@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fichas', function (Blueprint $table) {
+        Schema::create('rolls', function (Blueprint $table) {
             $table->id();
-            $table->string('num_ficha');
-            $table->enum('estados', ['activo', 'inactivo'])->default('activo');
+            $table->string('type_roll');
+            $table->enum('states', ['active', 'inactive'])->default('active');
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fichas');
+        Schema::dropIfExists('rolls');
     }
 };

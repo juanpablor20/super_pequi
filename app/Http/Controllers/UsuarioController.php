@@ -12,6 +12,7 @@ use App\Models\uniones;
 use App\Models\Relacion;
 use App\Models\ficha;
 use App\Models\Programa;
+
 /**
  * Class UsuarioController
  * @package App\Http\Controllers
@@ -85,7 +86,7 @@ class UsuarioController extends Controller
         return redirect()->route('usuarios.index')->with('success', 'Usuario created successfully.');
     }
 
-  
+
     public function show($id)
     {
 
@@ -93,7 +94,7 @@ class UsuarioController extends Controller
 
         return view('usuario.show', compact('usuario'));
     }
-  
+
     public function edit($id)
     {
         $usuario = Usuario::find($id);

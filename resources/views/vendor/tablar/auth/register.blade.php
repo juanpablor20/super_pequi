@@ -10,21 +10,58 @@
         <form class="card card-md" action="{{route('register')}}" method="post" autocomplete="off" novalidate>
             @csrf
             <div class="card-body">
-                <h2 class="card-title text-center mb-4">Create new account</h2>
+                <h2 class="card-title text-center mb-4">Registrar Nuevo Usuario</h2>
                 <div class="mb-3">
-                    <label class="form-label">Name</label>
-                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Enter name">
-                    @error('name')
+                    <label class="form-label">Nombre</label>
+                    <input type="text" name="names" class="form-control @error('names') is-invalid @enderror" placeholder="Enter Nombre">
+                    @error('names')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Email address</label>
-                    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Enter email">
-                    @error('email')
+                    <label class="form-label">Apellido</label>
+                    <input type="text" name="last_name" class="form-control @error('last_name') is-invalid @enderror" placeholder="Enter apellido">
+                    @error('last_name')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
+                <div class="mb-3">
+                    <label class="form-label">tipo de documento</label>
+                    <input type="text" name="type_identification" class="form-control @error('type_identification') is-invalid @enderror" placeholder="Enter Tipo de Documento">
+                    @error('type_identification')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Numero de Documento</label>
+                    <input type="number_identification" name="number_identification" class="form-control @error('number_identification') is-invalid @enderror" placeholder="Numero de identidad">
+                    @error('number_identification')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">tipo de sexo</label>
+                    <input type="text" name="sex_user" class="form-control @error('sex_user') is-invalid @enderror" placeholder="Enter Tipo de sexo">
+                    @error('sex_user')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Genero</label>
+                    <input type="text" name="gender_sex" class="form-control @error('gender_sex') is-invalid @enderror" placeholder="Enter genero">
+                    @error('sex_user')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+                {{-- <div class="mb-3">
+                    <label class="form-label">Numero de Telefono</label>
+                    <input type="text" name="gender_sex" class="form-control @error('gender_sex') is-invalid @enderror" placeholder="Enter genero">
+                    @error('sex_user')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div> --}}
+           
+               
                 <div class="mb-3">
                     <label class="form-label">Password</label>
                     <div class="input-group input-group-flat">

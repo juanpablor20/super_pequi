@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('direcciones', function (Blueprint $table) {
+        Schema::create('unions', function (Blueprint $table) {
             $table->id();
-            $table->string('ciudad');
-            $table->unsignedBigInteger('usuario_id'); 
+            $table->unsignedBigInteger('user_id'); 
+            $table->unsignedBigInteger('rolls_id');
 
-
-            $table->foreign('usuario_id')->references('id')->on('usuarios')->onDelete('cascade');
+            $table->foreign('rolls_id')->references('id')->on('rolls')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('direcciones');
+        Schema::dropIfExists('unions');
     }
 };

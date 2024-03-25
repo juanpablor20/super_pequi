@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('uniones', function (Blueprint $table) {
+        Schema::create('contacts', function (Blueprint $table) {
             $table->id();
+            $table->string('email_con');
+            $table->string('telephone_con');
+
+            $table->unsignedBigInteger('id_user_con'); 
 
 
-            $table->unsignedBigInteger('usuarios_id'); 
-            $table->unsignedBigInteger('roles_id');
-
-            $table->foreign('usuarios_id')->references('id')->on('usuarios')->onDelete('cascade');
-            $table->foreign('roles_id')->references('id')->on('roles')->onDelete('cascade');
+            $table->foreign('id_user_con')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('uniones');
+        Schema::dropIfExists('contacts');
     }
 };

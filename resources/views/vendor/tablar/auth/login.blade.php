@@ -13,11 +13,11 @@
                 <form action="{{route('login')}}" method="post" autocomplete="off" novalidate>
                     @csrf
                     <div class="mb-3">
-                        <label class="form-label">Email address</label>
-                        <input type="email" class="form-control @error('email') is-invalid @enderror" name="email"
-                               placeholder="your@email.com"
+                        <label class="form-label">Numero identificacion</label>
+                        <input type="email" class="form-control @error('number_identification') is-invalid @enderror" name="number_identification"
+                               placeholder="Numero documento"
                                autocomplete="off">
-                        @error('email')
+                        @error('number_identification')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
