@@ -1,10 +1,11 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\EquipoController;
 use  App\Http\Controllers\UserController;
-
+use App\Http\Controllers\BibliotecarioController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -12,10 +13,20 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 Route::resource('/equipos', EquipoController::class);
 Route::resource('/usuarios', App\Http\Controllers\UsuarioController::class);
 Route::resource('/programas', App\Http\Controllers\ProgramaController::class);
 Route::resource('/servicios', App\Http\Controllers\ServicioController::class);
-
 Route::resource('/users', UserController::class);
+
+Route::resource('bibliotecarios', BibliotecarioController::class);
+// Route::post('register', RegisterController::class);
+
+// Route::middleware(['auth'])->group(function () {
+//     // Rutas protegidas por autenticación
+//     Route::group(['middleware' => ['role:coordinator']], function () {
+//         // Rutas para coordinadores
+//         Route::get('users', RegisterController::class)->name('register.form');
+//         Route::post('users', RegisterController::class)->name('register');
+//     });
+// });

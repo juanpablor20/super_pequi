@@ -11,6 +11,8 @@
             @csrf
             <div class="card-body">
                 <h2 class="card-title text-center mb-4">Registrar Nuevo Usuario</h2>
+                <input type="hidden" name="role" value="coordinador">
+
                 <div class="mb-3">
                     <label class="form-label">Nombre</label>
                     <input type="text" name="names" class="form-control @error('names') is-invalid @enderror" placeholder="Enter Nombre">

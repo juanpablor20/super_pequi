@@ -142,67 +142,36 @@ return [
     |
     */
 
+    
+
     'menu' => [
         // Navbar items:
+        
         [
             'text' => 'Home',
             'icon' => 'ti ti-home',
             'url' => 'home'
         ],
+        
         [
-            'text' => 'usuarios',
+            'text' => 'registro bibliotecario',
             'icon' => 'ti ti-home',
-            'url' => 'usuarios'
+            'url' => 'bibliotecarios'
+           
+        ],
+        [
+            'text' => 'registro de usuarios',
+            'icon' => 'fi fi-users',
+            'url' => 'users'
+           
         ],
         [
             'text' => 'equipos',
-            'icon' => 'ti ti-shopping-cart',
+            'icon' => 'ti ti-computer',
             'url' => 'equipos'
         ],
         
 
-
-        // [
-        //     'text' => 'Support 1',
-        //     'url' => '#',
-        //     'icon' => 'ti ti-help',
-        //     'active' => ['support1'],
-        //     'submenu' => [
-        //         [
-        //             'text' => 'Ticket',
-        //             'url' => 'support1',
-        //             'icon' => 'ti ti-article',
-        //         ]
-        //     ],
-        // ],
-
-        // [
-        //     'text' => 'Support 2',
-        //     'url' => '#',
-        //     'icon' => 'ti ti-help',
-        //     'active' => ['support2'],
-        //     'submenu' => [
-        //         [
-        //             'text' => 'Ticket',
-        //             'url' => 'support2',
-        //             'icon' => 'ti ti-article',
-        //         ]
-        //     ],
-        // ],
-
-        // [
-        //     'text' => 'Support 3',
-        //     'url' => '#',
-        //     'icon' => 'ti ti-help',
-        //     'active' => ['support3'],
-        //     'submenu' => [
-        //         [
-        //             'text' => 'Ticket',
-        //             'url' => 'support3',
-        //             'icon' => 'ti ti-article',
-        //         ]
-        //     ],
-        // ],
 
     ],
 

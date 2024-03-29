@@ -7,45 +7,22 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Spatie\Permission\Models\Role;
+
+use App\Models\Address;
+use App\Models\contacts;
 
 class RegisterController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
-
     use RegistersUsers;
 
-    /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
     protected $redirectTo = '/home';
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('guest');
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
     protected function validator(array $data)
     {
         return Validator::make($data, [
@@ -54,15 +31,20 @@ class RegisterController extends Controller
         ]);
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\Models\User
-     */
     protected function create(array $data)
     {
-        return User::create([
+        // Obtener el rol enviado desde el formulario
+        $roleName = $data['role'];
+        return $roleName;
+        // Validar que el rol exista en la base de datos
+        $role = Role::where('name', $roleName)->first();
+
+        if (!$role) {
+            // return redirect()->back()->withErrors(['role' => 'El rol proporcionado no es válido']);
+        }
+
+        // Crear el usuario con los datos proporcionados
+        $user = User::create([
             'names' => $data['names'],
             'last_name' => $data['last_name'],
             'type_identification' => $data['type_identification'],
@@ -71,5 +53,31 @@ class RegisterController extends Controller
             'gender_sex' => $data['gender_sex'],
             'password' => Hash::make($data['password']),
         ]);
+
+        $contacts = contacts::create([
+            'email_con' => $data['email_con'],
+            'telephone_con' => $data['telephone_con'],
+            'id_user_con' => $user->id,
+        ]);
+
+        // Crea la direcion del usuario mediante el id
+        $address = Address::create([
+            'addres_add' => $data['addres_add'],
+            'id_user_add' => $user->id,
+        ]);
+
+        // Guarda los contactos y la dirección
+        $contacts->save();
+        $address->save();
+
+        // Asignar el rol al usuario si existe
+        if ($role) {
+            $user->assignRole($role);
+        }
+        if ($roleName === 'coordinador') {
+            return redirect()->route('/home');
+        } else {
+            return redirect()->route('bibliotecarios.index');
+        }
     }
 }

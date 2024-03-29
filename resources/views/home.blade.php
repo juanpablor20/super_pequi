@@ -1,6 +1,7 @@
 @extends('tablar::page')
 
 @section('content')
+
     <!-- Page header -->
     <div class="page-header d-print-none">
         <div class="container-xl">
@@ -11,7 +12,7 @@
                        panel Principal
                     </div>
                     <h2 class="page-title">
-                        Dashboard
+                        Pequi
                     </h2>
                 </div>
                 <!-- Page title actions -->
@@ -90,6 +91,13 @@
                                             <polyline points="6 15 12 9 18 15"/>
                                         </svg>
                                     </th>
+                                    @role('coordinador')
+                                    <h1>esto solo se muestraa al cordinador</h1>
+                                    @endrole
+                                    @role('bibliotecario') 
+                                    <h2>esto solo se muestra al bibliotecario</h2>
+                                    @endrole
+
                                     <th>Nombre</th>
                                     <th>apellido</th>
                                     <th>rol</th>

@@ -15,13 +15,13 @@
                         List
                     </div>
                     <h2 class="page-title">
-                        {{ __('Usuario ') }}
+                        {{ __('Usuario') }}
                     </h2>
                 </div>
                 <!-- Page title actions -->
                 <div class="col-12 col-md-auto ms-auto d-print-none">
                     <div class="btn-list">
-                        <a href="{{ route('usuarios.create') }}" class="btn btn-primary d-none d-sm-inline-block">
+                        <a href="{{ route('bibliotecarios.create') }}" class="btn btn-primary d-none d-sm-inline-block">
                             <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                  viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -68,7 +68,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="table-responsive min-vh-100">
+                        {{-- <div class="table-responsive min-vh-100">
                             <table class="table card-table table-vcenter text-nowrap datatable">
                                 <thead>
                                 <tr>
@@ -140,17 +140,17 @@
                                                 </div>
                                             </div>
                                         </td>
-                                    </tr>
-                                @empty
+                                    </tr> --}}
+                                {{-- @empty
                                     <td>No Data Found</td>
                                 @endforelse
-                                </tbody>
+                                </tbody> --}}
 
                             </table>
                         </div>
-                       <div class="card-footer d-flex align-items-center">
+                       {{-- <div class="card-footer d-flex align-items-center">
                             {!! $usuarios->links('tablar::pagination') !!}
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
