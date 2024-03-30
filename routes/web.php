@@ -13,12 +13,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::resource('/equipos', EquipoController::class);
 Route::resource('/usuarios', App\Http\Controllers\UsuarioController::class);
 Route::resource('/programas', App\Http\Controllers\ProgramaController::class);
 Route::resource('/servicios', App\Http\Controllers\ServicioController::class);
-Route::resource('/users', UserController::class);
 
+Route::resource('/equipment', App\Http\Controllers\EquipmentController::class);
+Route::resource('/users', UserController::class);
 Route::resource('bibliotecarios', BibliotecarioController::class);
 // Route::post('register', RegisterController::class);
 
@@ -30,3 +30,5 @@ Route::resource('bibliotecarios', BibliotecarioController::class);
 //         Route::post('users', RegisterController::class)->name('register');
 //     });
 // });
+
+

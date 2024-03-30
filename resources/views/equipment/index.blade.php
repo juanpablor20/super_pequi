@@ -1,7 +1,7 @@
 @extends('tablar::page')
 
 @section('title')
-    Equipo
+    pequi
 @endsection
 
 @section('content')
@@ -12,16 +12,16 @@
                 <div class="col">
                     <!-- Page pre-title -->
                     <div class="page-pretitle">
-                        List
+                     lista de equipos
                     </div>
                     <h2 class="page-title">
-                        {{ __('Equipo ') }}
+                        {{ __('Equipment ') }}
                     </h2>
                 </div>
                 <!-- Page title actions -->
                 <div class="col-12 col-md-auto ms-auto d-print-none">
                     <div class="btn-list">
-                        <a href="{{ route('equipos.create') }}" class="btn btn-primary d-none d-sm-inline-block">
+                        <a href="{{ route('equipment.create') }}" class="btn btn-primary d-none d-sm-inline-block">
                             <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                  viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -47,20 +47,13 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Equipo</h3>
+                            <h3 class="card-title">Equipos</h3>
                         </div>
                         <div class="card-body border-bottom py-3">
                             <div class="d-flex">
-                                <div class="text-muted">
-                                    Show
-                                    <div class="mx-2 d-inline-block">
-                                        <input type="text" class="form-control form-control-sm" value="10" size="3"
-                                               aria-label="Invoices count">
-                                    </div>
-                                    entries
-                                </div>
+                               
                                 <div class="ms-auto text-muted">
-                                    Search:
+                                    Buscar:
                                     <div class="ms-2 d-inline-block">
                                         <input type="text" class="form-control form-control-sm"
                                                aria-label="Search invoice">
@@ -85,65 +78,57 @@
                                         </svg>
                                     </th>
                                     
-										<th>Num Serie</th>
-										<th>Descripcion</th>
+										<th>Tipo de  Equipo</th>
+										<th>Numero de Serie</th>
+										<th>Estados</th>
 
                                     <th class="w-1"></th>
                                 </tr>
                                 </thead>
 
                                 <tbody>
-                                @forelse ($equipos as $equipo)
+                                @forelse ($equipment as $equipment)
                                     <tr>
                                         <td><input class="form-check-input m-0 align-middle" type="checkbox"
-                                                   aria-label="Select equipo"></td>
+                                                   aria-label="Select equipment"></td>
                                         <td>{{ ++$i }}</td>
                                         
-											<td>{{ $equipo->num_serie }}</td>
-											<td>{{ $equipo->descripcion }}</td>
+                                        <td>{{ $equipment->type_equi }}</td>
+                                        <td>{{ $equipment->serie_equi }}</td>
+                                        <td>
+                                            @if($equipment->states == 'disponible')
+                                                <span class="badge bg-success me-1"></span> Disponible
+                                            @elseif($equipment->states == 'en_prestamo')
+                                                <span class="badge bg-warning text-dark me-1"></span> En préstamo
+                                            @elseif($equipment->states == 'en_reparacion')
+                                                <span class="badge bg-secundary me-1"></span> En reparación
+                                            @else
+                                                <span class="badge bg-danger me-1"></span> Inactivo
+                                            @endif
+                                        </td>
 
                                         <td>
                                             <div class="btn-list flex-nowrap">
-                                                <div class="dropdown">
-                                                    <button class="btn dropdown-toggle align-text-top"
-                                                            data-bs-toggle="dropdown">
-                                                        Actions
-                                                    </button>
-                                                    <div class="dropdown-menu dropdown-menu-end">
-                                                        <a class="dropdown-item"
-                                                           href="{{ route('equipos.show',$equipo->id) }}">
-                                                            View
-                                                        </a>
-                                                        <a class="dropdown-item"
-                                                           href="{{ route('equipos.edit',$equipo->id) }}">
-                                                            Edit
-                                                        </a>
-                                                        <form
-                                                            action="{{ route('equipos.destroy',$equipo->id) }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit"
-                                                                    onclick="if(!confirm('Do you Want to Proceed?')){return false;}"
-                                                                    class="dropdown-item text-red"><i
-                                                                    class="fa fa-fw fa-trash"></i>
-                                                                Delete
-                                                            </button>
-                                                        </form>
-                                                    </div>
-                                                </div>
+                                                <a href="{{ route('equipment.show',$equipment->id) }}" class="btn btn-primary"><i class="ti ti-eye-check"></i></a>
+                                                <a href="{{ route('equipment.edit',$equipment->id) }}" class="btn btn-secondary"><i class="ti ti-edit"></i></a>
+                                                <form action="{{ route('equipment.destroy',$equipment->id) }}" method="POST" onsubmit="return confirm('Estás seguro de que quieres inactivar este equipo?')">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger"><i class="ti ti-trash-off"></i></button>
+                                                </form>
                                             </div>
                                         </td>
                                     </tr>
                                 @empty
-                                    <td>No Data Found</td>
+                                    <tr>
+                                        <td colspan="5">Datos no encontrados</td>
+                                    </tr>
                                 @endforelse
                                 </tbody>
-
                             </table>
                         </div>
                        <div class="card-footer d-flex align-items-center">
-                            {!! $equipos->links('tablar::pagination') !!}
+                            {{-- {!! $equipment->links('tablar::pagination') !!} --}}
                         </div>
                     </div>
                 </div>

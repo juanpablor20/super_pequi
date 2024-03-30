@@ -155,24 +155,23 @@ return [
         
         [
             'text' => 'registro bibliotecario',
-            'icon' => 'ti ti-home',
+            'icon' => 'ti ti-users',
             'url' => 'bibliotecarios'
            
         ],
         [
             'text' => 'registro de usuarios',
-            'icon' => 'fi fi-users',
+            'icon' => 'ti ti-users-group',
             'url' => 'users'
            
         ],
         [
-            'text' => 'equipos',
-            'icon' => 'ti ti-computer',
-            'url' => 'equipos'
+            'text' => 'Equipos',
+            'icon' => 'ti ti-device-desktop',
+            'url' => 'equipment'
+            
         ],
         
-
-
     ],
 
     /*

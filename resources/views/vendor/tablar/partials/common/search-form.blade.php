@@ -8,7 +8,7 @@
                           <circle cx="10" cy="10" r="7"/><line
                               x1="21" y1="21" x2="15" y2="15"/></svg>
                     </span>
-        <input type="text" value="" class="form-control" placeholder="Search…"
+        <input type="text" value="" class="form-control" placeholder="Buscar…"
                aria-label="Search in website">
     </div>
 </form>
