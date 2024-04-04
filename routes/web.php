@@ -14,12 +14,25 @@ Auth::routes();
 
 Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('/usuarios', App\Http\Controllers\UsuarioController::class);
-Route::resource('/programas', App\Http\Controllers\ProgramaController::class);
-Route::resource('/servicios', App\Http\Controllers\ServicioController::class);
+
 
 Route::resource('/equipment', App\Http\Controllers\EquipmentController::class);
 Route::resource('/users', UserController::class);
-Route::resource('Registers', RegisterController::class);
+
+
+
+
+
+// Definir las rutas para los bibliotecarios
+Route::get('bibliotecarios', [UserController::class, 'index'])->name('bibliotecarios.index');
+Route::get('/bibliotecarios/create', [UserController::class, 'create'])->name('bibliotecarios.create');
+Route::post('/bibliotecarios', [UserController::class, 'store'])->name('bibliotecarios.store');
+Route::get('/bibliotecarios/{bibliotecario}', [UserController::class, 'show'])->name('bibliotecarios.show');
+Route::get('/bibliotecarios/{bibliotecario}/edit', [UserController::class, 'edit'])->name('bibliotecarios.edit');
+Route::put('/bibliotecarios/{bibliotecario}', [UserController::class, 'update'])->name('bibliotecarios.update');
+Route::delete('/bibliotecarios/{bibliotecario}', [UserController::class, 'destroy'])->name('bibliotecarios.destroy');
+
+//Route::resource('Registers', RegisterController::class);
 // Route::post('register', RegisterController::class);
 
 // Route::middleware(['auth'])->group(function () {
@@ -30,5 +43,8 @@ Route::resource('Registers', RegisterController::class);
 //         Route::post('users', RegisterController::class)->name('register');
 //     });
 // });
+
+
+// Rutas para el registro de bibliotecarios
 
 

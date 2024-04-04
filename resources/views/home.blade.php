@@ -10,6 +10,8 @@
                     <!-- Page pre-title -->
                     <div class="page-pretitle">
                        panel Principal
+                       <a href="{{ route('users.index', ['tipo' => 'bibliotecarios']) }}">Bibliotecarios</a>
+
                     </div>
                     <h2 class="page-title">
                         Pequi

@@ -79,7 +79,9 @@
                                     </th>
                                     
 										<th>Tipo de  Equipo</th>
+                                        <th>Caracteristicas</th>
 										<th>Numero de Serie</th>
+                                        
 										<th>Estados</th>
 
                                     <th class="w-1"></th>
@@ -94,6 +96,7 @@
                                         <td>{{ ++$i }}</td>
                                         
                                         <td>{{ $equipment->type_equi }}</td>
+                                        <td>{{ $equipment->characteristics}}</td>
                                         <td>{{ $equipment->serie_equi }}</td>
                                         <td>
                                             @if($equipment->states == 'disponible')

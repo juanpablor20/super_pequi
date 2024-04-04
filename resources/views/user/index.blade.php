@@ -12,11 +12,9 @@
                 <div class="col">
                     <!-- Page pre-title -->
                     <div class="page-pretitle">
-                        List
+                        Lista de Usuarios
                     </div>
-                    <h2 class="page-title">
-                        {{ __('User ') }}
-                    </h2>
+                    
                 </div>
                 <!-- Page title actions -->
                 <div class="col-12 col-md-auto ms-auto d-print-none">
@@ -30,7 +28,7 @@
                                 <line x1="12" y1="5" x2="12" y2="19"/>
                                 <line x1="5" y1="12" x2="19" y2="12"/>
                             </svg>
-                            Create User
+                           Crear nuevo usuario
                         </a>
                     </div>
                 </div>
@@ -47,7 +45,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">User</h3>
+                            <h3 class="card-title">Usuarios</h3>
                         </div>
                         <div class="card-body border-bottom py-3">
                             <div class="d-flex">
@@ -60,7 +58,7 @@
                                     entries
                                 </div>
                                 <div class="ms-auto text-muted">
-                                    Search:
+                                    Buscar:
                                     <div class="ms-2 d-inline-block">
                                         <input type="text" class="form-control form-control-sm"
                                                aria-label="Search invoice">
@@ -86,12 +84,10 @@
                                     </th>
                                     
 										<th>Names</th>
-										<th>Last Name</th>
-										<th>Type Identification</th>
+										<th>Last Name</th>										
 										<th>Number Identification</th>
-										<th>Sex User</th>
-										<th>Gender Sex</th>
-										<th>States</th>
+										<th>roll</th>
+										<th>Estado</th>
 
                                     <th class="w-1"></th>
                                 </tr>
@@ -106,47 +102,35 @@
                                         
 											<td>{{ $user->names }}</td>
 											<td>{{ $user->last_name }}</td>
-											<td>{{ $user->type_identification }}</td>
 											<td>{{ $user->number_identification }}</td>
-											<td>{{ $user->sex_user }}</td>
-											<td>{{ $user->gender_sex }}</td>
+										
 											<td>{{ $user->states }}</td>
+                                            <td>
+                                                @if($user->states == 'active')
+                                                    <span class="badge bg-success me-1"></span> Activo
+                                                @elseif($user->states == 'with_equipment')
+                                                    <span class="badge bg-warning text-dark me-1"></span> con_equipo
+                                                @elseif($user->states == 'inactive')
+                                                    <span class="badge bg-secundary me-1"></span> En reparación
+                                                @else
+                                                    <span class="badge bg-danger me-1"></span> Inactivo
+                                                @endif
+                                            </td>
 
-                                        <td>
-                                            <div class="btn-list flex-nowrap">
-                                                <div class="dropdown">
-                                                    <button class="btn dropdown-toggle align-text-top"
-                                                            data-bs-toggle="dropdown">
-                                                        Actions
-                                                    </button>
-                                                    <div class="dropdown-menu dropdown-menu-end">
-                                                        <a class="dropdown-item"
-                                                           href="{{ route('users.show',$user->id) }}">
-                                                            View
-                                                        </a>
-                                                        <a class="dropdown-item"
-                                                           href="{{ route('users.edit',$user->id) }}">
-                                                            Edit
-                                                        </a>
-                                                        <form
-                                                            action="{{ route('users.destroy',$user->id) }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit"
-                                                                    onclick="if(!confirm('Do you Want to Proceed?')){return false;}"
-                                                                    class="dropdown-item text-red"><i
-                                                                    class="fa fa-fw fa-trash"></i>
-                                                                Delete
-                                                            </button>
-                                                        </form>
-                                                    </div>
+                                            <td>
+                                                <div class="btn-list flex-nowrap">
+                                                    <a href="{{ route('users.show',$user->id) }}" class="btn btn-primary"><i class="ti ti-eye-check"></i></a>
+                                                    <a href="{{ route('users.edit',$user->id) }}" class="btn btn-secondary"><i class="ti ti-edit"></i></a>
+                                                    <form action="{{ route('users.destroy',$user->id) }}" method="POST" onsubmit="return confirm('Estás seguro de que quieres inactivar este equipo?')">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger"><i class="ti ti-trash-off"></i></button>
+                                                    </form>
                                                 </div>
-                                            </div>
-                                        </td>
+                                            </td>
                                     </tr>
                                 @empty
-                                    <td>No Data Found</td>
+                                    <td>No hay registros</td>
                                 @endforelse
                                 </tbody>
 

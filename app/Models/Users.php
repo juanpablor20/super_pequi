@@ -13,7 +13,7 @@ class Users extends Model
 		'last_name' => 'required',
 		'type_identification' => 'required',
 		'number_identification' => 'required',
-    'sex_user' => 'rquired',
+    'sex_user' => 'required',
     'gender_sex' => 'required',
     ];
 
@@ -23,7 +23,7 @@ class Users extends Model
 
     public function contacts()
     {
-        return $this->hasOne(contacts::class, 'id_user_con', 'id');
+        return $this->hasOne(Contacts::class, 'id_user_con', 'id');
     }
    
     public function Address()

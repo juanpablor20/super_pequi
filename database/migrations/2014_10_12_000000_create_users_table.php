@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('number_identification', 60)->unique();
             $table->string('sex_user', 60);
             $table->string('gender_sex', 60);
-            $table->enum('states', ['active', 'inactive'])->default('active');
+            $table->enum('states', ['active', 'with_equipment', 'inactive'])->default('active');
             $table->timestamps();
         });
     }

@@ -74,42 +74,14 @@ return [
     'layout_light_topbar' => true,
     'layout_enable_top_header' => false,
 
-    /*
-    |--------------------------------------------------------------------------
-    | Sticky Navbar for Top Nav
-    |--------------------------------------------------------------------------
-    |
-    | Here you can enable/disable the sticky functionality of Top Navigation Bar.
-    |
-    | For detailed instructions, you can look at the Top Navigation Bar classes here:
-    |
-    */
+   
 
     'sticky_top_nav_bar' => false,
 
-    /*
-    |--------------------------------------------------------------------------
-    | Admin Panel Classes
-    |--------------------------------------------------------------------------
-    |
-    | Here you can change the look and behavior of the admin panel.
-    |
-    | For detailed instructions, you can look at the admin panel classes here:
-    |
-    */
+    
 
     'classes_body' => '',
 
-    /*
-    |--------------------------------------------------------------------------
-    | URLs
-    |--------------------------------------------------------------------------
-    |
-    | Here we can modify the url settings of the admin panel.
-    |
-    | For detailed instructions, you can look at the urls section here:
-    |
-    */
 
     'use_route_url' => true,
     'dashboard_url' => 'home',
@@ -121,31 +93,14 @@ return [
     'profile_url' => false,
     'setting_url' => false,
 
-    /*
-    |--------------------------------------------------------------------------
-    | Display Alert
-    |--------------------------------------------------------------------------
-    |
-    | Display Alert Visibility.
-    |
-    */
+
     'display_alert' => false,
 
-    /*
-    |--------------------------------------------------------------------------
-    | Menu Items
-    |--------------------------------------------------------------------------
-    |
-    | Here we can modify the sidebar/top navigation of the admin panel.
-    |
-    | For detailed instructions you can look here:
-    |
-    */
 
     
 
     'menu' => [
-        // Navbar items:
+        
         
         [
             'text' => 'Home',
@@ -156,7 +111,7 @@ return [
         [
             'text' => 'registro bibliotecario',
             'icon' => 'ti ti-users',
-            'url' => 'Registers'
+            'url' => '/bibliotecarios'
            
         ],
         [
@@ -171,6 +126,7 @@ return [
             'url' => 'equipment'
             
         ],
+       
         
     ],
 
