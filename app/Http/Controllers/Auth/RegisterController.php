@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\Logins;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -11,6 +11,7 @@ use Spatie\Permission\Models\Role;
 
 use App\Models\Address;
 use App\Models\contacts;
+use App\Models\Users;
 
 class RegisterController extends Controller
 {
@@ -34,50 +35,59 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         // Obtener el rol enviado desde el formulario
-        $roleName = $data['role'];
-        return $roleName;
-        // Validar que el rol exista en la base de datos
-        $role = Role::where('name', $roleName)->first();
+        // // $roleName = $data['role'];
+        // // return $roleName;
+        // // // Validar que el rol exista en la base de datos
+        // // $role = Role::where('name', $roleName)->first();
 
-        if (!$role) {
-            // return redirect()->back()->withErrors(['role' => 'El rol proporcionado no es válido']);
-        }
+        // // if (!$role) {
+        // //     // return redirect()->back()->withErrors(['role' => 'El rol proporcionado no es válido']);
+        // // }
 
         // Crear el usuario con los datos proporcionados
-        $user = User::create([
+        $user = Users::create([
             'names' => $data['names'],
             'last_name' => $data['last_name'],
             'type_identification' => $data['type_identification'],
             'number_identification' => $data['number_identification'],
             'sex_user' => $data['sex_user'],
             'gender_sex' => $data['gender_sex'],
+        ]);
+
+
+
+        $login = Logins::create([
+            'users' => $data['number_identification'],
             'password' => Hash::make($data['password']),
+
         ]);
 
-        $contacts = contacts::create([
-            'email_con' => $data['email_con'],
-            'telephone_con' => $data['telephone_con'],
-            'id_user_con' => $user->id,
-        ]);
+        $login->save();
 
-        // Crea la direcion del usuario mediante el id
-        $address = Address::create([
-            'addres_add' => $data['addres_add'],
-            'id_user_add' => $user->id,
-        ]);
+        // $contacts = contacts::create([
+        //     'email_con' => $data['email_con'],
+        //     'telephone_con' => $data['telephone_con'],
+        //     'id_user_con' => $user->id,
+        // ]);
 
-        // Guarda los contactos y la dirección
-        $contacts->save();
-        $address->save();
+        // // Crea la direcion del usuario mediante el id
+        // $address = Address::create([
+        //     'addres_add' => $data['addres_add'],
+        //     'id_user_add' => $user->id,
+        // ]);
+
+        // // Guarda los contactos y la dirección
+        // $contacts->save();
+        // $address->save();
 
         // Asignar el rol al usuario si existe
-        if ($role) {
-            $user->assignRole($role);
-        }
-        if ($roleName === 'coordinador') {
-            return redirect()->route('/home');
-        } else {
-            return redirect()->route('bibliotecarios.index');
-        }
+        // if ($role) {
+        //     $user->assignRole($role);
+        // }
+        // if ($roleName === 'coordinador') {
+        //     return redirect()->route('/home');
+        // } else {
+        //     return redirect()->route('bibliotecarios.index');
+        // }
     }
 }

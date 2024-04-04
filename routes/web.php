@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\Auth\RegisterController;
+//use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\EquipoController;
 use  App\Http\Controllers\UserController;
-use App\Http\Controllers\BibliotecarioController;
+use App\Http\Controllers\RegisterController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -19,7 +19,7 @@ Route::resource('/servicios', App\Http\Controllers\ServicioController::class);
 
 Route::resource('/equipment', App\Http\Controllers\EquipmentController::class);
 Route::resource('/users', UserController::class);
-Route::resource('bibliotecarios', BibliotecarioController::class);
+Route::resource('Registers', RegisterController::class);
 // Route::post('register', RegisterController::class);
 
 // Route::middleware(['auth'])->group(function () {

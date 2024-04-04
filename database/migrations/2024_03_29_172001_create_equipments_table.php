@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('equipment', function (Blueprint $table) {
             $table->id();
             $table->string('type_equi', 50);
+            $table->string('characteristics', 100);
             $table->string('serie_equi', 30)->unique();
             $table->enum('states', ['disponible', 'inactivo', 'en_prestamo', 'en_reparacion'])->default('disponible');
             $table->timestamps();

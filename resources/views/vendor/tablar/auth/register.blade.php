@@ -15,42 +15,42 @@
 
                 <div class="mb-3">
                     <label class="form-label">Nombre</label>
-                    <input type="text" name="names" class="form-control @error('names') is-invalid @enderror" placeholder="Enter Nombre">
+                    <input type="text" name="names" value="carlitos medina" class="form-control @error('names') is-invalid @enderror" placeholder="Enter Nombre">
                     @error('names')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Apellido</label>
-                    <input type="text" name="last_name" class="form-control @error('last_name') is-invalid @enderror" placeholder="Enter apellido">
+                    <input type="text" name="last_name" value="migel" class="form-control @error('last_name') is-invalid @enderror" placeholder="Enter apellido">
                     @error('last_name')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="mb-3">
                     <label class="form-label">tipo de documento</label>
-                    <input type="text" name="type_identification" class="form-control @error('type_identification') is-invalid @enderror" placeholder="Enter Tipo de Documento">
+                    <input type="text" name="type_identification" value="cc" class="form-control @error('type_identification') is-invalid @enderror" placeholder="Enter Tipo de Documento">
                     @error('type_identification')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Numero de Documento</label>
-                    <input type="number_identification" name="number_identification" class="form-control @error('number_identification') is-invalid @enderror" placeholder="Numero de identidad">
+                    <input type="number_identification" name="number_identification" value="10004250142" class="form-control @error('number_identification') is-invalid @enderror" placeholder="Numero de identidad">
                     @error('number_identification')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="mb-3">
                     <label class="form-label">tipo de sexo</label>
-                    <input type="text" name="sex_user" class="form-control @error('sex_user') is-invalid @enderror" placeholder="Enter Tipo de sexo">
+                    <input type="text" name="sex_user" value="m" class="form-control @error('sex_user') is-invalid @enderror" placeholder="Enter Tipo de sexo">
                     @error('sex_user')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Genero</label>
-                    <input type="text" name="gender_sex" class="form-control @error('gender_sex') is-invalid @enderror" placeholder="Enter genero">
+                    <input type="text" name="gender_sex" value="el macho" class="form-control @error('gender_sex') is-invalid @enderror" placeholder="Enter genero">
                     @error('sex_user')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -67,7 +67,7 @@
                 <div class="mb-3">
                     <label class="form-label">Password</label>
                     <div class="input-group input-group-flat">
-                        <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password"
+                        <input type="password" name="password" value="1234567890a" class="form-control @error('password') is-invalid @enderror" placeholder="Password"
                                autocomplete="off">
                         <span class="input-group-text">
                   <a href="#" class="link-secondary" title="Show password" data-bs-toggle="tooltip"><!-- Download SVG icon from http://tabler-icons.io/i/eye -->
@@ -88,7 +88,7 @@
                 <div class="mb-3">
                     <label class="form-label">Confirm Password</label>
                     <div class="input-group input-group-flat">
-                        <input type="password" name="password_confirmation" class="form-control @error('password_confirmation') is-invalid @enderror" placeholder="Password"
+                        <input type="password" name="password_confirmation" value="1234567890a" class="form-control @error('password_confirmation') is-invalid @enderror" placeholder="Password"
                                autocomplete="off">
                         <span class="input-group-text">
                   <a href="#" class="link-secondary" title="Show password" data-bs-toggle="tooltip"><!-- Download SVG icon from http://tabler-icons.io/i/eye -->

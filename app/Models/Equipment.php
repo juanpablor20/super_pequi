@@ -16,7 +16,7 @@ class Equipment extends Model
     protected $perPage = 20;
 
 
-    protected $fillable = ['type_equi','serie_equi', 'states'];
+    protected $fillable = ['type_equi','serie_equi', 'characteristics', 'states'];
 
 
 

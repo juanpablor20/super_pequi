@@ -156,7 +156,7 @@ return [
         [
             'text' => 'registro bibliotecario',
             'icon' => 'ti ti-users',
-            'url' => 'bibliotecarios'
+            'url' => 'Registers'
            
         ],
         [

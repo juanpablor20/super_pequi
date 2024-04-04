@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Logins;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Address;
 use App\Models\contacts;
 use App\Models\Users;
@@ -49,7 +50,13 @@ class UserController extends Controller
             'addres_add' => $request->input('addres_add'),
             'id_user_add' => $user->id,
         ]);
-    
+        $login = Logins::create([
+            'users' => $request['number_identification'],
+            'password' => Hash::make($request['password']),
+
+
+        ]);
+        $login->save();
         $contacts->save();
         $address->save();
         return redirect()->route('users.index')

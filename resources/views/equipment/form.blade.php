@@ -1,24 +1,24 @@
 <div class="form-group mb-3">
     <label class="form-label">{{ Form::label('type_equi', 'Type Equi') }}</label>
     <div>
-        {{ Form::select(
-            'type_equi',
-            [
-                'portatil' => 'Portátil',
-                'mause' => 'Mouse',
-                'audifono' => 'Audífono',
-                // Agrega más opciones según sea necesario
-            ],
-            $equipment->type_equi,
-            [
-                'class' => 'form-control' . ($errors->has('type_equi') ? ' is-invalid' : ''),
-                'placeholder' => 'Seleccione el tipo de equipo',
-            ],
-        ) }}
+        {{ Form::text('type_equi', $equipment->type_equi, [
+            'class' => 'form-control' . ($errors->has('type_equi') ? ' is-invalid' : ''),
+            'placeholder' => 'tipo de equipo',
+        ]) }}
         {!! $errors->first('type_equi', '<div class="invalid-feedback">:message</div>') !!}
-        <small class="form-hint">Seleccione el tipo de equipo que desea registrar.</small>
     </div>
 </div>
+</div>
+<div class="form-group mb-3">
+    <label class="form-label"> {{ Form::label('characteristics') }}</label>
+    <div>
+        {{ Form::text('characteristics', $equipment->characteristics, [
+            'class' => 'form-control' . ($errors->has('characteristics') ? ' is-invalid' : ''),
+            'placeholder' => 'caracteristicas',
+        ]) }}
+        {!! $errors->first('serie_equi', '<div class="invalid-feedback">:message</div>') !!}
+        <small class="form-hint">equipos <b>Numero de</b> Serie.</small>
+    </div>
 </div>
 <div class="form-group mb-3">
     <label class="form-label"> {{ Form::label('serie_equipo') }}</label>
