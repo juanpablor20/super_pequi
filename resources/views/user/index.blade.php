@@ -111,8 +111,7 @@
                                                 @elseif($user->states == 'with_equipment')
                                                     <span class="badge bg-warning text-dark me-1"></span> con_equipo
                                                 @elseif($user->states == 'inactive')
-                                                    <span class="badge bg-secundary me-1"></span> En reparación
-                                                @else
+                                                    
                                                     <span class="badge bg-danger me-1"></span> Inactivo
                                                 @endif
                                             </td>

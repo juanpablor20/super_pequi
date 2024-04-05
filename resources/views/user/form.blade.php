@@ -68,7 +68,7 @@
 </div>
 </div>
 
-<div class="form-group mb-3">
+<div class="mb-3 col-md-6">
     <label class="form-label">Dirección</label>
     <div>
         <input type="text" name="addres_add" value="{{ $user->address->addres_add ?? '' }}" class="form-control @error('addres_add') is-invalid @enderror" placeholder="Addres_add">

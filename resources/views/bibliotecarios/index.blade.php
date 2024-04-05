@@ -1,7 +1,7 @@
 @extends('tablar::page')
 
 @section('title')
-    Usuario
+    bibliotecarios
 @endsection
 
 @section('content')
@@ -11,9 +11,7 @@
             <div class="row g-2 align-items-center">
                 <div class="col">
                     <!-- Page pre-title -->
-                    <div class="page-pretitle">
-                        bibliotecarios
-                    </div>
+
                     <h2 class="page-title">
                         {{ __('bibliotecarios') }}
                     </h2>
@@ -47,7 +45,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Usuario</h3>
+                            <h3 class="card-title">bibliotecarios</h3>
                         </div>
                         <div class="card-body border-bottom py-3">
                             <div class="d-flex">
@@ -68,7 +66,7 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- <div class="table-responsive min-vh-100">
+                        <div class="table-responsive min-vh-100">
                             <table class="table card-table table-vcenter text-nowrap datatable">
                                 <thead>
                                 <tr>
@@ -87,7 +85,6 @@
                                     
 										<th>Nombres</th>
 										<th>Apellidos</th>
-										<th>Tipo Doc</th>
 										<th>Num Doc</th>
 										<th>Estados</th>
 
@@ -96,17 +93,16 @@
                                 </thead>
 
                                 <tbody>
-                                @forelse ($usuarios as $usuario)
+                                @forelse ($bibliotecarios as $usuario)
                                     <tr>
                                         <td><input class="form-check-input m-0 align-middle" type="checkbox"
                                                    aria-label="Select usuario"></td>
                                         <td>{{ ++$i }}</td>
                                         
-											<td>{{ $usuario->nombres }}</td>
-											<td>{{ $usuario->apellidos }}</td>
-											<td>{{ $usuario->tipo_doc }}</td>
-											<td>{{ $usuario->num_doc }}</td>
-											<td>{{ $usuario->estados }}</td>
+											<td>{{ $usuario->names }}</td>
+											<td>{{ $usuario->last_name }}</td>
+											<td>{{ $usuario->number_identification }}</td>
+											<td>{{ $usuario->states }}</td>
 
                                         <td>
                                             <div class="btn-list flex-nowrap">
@@ -140,17 +136,17 @@
                                                 </div>
                                             </div>
                                         </td>
-                                    </tr> --}}
-                                {{-- @empty
+                                    </tr>
+                                @empty
                                     <td>No Data Found</td>
                                 @endforelse
-                                </tbody> --}}
+                                </tbody> 
 
                             </table>
                         </div>
-                       {{-- <div class="card-footer d-flex align-items-center">
-                            {!! $usuarios->links('tablar::pagination') !!}
-                        </div> --}}
+                       <div class="card-footer d-flex align-items-center">
+                            {!! $bibliotecarios->links('tablar::pagination') !!}
+                        </div>
                     </div>
                 </div>
             </div>

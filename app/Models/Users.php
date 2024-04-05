@@ -1,12 +1,17 @@
 <?php
 
 namespace App\Models;
-
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
-
+use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Contracts\Role;
 
 class Users extends Model
 {
+  protected $guard_name = 'web';
+  use Notifiable, HasRoles;
     
     static $rules = [
 		'names' => 'required',
@@ -32,10 +37,11 @@ class Users extends Model
     }
     
   
-  public function uniones_rol()
-  {
-    return $this->belongsToMany(Rolls::class, 'unions', 'user_id', 'rolls_id');
-  }
+    // public function roles(): BelongsToMany
+    // {
+    //     return $this->belongsToMany(Role::class);
+    // }
+
 
   
  

@@ -34,15 +34,15 @@ class RegisterController extends Controller
 
     protected function create(array $data)
     {
-        // Obtener el rol enviado desde el formulario
-        // // $roleName = $data['role'];
-        // // return $roleName;
-        // // // Validar que el rol exista en la base de datos
-        // // $role = Role::where('name', $roleName)->first();
+     //   Obtener el rol enviado desde el formulario
+        $roleName = $data['role'];
+        return $roleName;
+        // Validar que el rol exista en la base de datos
+        $role = Role::where('name', $roleName)->first();
 
-        // // if (!$role) {
-        // //     // return redirect()->back()->withErrors(['role' => 'El rol proporcionado no es válido']);
-        // // }
+        if (!$role) {
+            // return redirect()->back()->withErrors(['role' => 'El rol proporcionado no es válido']);
+        }
 
         // Crear el usuario con los datos proporcionados
         $user = Users::create([
@@ -64,30 +64,30 @@ class RegisterController extends Controller
 
         $login->save();
 
-        // $contacts = contacts::create([
-        //     'email_con' => $data['email_con'],
-        //     'telephone_con' => $data['telephone_con'],
-        //     'id_user_con' => $user->id,
-        // ]);
+        $contacts = contacts::create([
+            'email_con' => $data['email_con'],
+            'telephone_con' => $data['telephone_con'],
+            'id_user_con' => $user->id,
+        ]);
 
-        // // Crea la direcion del usuario mediante el id
-        // $address = Address::create([
-        //     'addres_add' => $data['addres_add'],
-        //     'id_user_add' => $user->id,
-        // ]);
+        // Crea la direcion del usuario mediante el id
+        $address = Address::create([
+            'addres_add' => $data['addres_add'],
+            'id_user_add' => $user->id,
+        ]);
 
-        // // Guarda los contactos y la dirección
-        // $contacts->save();
-        // $address->save();
+        // Guarda los contactos y la dirección
+        $contacts->save();
+        $address->save();
 
-        // Asignar el rol al usuario si existe
-        // if ($role) {
-        //     $user->assignRole($role);
-        // }
-        // if ($roleName === 'coordinador') {
-        //     return redirect()->route('/home');
-        // } else {
-        //     return redirect()->route('bibliotecarios.index');
-        // }
+       // Asignar el rol al usuario si existe
+        if ($role) {
+            $user->assignRole($role);
+        }
+        if ($roleName === 'coordinador') {
+            return redirect()->route('/home');
+        } else {
+            return redirect()->route('bibliotecarios.index');
+        }
     }
 }

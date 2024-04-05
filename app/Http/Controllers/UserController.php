@@ -8,17 +8,25 @@ use App\Models\Address;
 use App\Models\Contacts;
 use App\Models\Users;
 use Illuminate\Http\Request;
-
+use Spatie\Permission\Models\Role;
 class UserController extends Controller
 {
+ 
     public function index()
     {
-        $users = Users::paginate(10);
+        $rol_users = Role::where('name', 'aprendices', 'instructor')->where('guard_name', 'web')->first();
+        return $rol_users;
+        if ($rol_users){
+            $users = Users::role($rol_users)->paginate(10);
+            $i = ($users->currentPage() -1) * $users->perPage();
+            return view('user.index', compact('users', 'i'));
+        } 
+        // $users = Users::paginate(10);
 
-        return view('user.index', compact('users'))
-            ->with('i', (request()->input('page', 1) - 1) * $users->perPage());
+        // return view('user.index', compact('users'))
+        //     ->with('i', (request()->input('page', 1) - 1) * $users->perPage());
     }
-
+    
     public function create()
     {
         $user = new Users();
@@ -42,12 +50,7 @@ class UserController extends Controller
             'id_user_add' => $user->id,
         ]);
 
-        $login = Logins::create([
-            'users' => $request['number_identification'],
-            'password' => Hash::make($request['password']),
-        ]);
-
-        $login->save();
+       
         $contacts->save();
         $address->save();
 
@@ -86,3 +89,4 @@ class UserController extends Controller
             ->with('success', 'User deleted successfully');
     }
 }
+

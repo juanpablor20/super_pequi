@@ -2,7 +2,7 @@
     <div class="mb-3 col-md-6">
         <label class="form-label">Nombre</label>
         <div>
-            <input type="text" name="names" value="{{ $user->names ?? '' }}" class="form-control @error('names') is-invalid @enderror" placeholder="Names">
+            <input type="text" name="names"  value="{{ $user->names ?? '' }}" class="form-control @error('names') is-invalid @enderror" placeholder="Names">
             {!! $errors->first('names', '<div class="invalid-feedback">:message</div>') !!}
             <small class="form-hint">User <b>names</b> instruction.</small>
         </div>
@@ -22,7 +22,7 @@
     <div class="form-group mb-3">
         <label class="form-label">Tipo de Documento</label>
         <div>
-            <input type="text" name="type_identification" value="{{ $user->type_identification ?? '' }}" class="form-control @error('type_identification') is-invalid @enderror" placeholder="Type Identification">
+            <input type="text" name="type_identification"  value="{{ $user->type_identification ?? '' }}" class="form-control @error('type_identification') is-invalid @enderror" placeholder="Type Identification">
             {!! $errors->first('type_identification', '<div class="invalid-feedback">:message</div>') !!}
             <small class="form-hint">User <b>type_identification</b> instruction.</small>
         </div>
