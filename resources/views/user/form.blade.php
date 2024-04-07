@@ -76,6 +76,19 @@
     </div>
 </div>
 
+<div class="mb-3 col-md-6">
+    <label class="form-label">Rol</label>
+    <div>
+        <select name="role" class="form-select @error('role') is-invalid @enderror">
+            <option value="">Selecciona un rol</option>
+            <option value="aprendiz" {{ old('role') == 'aprendices' ? 'selected' : '' }}>Aprendiz</option>
+            <option value="instructor" {{ old('role') == 'instructor' ? 'selected' : '' }}>Instructor</option>
+        </select>
+        {!! $errors->first('role', '<div class="invalid-feedback">:message</div>') !!}
+    </div>
+</div>
+
+
 
 
 <div class="form-footer">

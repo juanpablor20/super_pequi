@@ -7,26 +7,40 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\Address;
 use App\Models\Contacts;
 use App\Models\Users;
+use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\URL;
+
 class UserController extends Controller
 {
- 
     public function index()
     {
-        $rol_users = Role::where('name', 'aprendices', 'instructor')->where('guard_name', 'web')->first();
-        return $rol_users;
-        if ($rol_users){
-            $users = Users::role($rol_users)->paginate(10);
-            $i = ($users->currentPage() -1) * $users->perPage();
-            return view('user.index', compact('users', 'i'));
-        } 
-        // $users = Users::paginate(10);
+        $aprendicesRole = Role::where('name', 'aprendices')->where('guard_name', 'web')->first();
+        $instructorRole = Role::where('name', 'instructor')->where('guard_name', 'web')->first();
 
-        // return view('user.index', compact('users'))
-        //     ->with('i', (request()->input('page', 1) - 1) * $users->perPage());
+        if ($aprendicesRole && $instructorRole) {
+            $aprendices = Users::role($aprendicesRole)->paginate(10);
+            $instructores = Users::role($instructorRole)->paginate(10);
+
+            $users = $instructores->merge($aprendices);
+
+            $i = ($instructores->currentPage() - 1) * $instructores->perPage();
+
+            $perPage = 10;
+            $currentPage = LengthAwarePaginator::resolveCurrentPage();
+            $currentPageItems = $users->slice(($currentPage - 1) * $perPage, $perPage)->all();
+            $users = new LengthAwarePaginator($currentPageItems, $users->count(), $perPage);
+            $users->setPath(URL::current());
+
+            return view('user.index', compact('users', 'i'));
+        } else {
+            return "Uno de los roles ('aprendices' o 'instructor') no existe.";
+        }
     }
-    
+
+
     public function create()
     {
         $user = new Users();
@@ -50,12 +64,17 @@ class UserController extends Controller
             'id_user_add' => $user->id,
         ]);
 
-       
+        $role = $request->input('role');
+        if ($role == 'aprendices') {
+            $user->assignRole('aprendices'); // Asignar el rol de "aprendiz"
+        } elseif ($role == 'instructor') {
+            $user->assignRole('instructor'); // Asignar el rol de "instructor"
+        }
+
         $contacts->save();
         $address->save();
 
-        return redirect()->route('users.index')
-            ->with('success', 'User created successfully.');
+        return redirect()->route('users.index')->with('success', 'User created successfully.');
     }
 
     public function show($id)
@@ -78,15 +97,12 @@ class UserController extends Controller
 
         $user->update($request->all());
 
-        return redirect()->route('users.index')
-            ->with('success', 'User updated successfully');
+        return redirect()->route('users.index')->with('success', 'User updated successfully');
     }
 
     public function destroy($id)
     {
         $user = Users::find($id)->delete();
-        return redirect()->route('users.index')
-            ->with('success', 'User deleted successfully');
+        return redirect()->route('users.index')->with('success', 'User deleted successfully');
     }
 }
-

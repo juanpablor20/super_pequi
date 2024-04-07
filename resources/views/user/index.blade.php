@@ -136,7 +136,7 @@
                             </table>
                         </div>
                        <div class="card-footer d-flex align-items-center">
-                            {!! $users->links('tablar::pagination') !!}
+                            {!!$users->links('tablar::pagination') !!}
                         </div>
                     </div>
                 </div>
