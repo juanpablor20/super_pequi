@@ -8,11 +8,6 @@ use Illuminate\Http\Request;
 
 class EquipmentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $equipment = Equipment::paginate(10);
@@ -72,7 +67,7 @@ class EquipmentController extends Controller
         $equipment->update($request->all());
 
         return redirect()->route('equipment.index')
-            ->with('success', 'Equipment updated successfully');
+            ->with('Exito', 'Equipo Actualizado exitosamente');
     }
 
     public function destroy($id)

@@ -6,6 +6,7 @@ use App\Http\Controllers\BibliotecarioController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\EquipoController;
+use App\Http\Controllers\PerfilController;
 use  App\Http\Controllers\UserController;
 use App\Http\Controllers\RegisterController;
 
@@ -15,12 +16,15 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::resource('/perfil', PerfilController::class);
 Route::resource('/usuarios', App\Http\Controllers\UsuarioController::class);
 
 
 Route::resource('/equipment', App\Http\Controllers\EquipmentController::class);
 Route::resource('/users', UserController::class);
 Route::resource('bibliotecarios', BibliotecarioController::class);
+ 
+
 
 
 

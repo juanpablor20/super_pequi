@@ -107,7 +107,6 @@ return [
             'icon' => 'ti ti-home',
             'url' => 'home'
         ],
-        
         [
             'text' => 'registro bibliotecario',
             'icon' => 'ti ti-users',

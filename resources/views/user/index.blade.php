@@ -104,7 +104,6 @@
 											<td>{{ $user->last_name }}</td>
 											<td>{{ $user->number_identification }}</td>
 										
-											<td>{{ $user->states }}</td>
                                             <td>
                                                 @if($user->states == 'active')
                                                     <span class="badge bg-success me-1"></span> Activo

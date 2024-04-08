@@ -13,7 +13,7 @@
                         Update
                     </div>
                     <h2 class="page-title">
-                        {{ __('Usuario ') }}
+                        {{ __('Actualizar') }}
                     </h2>
                 </div>
                 <!-- Page title actions -->
@@ -28,7 +28,7 @@
                                 <line x1="12" y1="5" x2="12" y2="19"/>
                                 <line x1="5" y1="12" x2="19" y2="12"/>
                             </svg>
-                            Usuario List
+                          Lista de Bibliotecarios
                         </a>
                     </div>
                 </div>
@@ -45,15 +45,15 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Usuario Details</h3>
+                            <h3 class="card-title">Bibliotecario</h3>
                         </div>
                         <div class="card-body">
                             <form method="POST"
-                                  action="{{ route('usuarios.update', $usuario->id) }}" id="ajaxForm" role="form"
+                                  action="{{ route('bibliotecarios.update', $user->id) }}" id="ajaxForm" role="form"
                                   enctype="multipart/form-data">
                                 {{ method_field('PATCH') }}
                                 @csrf
-                                @include('usuario.form')
+                                @include('bibliotecarios.form')
                             </form>
                         </div>
                     </div>

@@ -102,40 +102,30 @@
 											<td>{{ $usuario->names }}</td>
 											<td>{{ $usuario->last_name }}</td>
 											<td>{{ $usuario->number_identification }}</td>
-											<td>{{ $usuario->states }}</td>
 
-                                        <td>
-                                            <div class="btn-list flex-nowrap">
-                                                <div class="dropdown">
-                                                    <button class="btn dropdown-toggle align-text-top"
-                                                            data-bs-toggle="dropdown">
-                                                        Actions
-                                                    </button>
-                                                    <div class="dropdown-menu dropdown-menu-end">
-                                                        <a class="dropdown-item"
-                                                           href="{{ route('usuarios.show',$usuario->id) }}">
-                                                            View
-                                                        </a>
-                                                        <a class="dropdown-item"
-                                                           href="{{ route('usuarios.edit',$usuario->id) }}">
-                                                            Edit
-                                                        </a>
-                                                        <form
-                                                            action="{{ route('usuarios.destroy',$usuario->id) }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit"
-                                                                    onclick="if(!confirm('Do you Want to Proceed?')){return false;}"
-                                                                    class="dropdown-item text-red"><i
-                                                                    class="fa fa-fw fa-trash"></i>
-                                                                Delete
-                                                            </button>
-                                                        </form>
-                                                    </div>
+                                            
+                                            <td>
+                                                @if($usuario->states == 'active')
+                                                    <span class="badge bg-success me-1"></span> Activo
+                                                @elseif($usuario->states == 'with_equipment')
+                                                    <span class="badge bg-warning text-dark me-1"></span> con_equipo
+                                                @elseif($usuario->states == 'inactive')
+                                                    
+                                                    <span class="badge bg-danger me-1"></span> Inactivo
+                                                @endif
+                                            </td>
+
+                                            <td>
+                                                <div class="btn-list flex-nowrap">
+                                                    <a href="{{ route('bibliotecarios.show',$usuario->id) }}" class="btn btn-primary"><i class="ti ti-eye-check"></i></a>
+                                                    <a href="{{ route('bibliotecarios.edit',$usuario->id) }}" class="btn btn-secondary"><i class="ti ti-edit"></i></a>
+                                                    <form action="{{ route('bibliotecarios.destroy',$usuario->id) }}" method="POST" onsubmit="return confirm('Estás seguro de que quieres inactivar este usuario?')">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger"><i class="ti ti-trash-off"></i></button>
+                                                    </form>
                                                 </div>
-                                            </div>
-                                        </td>
+                                            </td>
                                     </tr>
                                 @empty
                                     <td>No Data Found</td>

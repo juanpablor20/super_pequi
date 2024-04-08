@@ -9,11 +9,9 @@
             <div class="row g-2 align-items-center">
                 <div class="col">
                     <!-- Page pre-title -->
-                    <div class="page-pretitle">
-                        Create
-                    </div>
+                    
                     <h2 class="page-title">
-                        {{ __('Usuario ') }}
+                        {{ __('Crear') }}
                     </h2>
                 </div>
                 <!-- Page title actions -->

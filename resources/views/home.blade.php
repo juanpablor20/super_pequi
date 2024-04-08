@@ -10,10 +10,17 @@
                     <!-- Page pre-title -->
                     <div class="page-pretitle">
                        panel Principal
+                     
                        <a href="{{ route('users.index', ['tipo' => 'bibliotecarios']) }}">Bibliotecarios</a>
 
                     </div>
                     <h2 class="page-title">
+                        @role('bibliotecario') 
+                        <h2>esto solo se muestra al bibliotecario</h2>
+                        @endrole
+                        @role('bibliotecario')
+                        <h1>esto es para juan</h1>
+                        @endrole
                         Pequi
                     </h2>
                 </div>
@@ -48,6 +55,7 @@
                 </div>
             </div>
         </div>
+
     </div>
     <!-- Page body -->
     <div class="page-body">
@@ -99,6 +107,7 @@
                                     @role('bibliotecario') 
                                     <h2>esto solo se muestra al bibliotecario</h2>
                                     @endrole
+
 
                                     <th>Nombre</th>
                                     <th>apellido</th>

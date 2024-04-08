@@ -79,10 +79,9 @@ class UserController extends Controller
 
     public function show($id)
     {
-        $user = Users::find($id);
+          $user = Users::with('contacts', 'Address')->find($id);
         return view('user.show', compact('user'));
     }
-
     public function edit($id)
     {
         $user = Users::find($id);

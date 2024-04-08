@@ -9,11 +9,9 @@
             <div class="row g-2 align-items-center">
                 <div class="col">
                     <!-- Page pre-title -->
-                    <div class="page-pretitle">
-                        View
-                    </div>
+                   
                     <h2 class="page-title">
-                        {{ __('Usuario ') }}
+                        {{ __('Bibliotecario') }}
                     </h2>
                 </div>
                 <!-- Page title actions -->
@@ -28,7 +26,7 @@
                                 <line x1="12" y1="5" x2="12" y2="19" />
                                 <line x1="5" y1="12" x2="19" y2="12" />
                             </svg>
-                            Usuario List
+                         Lista  Bibliotecarios 
                         </a>
                     </div>
                 </div>
@@ -45,62 +43,47 @@
                     @endif
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Usuario Details</h3>
+                            <h3 class="card-title">Detalles del Bibliotecario</h3>
                         </div>
                         <div class="card-body">
 
                             <div class="form-group">
                                 <strong>Nombres:</strong>
-                                {{ $usuario->nombres }}
+                                {{ $user->names }}
                             </div>
                             <div class="form-group">
                                 <strong>Apellidos:</strong>
-                                {{ $usuario->apellidos }}
+                                {{ $user->last_name }}
                             </div>
                             <div class="form-group">
-                                <strong>Tipo Doc:</strong>
-                                {{ $usuario->tipo_doc }}
+                                <strong>Tipo de Documento:</strong>
+                                {{ $user->type_identification}}
                             </div>
                             <div class="form-group">
-                                <strong>Num Doc:</strong>
-                                {{ $usuario->num_doc }}
+                                <strong>numero de Documento:</strong>
+                                {{ $user->number_identification }}
                             </div>
                             <div class="form-group">
-                                <strong>correo:</strong>
-                                {{ $usuario->contactos[0]->correo }}
+                                <strong>Sexo:</strong>
+                                {{$user->sex_user}}
                             </div>
                             <div class="form-group">
-                                <strong>numero de telefono:</strong>
-                                {{ $usuario->contactos[0]->telefono }}
+                                <strong>Genero:</strong>
+                                {{$user->gender_sex}}
+                            </div>
+                           <div class="form-group">
+                                <strong>Correo:</strong>
+                                {{$user->contacts->email_con}}
+                            </div>
+                            <div class="form-group">
+                                <strong>Telefono:</strong>
+                                {{$user->contacts->telephone_con}}
                             </div>
                             <div class="form-group">
                                 <strong>Ciudad de Residencia:</strong>
-                                {{ $usuario->direcciones[0]->ciudad }}
+                                {{$user->Address->addres_add}}
                             </div>
-                            <div class="form-group">
-                                <strong>Estados:</strong>
-                                {{ $usuario->estados }}
-                            </div>
-                            @if ($usuario->datos->isNotEmpty())
-                                <div class="form-group">
-                                    <strong>Fichas:</strong>
-                                    {{ $usuario->datos[0]->ficha_id }}
-                                </div>
-                            @else
-                                <div class="form-group">
-                                    <strong>No se encontraron fichas para este usuario.</strong>
-                                </div>
-                            @endif
-                            {{-- @if ($usuario->programa->isNotEmpty())
-    <div class="form-group">
-        <strong>Fichas:</strong>
-        {{ $usuario->programa[0]->progrma_id}}
-    </div>
-@else
-    <div class="form-group">
-        <strong>No se encontraron fichas para este usuario.</strong>
-    </div>
-@endif --}}
+                        
                         </div>
                     </div>
                 </div>
