@@ -2,20 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Equipment;
 use App\Models\Service;
+use App\Models\Users;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
-/**
- * Class ServiceController
- * @package App\Http\Controllers
- */
 class ServiceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $services = Service::paginate(10);
@@ -24,39 +19,48 @@ class ServiceController extends Controller
             ->with('i', (request()->input('page', 1) - 1) * $services->perPage());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        $service = new Service();
-        return view('service.create', compact('service'));
+        return view('service.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        request()->validate(Service::$rules);
+        $usuario = Users::where('number_identification', $request->number_identification)->first();
+        $equipment = Equipment::where('serie_equi', $request->serie_equi)->first();
 
-        $service = Service::create($request->all());
+        if (!$usuario) {
+            return "El usuario no existe";
+        }
 
-        return redirect()->route('services.index')
-            ->with('success', 'Service created successfully.');
+        if (!$equipment) {
+            return "Equipo no encontrado";
+        }
+
+        // Iniciar una transacción de base de datos
+        DB::beginTransaction();
+
+        try {
+            // Crear el servicio con el usuario, el equipo y la fecha actual
+            $service = new Service();
+            $service->user_id = $usuario->id;
+           // $service->equipment_id = $equipment->id;
+            $service->date_ser = Carbon::now(); // Fecha y hora actual
+            // Otros campos del servicio
+            $service->save();
+
+            // Confirmar la transacción si todo fue exitoso
+            DB::commit();
+
+            return redirect()->route('services.index')->with('success', 'Servicio creado exitosamente.');
+        } catch (\Exception $e) {
+            // Revertir la transacción si ocurre algún error
+            DB::rollback();
+
+            return $e->getMessage(); // Manejar el error de alguna manera
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $service = Service::find($id);
@@ -64,12 +68,6 @@ class ServiceController extends Controller
         return view('service.show', compact('service'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $service = Service::find($id);
@@ -77,33 +75,22 @@ class ServiceController extends Controller
         return view('service.edit', compact('service'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  Service $service
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Service $service)
     {
-        request()->validate(Service::$rules);
+        $request->validate([
+            // Aquí debes definir las reglas de validación para la actualización de un servicio si es necesario
+        ]);
 
         $service->update($request->all());
 
-        return redirect()->route('services.index')
-            ->with('success', 'Service updated successfully');
+        return redirect()->route('services.index')->with('success', 'Servicio actualizado exitosamente.');
     }
 
-    /**
-     * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
-     */
     public function destroy($id)
     {
-        $service = Service::find($id)->delete();
+        $service = Service::find($id);
+        $service->delete();
 
-        return redirect()->route('services.index')
-            ->with('success', 'Service deleted successfully');
+        return redirect()->route('services.index')->with('success', 'Servicio eliminado exitosamente.');
     }
 }
