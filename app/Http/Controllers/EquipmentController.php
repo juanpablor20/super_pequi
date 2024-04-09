@@ -46,12 +46,7 @@ class EquipmentController extends Controller
         return view('equipment.show', compact('equipment'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
         $equipment = Equipment::find($id);
@@ -63,7 +58,6 @@ class EquipmentController extends Controller
     public function update(Request $request, Equipment $equipment)
     {
         request()->validate(Equipment::$rules);
-
         $equipment->update($request->all());
 
         return redirect()->route('equipment.index')

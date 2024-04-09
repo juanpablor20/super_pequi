@@ -3,12 +3,14 @@
 //use App\Http\Controllers\Auth\RegisterController;
 
 use App\Http\Controllers\BibliotecarioController;
+use App\Http\Controllers\EquipmentController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\PerfilController;
 use  App\Http\Controllers\UserController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ServiceController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -20,11 +22,11 @@ Route::resource('/perfil', PerfilController::class);
 Route::resource('/usuarios', App\Http\Controllers\UsuarioController::class);
 
 
-Route::resource('/equipment', App\Http\Controllers\EquipmentController::class);
+Route::resource('/equipment', EquipmentController::class);
 Route::resource('/users', UserController::class);
 Route::resource('bibliotecarios', BibliotecarioController::class);
  
-
+Route::resource('/services', ServiceController::class);
 
 
 
@@ -45,5 +47,6 @@ Route::resource('bibliotecarios', BibliotecarioController::class);
 
 
 // Rutas para el registro de bibliotecarios
+
 
 

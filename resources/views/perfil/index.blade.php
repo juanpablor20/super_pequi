@@ -66,7 +66,7 @@
                                             <div class="text-end">
                                                 <div class="d-flex">
                                                     <a href="{{ route('home') }}" class="btn btn-primary">volver</a>
-                                                    <a href="{{ route('perfil.edit', $user->id) }}"
+                                                    <a href="{{ route('perfil.edit',$user->id) }}"
                                                         class="btn btn-warning ms-auto"><i class="ti ti-edit"></i>Editar
                                                         Perfil</a>
                                                 </div>

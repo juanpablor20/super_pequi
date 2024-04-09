@@ -80,14 +80,23 @@ class BibliotecarioController extends Controller
         return view('bibliotecarios.edit', compact('user', 'contact', 'address'));
     }
 
-    public function update(Request $request, Users $b1)
+    public function update(Request $request, Users $bibliotecario)
     {
-         $request->validate(Users::$rules);
-         //dd($request->all());
-         $b1->update($request->all());
+        $request->validate(Users::$rules);
+        //dd($request->all());
+        //return $bibliotecario;
+        $bibliotecario->update($request->all());
+        $bibliotecario->contacts->email_con = $request->email_con;
+        $bibliotecario->contacts->telephone_con = $request->telephone_con;
+        $bibliotecario->contacts->save();
+
+        // Actualiza los datos de la dirección
+        $bibliotecario->address->addres_add = $request->addres_add;
+        $bibliotecario->address->save();
+      //  return $bibliotecario;
         return redirect()->route('bibliotecarios.index')->with('Exelente', 'Biliotecario Actualizado Exitosamente');
     }
-   
+
     public function destroy($id)
     {
         $user = Users::find($id)->delete();
