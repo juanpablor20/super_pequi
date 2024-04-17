@@ -87,6 +87,13 @@
         {!! $errors->first('role', '<div class="invalid-feedback">:message</div>') !!}
     </div>
 </div>
+<div class="mb-3 col-md-6">
+    <label class="form-label">Numero de ficha</label>
+    <div>
+        <input type="text" name="addres_add" value="{{ $user->address->addres_add ?? '' }}" class="form-control @error('addres_add') is-invalid @enderror" placeholder="Addres_add">
+        {!! $errors->first('addres_add', '<div class="invalid-feedback">:message</div>') !!}
+    </div>
+</div>
 
 
 

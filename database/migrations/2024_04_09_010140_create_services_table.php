@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('return_date')->nullable();
             $table->timestamp('date_ser')->useCurrent();
-            $table->enum('state_ser', ['loan', 'Returned']);
+            $table->enum('state_ser', ['pendiente', 'devuelto']);
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 

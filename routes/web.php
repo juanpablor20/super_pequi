@@ -27,6 +27,10 @@ Route::resource('/users', UserController::class);
 Route::resource('bibliotecarios', BibliotecarioController::class);
  
 Route::resource('/services', ServiceController::class);
+//Route::get('/services',  ServiceController::class);
+Route::get('/error', function () {
+    return view('error');
+})->name('error');
 
 
 
@@ -50,3 +54,4 @@ Route::resource('/services', ServiceController::class);
 
 
 
+Route::resource('/indexcards', App\Http\Controllers\IndexCardController::class);

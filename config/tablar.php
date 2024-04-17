@@ -125,6 +125,13 @@ return [
             'url' => 'equipment'
             
         ],
+        [
+            'text' => 'Fichas',
+            'icon' => 'ti ti-align-box-left-bottom',
+            'url' => 'indexcards'
+            
+        ],
+       
        
         
     ],

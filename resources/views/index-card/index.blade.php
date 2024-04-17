@@ -1,54 +1,39 @@
 @extends('tablar::page')
 
-@section('title', 'Service')
+@section('title')
+    Index Card
+@endsection
 
 @section('content')
-
-
     <!-- Page header -->
-    <div class="col-12 col-md-auto ms-auto d-print-none">
-        <div class="btn-list">
-            <div class="md-2 col-md-2 ms-3">
-                <!-- Page pre-title -->
-                <div class="page-pretitle">
-                    List
-                </div>
-                <h2 class="page-title">
-                    {{ __('Service ') }}
-                </h2>
-            </div>
+    <div class="page-header d-print-none">
+        <div class="container-xl">
             <div class="row g-2 align-items-center">
-                
-                
-                <div class="row">
-                <div class="md-3 col-md-6">
-                    <a href="{{ route('services.create') }}" class="btn btn-primary d-none d-sm-inline-block">
-                        <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                             viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                             stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                            <line x1="12" y1="5" x2="12" y2="19"/>
-                            <line x1="5" y1="12" x2="19" y2="12"/>
-                        </svg>
-                   
-                        Registrar Prestamo
-                    </a>
+                <div class="col">
+                    <!-- Page pre-title -->
+                    <div class="page-pretitle">
+                        List
+                    </div>
+                    <h2 class="page-title">
+                        {{ __('Index Card ') }}
+                    </h2>
                 </div>
-                    <div class="md-3 col-md-6">
-                    <a href="{{ route('services.index') }}" class="btn btn-danger d-none d-sm-inline-block">
-                        <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                             viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                             stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                            <line x1="12" y1="5" x2="12" y2="19"/>
-                            <line x1="5" y1="12" x2="19" y2="12"/>
-                        </svg>
-                        Registrar Devolucion
-                    </a>
+                <!-- Page title actions -->
+                <div class="col-12 col-md-auto ms-auto d-print-none">
+                    <div class="btn-list">
+                        <a href="{{ route('indexcards.create') }}" class="btn btn-primary d-none d-sm-inline-block">
+                            <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                 stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <line x1="12" y1="5" x2="12" y2="19"/>
+                                <line x1="5" y1="12" x2="19" y2="12"/>
+                            </svg>
+                            Create Index Card
+                        </a>
+                    </div>
                 </div>
-            </div>
             </div>
         </div>
     </div>
@@ -62,7 +47,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Service</h3>
+                            <h3 class="card-title">Index Card</h3>
                         </div>
                         <div class="card-body border-bottom py-3">
                             <div class="d-flex">
@@ -99,24 +84,26 @@
                                             <polyline points="6 15 12 9 18 15"/>
                                         </svg>
                                     </th>
-                                    <th>Return Date</th>
-                                    <th>Date Ser</th>
-                                    <th>State Ser</th>
-                                    <th>Numero de documento</th>
+                                    
+										<th>Number</th>
+										<th>States</th>
+										<th>Program Id</th>
+
                                     <th class="w-1"></th>
                                 </tr>
                                 </thead>
 
                                 <tbody>
-                                @forelse ($services as $service)
+                                @forelse ($indexCards as $indexCard)
                                     <tr>
                                         <td><input class="form-check-input m-0 align-middle" type="checkbox"
-                                                   aria-label="Select service"></td>
+                                                   aria-label="Select indexCard"></td>
                                         <td>{{ ++$i }}</td>
-                                        <td>{{ $service->return_date }}</td>
-                                        <td>{{ $service->date_ser }}</td>
-                                        <td>{{ $service->state_ser }}</td>
-                                        <td>{{ $service->Users->names }}</td>
+                                        
+											<td>{{ $indexCard->number }}</td>
+											<td>{{ $indexCard->states }}</td>
+											<td>{{ $indexCard->program_id }}</td>
+
                                         <td>
                                             <div class="btn-list flex-nowrap">
                                                 <div class="dropdown">
@@ -126,15 +113,15 @@
                                                     </button>
                                                     <div class="dropdown-menu dropdown-menu-end">
                                                         <a class="dropdown-item"
-                                                           href="{{ route('services.show',$service->id) }}">
+                                                           href="{{ route('index-cards.show',$indexCard->id) }}">
                                                             View
                                                         </a>
                                                         <a class="dropdown-item"
-                                                           href="{{ route('services.edit',$service->id) }}">
+                                                           href="{{ route('index-cards.edit',$indexCard->id) }}">
                                                             Edit
                                                         </a>
                                                         <form
-                                                            action="{{ route('services.destroy',$service->id) }}"
+                                                            action="{{ route('index-cards.destroy',$indexCard->id) }}"
                                                             method="POST">
                                                             @csrf
                                                             @method('DELETE')
@@ -154,11 +141,12 @@
                                     <td>No Data Found</td>
                                 @endforelse
                                 </tbody>
+
                             </table>
                         </div>
-                        {{-- <div class="card-footer d-flex align-items-center">
-                            {!! $services->links('tablar::pagination') !!}
-                        </div> --}}
+                       <div class="card-footer d-flex align-items-center">
+                            {!! $indexCards->links('tablar::pagination') !!}
+                        </div>
                     </div>
                 </div>
             </div>

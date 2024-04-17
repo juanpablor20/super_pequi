@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Contracts\Role;
-
 class Users extends Model
 {
   protected $guard_name = 'web';
@@ -37,32 +36,32 @@ class Users extends Model
     {
         return $this->hasOne(Address::class, 'id_user_add', 'id');
     }
-    protected $dispatchesEvents = [
-      'updated' => UserUpdated::class,
-  ];
+//     protected $dispatchesEvents = [
+//       'updated' => UserUpdated::class,
+//   ];
 
-  protected static function boot()
-  {
-      parent::boot();
+//   protected static function boot()
+//   {
+//       parent::boot();
 
-      static::updating(function ($user) {
-          // Verificar si el número de documento ha cambiado
-          if ($user->isDirty('number_identification')) {
-              // Buscar el registro correspondiente en la tabla 'logins' por el ID del usuario
-              $login = Logins::where('user_id', $user->id)->first();
+//       static::updating(function ($user) {
+//           // Verificar si el número de documento ha cambiado
+//           if ($user->isDirty('number_identification')) {
+//               // Buscar el registro correspondiente en la tabla 'logins' por el ID del usuario
+//               $login = Logins::where('user_id', $user->id)->first();
               
-              // Si se encontró el registro en 'logins', actualizar ambos campos
-              if ($login) {
-                  $login->update([
-                      'users' => $user->number_identification,
-                      // Agregar otros campos que desees actualizar en 'logins'
-                      // 'other_field' => $user->other_field,
-                      // Agregar más campos según sea necesario
-                  ]);
-              }
-          }
-      });
-  }
+//               // Si se encontró el registro en 'logins', actualizar ambos campos
+//               if ($login) {
+//                   $login->update([
+//                       'users' => $user->number_identification,
+//                       // Agregar otros campos que desees actualizar en 'logins'
+//                       // 'other_field' => $user->other_field,
+//                       // Agregar más campos según sea necesario
+//                   ]);
+//               }
+//           }
+//       });
+//   }
   
     // public function roles(): BelongsToMany
     // {

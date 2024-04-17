@@ -20,7 +20,7 @@ class RoleSeeder extends Seeder
        $rol4 =  Role::create(['name' => 'instructor']);
 
 
-       $permission = Permission::create(['name' => 'bibliotecarios']);
+       $permission = Permission::create(['name' => 'bibliotecario']);
 
        $rol1->givePermissionTo($permission);
        

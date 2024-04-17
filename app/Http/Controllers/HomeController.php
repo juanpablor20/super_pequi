@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Service;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        //return view('home');
+        $services = Service::with('Users', 'equipoUnion')->get();
+
+        return view('home', compact('services'))
+            ->with('i', (request()->input('page', 1) - 1) * 10);
     }
 }

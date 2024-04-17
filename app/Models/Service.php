@@ -4,23 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * Class Service
- *
- * @property $id
- * @property $return_date
- * @property $date_ser
- * @property $state_ser
- * @property $user_id
- * @property $created_at
- * @property $updated_at
- *
- * @property ServicesUnione[] $servicesUniones
- * @property TransferPlace[] $transferPlaces
- * @property User $user
- * @package App
- * @mixin \Illuminate\Database\Eloquent\Builder
- */
 class Service extends Model
 {
     
@@ -29,40 +12,39 @@ class Service extends Model
 		'state_ser' => 'required',
 		'user_id' => 'required',
     ];
+ 
+
+  public function validateEquipment($equipmentId) {
+
+    // Validation logic
+    $equipment = Equipment::find($equipmentId);
+
+    if(!$equipment) {
+      return ("Equipment not found"); 
+    }
+
+    // Additional validation
+
+    return $equipment;
+
+  }
+
 
     protected $perPage = 20;
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
+  
     protected $fillable = ['return_date','date_ser','state_ser','user_id'];
 
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function servicesUniones()
-    {
-        return $this->hasMany('App\Models\ServicesUnione', 'services_id', 'id');
-    }
-    
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function transferPlaces()
-    {
-        return $this->hasMany('App\Models\TransferPlace', 'places_id', 'id');
-    }
-    
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function user()
-    {
-        return $this->hasOne('App\Models\User', 'id', 'user_id');
-    }
+    public function Users()
+  {
+    return $this->belongsTo(Users::class, 'user_id');
+  }
+
+  public function equipoUnion()
+  {
+    return $this->belongsToMany(Equipment::class, 'services_uniones', 'services_id', 'equipment_id');
+  }
     
 
 }

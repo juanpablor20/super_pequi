@@ -19,9 +19,9 @@
                     <label class="form-label">numero Serie</label>
                     <input type="text" class="form-control" name="serie_equi" placeholder="Numero de seire">
                 </div>
-                <div class="mb-3">
+                {{-- <div class="mb-3">
                 <label for="form-label">Ambiente a Trasladar:</label><br>
-                <input type="text" class="form-control" name="places" placeholder="Ambiente a Trasladar"><br><br>
+                <input type="text" class="form-control" name="places" placeholder="Ambiente a Trasladar"><br><br> --}}
             </div>
            
             <div class="form-footer">
