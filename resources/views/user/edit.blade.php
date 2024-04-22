@@ -10,10 +10,10 @@
                 <div class="col">
                     <!-- Page pre-title -->
                     <div class="page-pretitle">
-                        Update
+                        Actualizar Datos del
                     </div>
                     <h2 class="page-title">
-                        {{ __('User ') }}
+                        {{ __('usuario') }}
                     </h2>
                 </div>
                 <!-- Page title actions -->
@@ -28,7 +28,7 @@
                                 <line x1="12" y1="5" x2="12" y2="19"/>
                                 <line x1="5" y1="12" x2="19" y2="12"/>
                             </svg>
-                            User List
+                          Lista de Usuarios
                         </a>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">User Details</h3>
+                            <h3 class="card-title">Detalles del Usuario</h3>
                         </div>
                         <div class="card-body">
                             <form method="POST"
@@ -53,6 +53,17 @@
                                   enctype="multipart/form-data">
                                 {{ method_field('PATCH') }}
                                 @csrf
+                                <div class="form-group mb-3">
+                                    <label class="form-label">Estado del Usuario</label>
+                                    <div>
+                                        <select name="states" class="form-select">
+                                            <option value="active" {{ $user->states == 'active' ? 'selected' : '' }}>activo</option>
+                                            <option value="inactive" {{ $user->states == 'inactive' ? 'selected' : '' }}>Inactivo</option>
+                                                 </select>
+                                        <!-- Agrega cualquier mensaje de error aquí si es necesario -->
+                                        <small class="form-hint">Seleccione el nuevo estado del Usuario.</small>
+                                    </div>
+                                </div>
                                 @include('user.form')
                             </form>
                         </div>

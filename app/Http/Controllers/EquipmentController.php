@@ -30,7 +30,7 @@ class EquipmentController extends Controller
         $equipment = Equipment::create($request->all());
 
         return redirect()->route('equipment.index')
-            ->with('success', 'Equipment created successfully.');
+            ->with('success', 'Equipo creado exitosamente.');
     }
 
     /**

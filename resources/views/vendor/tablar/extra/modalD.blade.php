@@ -1,4 +1,4 @@
-<div class="modal modal-blur fade" id="prestamo" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal modal-blur fade" id="devolucion" tabindex="-1" role="dialog" aria-hidden="true">
     <form method="POST" action="{{ route('prestamos') }}" id="ajaxForm" role="form"
     enctype="multipart/form-data">
   @csrf

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Database\Eloquent\Model;
 
 class Service extends Model
@@ -12,9 +13,16 @@ class Service extends Model
 		'state_ser' => 'required',
 		'user_id' => 'required',
     ];
- 
+       
+    // $equipment_id = $equipment->id; 
+//     if (!$usuario) {
+
+//         return "El usuario no existe";
+//     
+
 
   public function validateEquipment($equipmentId) {
+   
 
     // Validation logic
     $equipment = Equipment::find($equipmentId);
@@ -33,7 +41,7 @@ class Service extends Model
     protected $perPage = 20;
 
   
-    protected $fillable = ['return_date','date_ser','state_ser','user_id'];
+    protected $fillable = ['return_date','date_ser','state_ser','user_id', 'equipment_id'];
 
 
     public function Users()
@@ -41,9 +49,9 @@ class Service extends Model
     return $this->belongsTo(Users::class, 'user_id');
   }
 
-  public function equipoUnion()
+  public function equipment()
   {
-    return $this->belongsToMany(Equipment::class, 'services_uniones', 'services_id', 'equipment_id');
+    return $this->belongsTo(Equipment::class, 'equipment_id');
   }
     
 

@@ -25,7 +25,7 @@ class HomeController extends Controller
     public function index()
     {
         //return view('home');
-        $services = Service::with('Users', 'equipoUnion')->get();
+        $services = Service::with('Users', 'equipment')->get();
 
         return view('home', compact('services'))
             ->with('i', (request()->input('page', 1) - 1) * 10);

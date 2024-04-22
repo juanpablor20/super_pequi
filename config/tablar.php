@@ -108,13 +108,13 @@ return [
             'url' => 'home'
         ],
         [
-            'text' => 'registro bibliotecario',
+            'text' => 'Bibliotecario',
             'icon' => 'ti ti-users',
             'url' => 'bibliotecarios'
            
         ],
         [
-            'text' => 'registro de usuarios',
+            'text' => 'Usuarios',
             'icon' => 'ti ti-users-group',
             'url' => 'users'
            

@@ -1,5 +1,6 @@
 <div class="modal-body">
     <div class="mb-3">
+        <input type="hidden" name="bibliotecario_id" value="{{ Auth::id() }}">
         <label class="form-label">numero Documento</label>
         <input type="text" class="form-control" name="number_identification" placeholder="Numero de documento">
     </div>

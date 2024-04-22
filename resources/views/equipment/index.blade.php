@@ -15,7 +15,7 @@
                      lista de equipos
                     </div>
                     <h2 class="page-title">
-                        {{ __('Equipment ') }}
+                        {{ __('Equipos') }}
                     </h2>
                 </div>
                 <!-- Page title actions -->

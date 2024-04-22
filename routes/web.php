@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\PerfilController;
+use App\Http\Controllers\PrestamosController;
 use  App\Http\Controllers\UserController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ServiceController;
@@ -19,15 +20,17 @@ Auth::routes();
 
 Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('/perfil', PerfilController::class);
-Route::resource('/usuarios', App\Http\Controllers\UsuarioController::class);
+
 
 
 Route::resource('/equipment', EquipmentController::class);
 Route::resource('/users', UserController::class);
 Route::resource('bibliotecarios', BibliotecarioController::class);
  
-Route::resource('/services', ServiceController::class);
-//Route::get('/services',  ServiceController::class);
+// Route::post('/prestamos', PrestamosController::class);
+// Route::get('prestamos', PrestamosController::class);
+// //Route::get('/services',  ServiceController::class);
+Route::post('/prestamos', [PrestamosController::class, 'store'])->name('prestamos');
 Route::get('/error', function () {
     return view('error');
 })->name('error');

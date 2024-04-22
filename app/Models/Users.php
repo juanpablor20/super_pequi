@@ -25,7 +25,7 @@ class Users extends Model
 
     protected $perPage = 20;
 
-    protected $fillable = ['names','last_name','type_identification','number_identification', 'sex_user', 'gender_sex'];
+    protected $fillable = ['names','last_name','type_identification','number_identification', 'sex_user', 'gender_sex', 'states'];
 
     public function contacts()
     {

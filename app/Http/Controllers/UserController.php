@@ -74,7 +74,7 @@ class UserController extends Controller
         $contacts->save();
         $address->save();
 
-        return redirect()->route('users.index')->with('success', 'User created successfully.');
+        return redirect()->route('users.index')->with('success', 'Usuario Creado Exitosamente.');
     }
 
     public function show($id)
@@ -96,12 +96,12 @@ class UserController extends Controller
 
         $user->update($request->all());
 
-        return redirect()->route('users.index')->with('success', 'User updated successfully');
+        return redirect()->route('users.index')->with('success', 'Usuario Actualisado exitosamente');
     }
 
     public function destroy($id)
     {
         $user = Users::find($id)->delete();
-        return redirect()->route('users.index')->with('success', 'User deleted successfully');
+        return redirect()->route('users.index')->with('success', 'Usuario inactivo exitosamente');
     }
 }
