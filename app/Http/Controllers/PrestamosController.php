@@ -14,22 +14,25 @@ class PrestamosController extends Controller
 {   
     public function store(Request $request)
     {
+       // request()->validate(Service::$rules);
         $usuario = Users::where('number_identification', $request->number_identification)->first();
         $equipment = Equipment::where('serie_equi', $request->serie_equi)->first();
 
-        // Verificar si el usuario ya tiene un préstamo activo del mismo tipo de equipo
-        $prestamo_existente = Service::where('user_id', $usuario->id)
-            ->where('state_ser', 'prestado') // Asumo que 'prestado' es el estado de un préstamo activo
-            ->whereHas('equipment', function ($query) use ($equipment) {
-                $query->where('type_equi', $equipment->type_equi);
-            })
-            ->exists();
-
-        if ($prestamo_existente) {
-            // Redirigir al usuario a otra vista
-            return redirect()->route('home')->with('error', 'Ya tienes un préstamo activo de este tipo de equipo.');
+        if (!$equipment) {
+          return redirect()->route('home')->with('error', 'el usuario no existe en nuestro sistema.');
+         // return response()->json(['error' => '¡El equipo no existe en nuestro sistema!'], 422);
+        } 
+        if (!$usuario) {
+            return redirect()->route('home')->with('error', 'el usuario no existe en nuestro sistema.');
         }
-
+        if ($equipment && $equipment->states == 'disponible') {
+           
+         
+        } else {
+            return redirect()->route('home')->with('error', 'este equipo no se enccuentra disponible.');
+          
+        }
+   
         // Iniciar una transacción de base de datos
         DB::beginTransaction();
 
@@ -54,7 +57,7 @@ class PrestamosController extends Controller
 
             DB::commit();
 
-            return redirect()->route('home')->with('success', 'Servicio creado exitosamente.');
+            return redirect()->route('mostrarServicio', ['id' => $service->id])->with('success', 'Prestamo creado exitosamente.');
         } catch (\Exception $e) {
             // Revertir la transacción si ocurre algún error
             DB::rollback();
@@ -62,7 +65,21 @@ class PrestamosController extends Controller
             return $e->getMessage(); // Manejar el error de alguna manera
         }
     }
+    public function buscarUsuario(Request $request)
+{
+    $user = Users::where('number_identification', $request->input('numberIdentification'))->first();
 
-    // Otros métodos del controlador...
+    if ($user) {
+        return response()->json([
+            'names' => $user->names,
+            'last_name' => $user->last_name,
+            //'prestamos' => $user->prestamos, // Ajusta esto según la relación de préstamos de tu modelo de usuario
+        ]);
+    } else {
+        return response()->json(['error' => 'Usuario no encontrado'], 404);
+    }
+}
+
+
 }
 

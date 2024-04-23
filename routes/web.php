@@ -59,3 +59,6 @@ Route::get('/error', function () {
 
 Route::resource('/indexcards', App\Http\Controllers\IndexCardController::class);
 Route::resource('/programs', App\Http\Controllers\ProgramController::class);
+
+Route::get('/buscarUsuario', [PrestamosController::class, 'buscarUsuario'])->name('buscarUsuario');
+Route::get('mostrarServicio/{id}', [ServiceController::class, 'show'])->name('mostrarServicio');

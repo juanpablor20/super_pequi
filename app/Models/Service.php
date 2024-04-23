@@ -12,6 +12,7 @@ class Service extends Model
 		'date_ser' => 'required',
 		'state_ser' => 'required',
 		'user_id' => 'required',
+    'serie_equi' => 'required',
     ];
        
     // $equipment_id = $equipment->id; 

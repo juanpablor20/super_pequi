@@ -4,6 +4,7 @@
     home
 @endsection
 @section('content')
+   
     <!-- Page header -->
     <div class="page-header d-print-none">
         <div class="container-xl">
@@ -13,7 +14,7 @@
                     <div class="page-pretitle">
                         panel Principal
                         @can('bibliotecatio')
-                            ...juan  pablo
+                            ...juan pablo
                         @endcan
                     </div>
                     <h2 class="page-title">
@@ -69,14 +70,7 @@
                         </div>
                         <div class="card-body border-bottom py-3">
                             <div class="d-flex">
-                                <div class="text-muted">
-                                    Show
-                                    <div class="mx-2 d-inline-block">
-                                        <input type="text" class="form-control form-control-sm" value="8"
-                                            size="3" aria-label="Invoices count">
-                                    </div>
-                                    entries
-                                </div>
+
                                 <div class="ms-auto text-muted">
                                     Buscar:
                                     <div class="ms-2 d-inline-block">
@@ -108,7 +102,7 @@
                                         @role('bibliotecario')
                                             <th>esto solo se muestra al bibliotecario</th>
                                         @endrole
-                                     
+
                                         <th>Fecha de Prestamo</th>
                                         <th>Numero de Documento</th>
                                         <th>Numero de Serie</th>
@@ -122,7 +116,7 @@
                                             <td><input class="form-check-input m-0 align-middle" type="checkbox"
                                                     aria-label="Select service"></td>
                                             <td>{{ ++$i }}</td>
-                                            
+
                                             <td>{{ $service->date_ser }}</td>
                                             <td>{{ $service->Users->number_identification }}</td>
                                             <td>{{ $service->equipment->serie_equi }}</td>
@@ -135,10 +129,10 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                {{-- <div class="btn-list flex-nowrap">
-                                                    <a href="{{ route('services.show', $service->id) }}"
+                                                <div class="btn-list flex-nowrap">
+                                                    <a href="{{ route('mostrarServicio', $service->id) }}"
                                                         class="btn btn-primary"><i class="ti ti-eye-check"></i></a>
-                                                </div> --}}
+                                                </div>
                                             </td>
                                             <td>
                                                 <div class="btn-list flex-nowrap">
@@ -146,6 +140,82 @@
                                                 </div>
                                             </td>
                                         </tr>
+
+                                        @if (session('error'))
+                                        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                                        <script>
+                                            // Muestra el mensaje de error utilizando SweetAlert2
+                                            Swal.fire({
+                                                icon: 'error',
+                                                title: 'Error',
+                                                text: '{{ session('error') }}',
+                                                confirmButtonText: 'Aceptar'
+                                            });
+                                        </script>
+                                    @endif
+                                    
+                                    {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                                    <script>
+                                        // Envía una solicitud AJAX al controlador
+                                        function enviarSolicitud(event) {
+                                            event.preventDefault(); // Evita el comportamiento predeterminado del formulario
+                                    
+                                            $.ajax({
+                                                type: 'POST',
+                                                url: '{{ route('prestamos') }}',
+                                                data: {
+                                                    // Tu data aquí si es necesario
+                                                },
+                                                success: function(response) {
+                                                    // Si hay un error, muestra el mensaje utilizando SweetAlert2
+                                                    if (response.error) {
+                                                        Swal.fire({
+                                                            icon: 'error',
+                                                            title: 'Error',
+                                                            text: response.error,
+                                                            confirmButtonText: 'Aceptar'
+                                                        });
+                                                    }
+                                                },
+                                                error: function(xhr, status, error) {
+                                                    // Si ocurre un error en la solicitud AJAX, muestra un mensaje genérico de error
+                                                    console.error(error);
+                                                    Swal.fire({
+                                                        icon: 'error',
+                                                        title: 'Error',
+                                                        text: '¡Ocurrió un error al procesar la solicitud!',
+                                                        confirmButtonText: 'Aceptar'
+                                                    });
+                                                }
+                                            });
+                                        }
+                                    
+                                        // Asigna la función a la acción de enviar el formulario
+                                        $(document).ready(function() {
+                                            $('#prestamo').submit(enviarSolicitud);
+                                        });
+                                    </script> --}}
+                                    
+                                    
+                                
+                                    @if (session('success'))
+                                        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                                        <script>
+                                            // Muestra el mensaje de éxito utilizando SweetAlert2
+                                            Swal.fire({
+                                                icon: 'success',
+                                                title: 'Éxito',
+                                                text: '{{ session('success') }}',
+                                                confirmButtonText: 'Aceptar',
+                                                showCancelButton: true, // Muestra el botón de cancelar
+                                               // cancelButtonText: 'Ver usuario', // Texto del botón de cancelar
+                                                cancelButtonColor: '#3085d6', // Color del botón de cancelar
+                                                reverseButtons: true // Invierte el orden de los botones (Aceptar y Cancelar)
+                                            })
+                                            
+                                        </script>
+                                    @endif
+
                                     @empty
                                         <td colspan="9">No Hay Datos</td>
                                     @endforelse
@@ -158,3 +228,4 @@
         </div>
     </div>
 @endsection
+
