@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('number', 60);
             $table->enum('states', ['active', 'inactive'])->default('active');
             $table->unsignedBigInteger('program_id'); 
-            $table->foreign('program_id')->references('id')->on('index_cards')->onDelete('cascade');
+            $table->foreign('program_id')->references('id')->on('programs')->onDelete('cascade');
            
             $table->timestamps();
         });

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\IndexCard;
-use App\Models\programs;
+use App\Models\program;
 use Illuminate\Http\Request;
 
 
@@ -16,26 +16,26 @@ class IndexCardController extends Controller
         return view('index-card.index', compact('indexCards'))
             ->with('i', (request()->input('page', 1) - 1) * $indexCards->perPage());
     }
-    
+
 
 
     public function create()
     {
-        $programas = programs::all();
+        $programas = program::all();
         $indexCard = new IndexCard();
         return view('index-card.create', compact('indexCard', 'programas'));
     }
 
     public function store(Request $request)
     {
-        
-        request()->validate(IndexCard::$rules);
-    $indexCard = IndexCard::create($request->all());
-      
 
-        
+        request()->validate(IndexCard::$rules);
+        $indexCard = IndexCard::create($request->all());
+
+
+
         return redirect()->route('indexcards.index')
-           ->with('success', 'Registro exitoso.');
+            ->with('success', 'Registro exitoso.');
     }
 
     public function show($id)
@@ -48,11 +48,11 @@ class IndexCardController extends Controller
     public function edit($id)
     {
         $indexCard = IndexCard::find($id);
-        $programa = programs::all();
-       //return $indexCard;
-       $programas = $indexCard->programs;
-        
-        return view('index-card.edit', compact('indexCard', 'programas', 'programa'));
+        $programa = program::all();
+        //return $indexCard;
+        $programas = $indexCard->programs;
+
+        return view('index-card.edit', compact('indexCard'));
     }
 
     public function update(Request $request, IndexCard $indexCard)
@@ -67,9 +67,9 @@ class IndexCardController extends Controller
 
     public function destroy($id)
     {
-      
+
         $indexCard = IndexCard::find($id)->delete();
-return $indexCard;
+        return $indexCard;
         return redirect()->route('indexcards.index')
             ->with('success', 'IndexCard deleted successfully');
     }

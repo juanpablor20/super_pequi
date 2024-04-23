@@ -1,10 +1,9 @@
 @extends('tablar::page')
 
 @section('title')
-   home
-@endsection 
+    home
+@endsection
 @section('content')
-
     <!-- Page header -->
     <div class="page-header d-print-none">
         <div class="container-xl">
@@ -14,8 +13,8 @@
                     <div class="page-pretitle">
                         panel Principal
                         @can('bibliotecatio')
-...
-@endcan
+                            ...juan  pablo
+                        @endcan
                     </div>
                     <h2 class="page-title">
                         @role('bibliotecario')
@@ -42,26 +41,16 @@
                             </svg>
                             Registrar Prestamo
                         </a>
-                        <a href="#" class="btn btn-danger d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#devolucion">
+                        <a href="#" class="btn btn-danger d-none d-sm-inline-block" data-bs-toggle="modal"
+                            data-bs-target="#devolucion">
                             <!-- Icono "Menos" SVG -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <line x1="5" y1="12" x2="19" y2="12" />
-                            </svg>
-                            Registrar Devolucion
-                        </a>
-                        
-                        <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal"
-                            data-bs-target="#modal-report" aria-label="Create new report">
-                            <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                                 stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <line x1="12" y1="5" x2="12" y2="19" />
                                 <line x1="5" y1="12" x2="19" y2="12" />
                             </svg>
-                         
+                            Registrar Devolucion
                         </a>
                     </div>
                 </div>
@@ -119,7 +108,7 @@
                                         @role('bibliotecario')
                                             <th>esto solo se muestra al bibliotecario</th>
                                         @endrole
-                                        <th>Fecha de devolucion</th>
+                                     
                                         <th>Fecha de Prestamo</th>
                                         <th>Numero de Documento</th>
                                         <th>Numero de Serie</th>
@@ -133,11 +122,11 @@
                                             <td><input class="form-check-input m-0 align-middle" type="checkbox"
                                                     aria-label="Select service"></td>
                                             <td>{{ ++$i }}</td>
-                                            <td>{{ $service->return_date }}</td>
+                                            
                                             <td>{{ $service->date_ser }}</td>
                                             <td>{{ $service->Users->number_identification }}</td>
                                             <td>{{ $service->equipment->serie_equi }}</td>
-                                            
+
                                             <td>
                                                 @if ($service->state_ser == 'prestado')
                                                     <span class="badge bg-warning text-dark me-1"></span> pendiente
@@ -153,7 +142,7 @@
                                             </td>
                                             <td>
                                                 <div class="btn-list flex-nowrap">
-                                                    
+
                                                 </div>
                                             </td>
                                         </tr>
@@ -168,5 +157,4 @@
             </div>
         </div>
     </div>
-
 @endsection

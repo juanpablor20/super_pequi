@@ -22,6 +22,7 @@
     @yield('tablar_css')
 </head>
 @yield('body')
-@include('tablar::extra.modal')
+@include('tablar::extra.prestamoModal')
+@include('tablar::extra.devolucionModal')
 @yield('tablar_js')
 </html>

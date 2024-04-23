@@ -126,11 +126,18 @@ return [
             
         ],
         [
+            
             'text' => 'Fichas',
             'icon' => 'ti ti-align-box-left-bottom',
             'url' => 'indexcards'
             
         ],
+        [
+            'text' => 'programas',
+            'icon' => 'ti ti-tournament',
+            'url' => 'programs'
+        ],
+
        
        
         

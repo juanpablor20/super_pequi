@@ -19,11 +19,11 @@ class IndexCard extends Model
 
     public function programs()
     {
-        return $this->belongsTo(programs::class, 'program_id', 'id');
+        return $this->belongsTo(program::class, 'program_id', 'id');
     }
 
-    public function relationships()
-    {
-        return $this->hasMany('App\Models\Relationship', 'index_card_id', 'id');
-    }
+    // public function relationships()
+    // {
+    //     return $this->hasMany('App\Models\Relationship', 'index_card_id', 'id');
+    // }
 }
