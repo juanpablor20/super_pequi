@@ -36,6 +36,13 @@ class Users extends Model
     {
         return $this->hasOne(Address::class, 'id_user_add', 'id');
     }
+    public function services()
+    {
+      return $this->hasMany(Service::class, 'user_id');
+    }
+
+
+  
 //     protected $dispatchesEvents = [
 //       'updated' => UserUpdated::class,
 //   ];

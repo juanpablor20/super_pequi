@@ -9,11 +9,14 @@ use Illuminate\Http\Request;
 class EquipmentController extends Controller
 {
     public function index()
+
     {
+        
         $equipment = Equipment::paginate(10);
         return view('equipment.index', compact('equipment'))
             ->with('i', (request()->input('page', 1) - 1) * $equipment->perPage());
     }
+   
 
   
     public function create()

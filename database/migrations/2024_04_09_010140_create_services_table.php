@@ -15,15 +15,18 @@ return new class extends Migration
             $table->foreignId('librarian_id')->constrained('users')->onDelete('cascade');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('equipment_id');
+            $table->unsignedBigInteger('environment_id');
+
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('equipment_id')->references('id')->on('equipment')->onDelete('cascade');
+            $table->foreign('environment_id')->references('id')->on('environments')->onDelete('cascade');
 
 
 
             $table->timestamps();
         });
     }
-    
+
     public function down(): void
     {
         Schema::dropIfExists('services');

@@ -15,18 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('email_con');
             $table->string('telephone_con');
-
-            $table->unsignedBigInteger('id_user_con'); 
-
-
+            $table->unsignedBigInteger('id_user_con');
             $table->foreign('id_user_con')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
+   
     public function down(): void
     {
         Schema::dropIfExists('contacts');

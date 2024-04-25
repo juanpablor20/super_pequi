@@ -1,7 +1,7 @@
 @extends('tablar::page')
 
 @section('title')
-    pequi
+    Ambientes 
 @endsection
 
 @section('content')
@@ -11,17 +11,15 @@
             <div class="row g-2 align-items-center">
                 <div class="col">
                     <!-- Page pre-title -->
-                    <div class="page-pretitle">
-                     lista de equipos
-                    </div>
+                    
                     <h2 class="page-title">
-                        {{ __('Equipos') }}
+                        {{ __('Ambientes ') }}
                     </h2>
                 </div>
                 <!-- Page title actions -->
                 <div class="col-12 col-md-auto ms-auto d-print-none">
                     <div class="btn-list">
-                        <a href="{{ route('equipment.create') }}" class="btn btn-primary d-none d-sm-inline-block">
+                        <a href="{{ route('environments.create') }}" class="btn btn-primary d-none d-sm-inline-block">
                             <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                  viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -30,7 +28,7 @@
                                 <line x1="12" y1="5" x2="12" y2="19"/>
                                 <line x1="5" y1="12" x2="19" y2="12"/>
                             </svg>
-                            Create Equipo
+                           Crear Ambiente
                         </a>
                     </div>
                 </div>
@@ -47,9 +45,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            {{-- <x-tabulator :table="$equiposTable"></x-tabulator> --}}
-
-                            <h3 class="card-title">Equipos</h3>
+                            <h3 class="card-title">Ambiente</h3>
                         </div>
                         <div class="card-body border-bottom py-3">
                             <div class="d-flex">
@@ -80,60 +76,56 @@
                                         </svg>
                                     </th>
                                     
-										<th>Tipo de  Equipo</th>
-                                        <th>Caracteristicas</th>
-										<th>Numero de Serie</th>
-                                        
-										<th>Estados</th>
+										<th>Nombre del Ambiente</th>
+										<th>Estado</th>
 
                                     <th class="w-1"></th>
                                 </tr>
                                 </thead>
 
                                 <tbody>
-                                @forelse ($equipment as $equipment)
+                                @forelse ($environments as $environment)
                                     <tr>
                                         <td><input class="form-check-input m-0 align-middle" type="checkbox"
-                                                   aria-label="Select equipment"></td>
+                                                   aria-label="Select environment"></td>
                                         <td>{{ ++$i }}</td>
                                         
-                                        <td>{{ $equipment->type_equi }}</td>
-                                        <td>{{ $equipment->characteristics}}</td>
-                                        <td>{{ $equipment->serie_equi }}</td>
-                                        <td>
-                                            @if($equipment->states == 'disponible')
-                                                <span class="badge bg-success me-1"></span>Disponible
-                                            @elseif($equipment->states == 'en_prestamo')
-                                                <span class="badge bg-warning text-dark me-1"></span>En préstamo
-                                            @elseif($equipment->states == 'en_reparacion')
-                                                <span class="badge bg-secundary me-1"></span>En reparación
-                                            @else
-                                                <span class="badge bg-danger me-1"></span> Inactivo
-                                            @endif
-                                        </td>
+											<td>{{ $environment->names }}</td>
+											<td>{{ $environment->states }}</td>
 
                                         <td>
                                             <div class="btn-list flex-nowrap">
-                                                <a href="{{ route('equipment.show',$equipment->id) }}" class="btn btn-primary"><i class="ti ti-eye-check"></i></a>
-                                                <a href="{{ route('equipment.edit',$equipment->id) }}" class="btn btn-secondary"><i class="ti ti-edit"></i></a>
-                                                <form action="{{ route('equipment.destroy',$equipment->id) }}" method="POST" onsubmit="return confirm('Estás seguro de que quieres inactivar este equipo?')">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger"><i class="ti ti-trash-off"></i></button>
-                                                </form>
+                                                <div class="dropdown">
+                                                        <a class="dropdown-item"
+                                                           href="{{ route('environments.edit',$environment->id) }}">
+                                                            Editar
+                                                        </a>
+                                                        <form
+                                                            action="{{ route('environments.destroy',$environment->id) }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit"
+                                                                    onclick="if(!confirm('Do you Want to Proceed?')){return false;}"
+                                                                    class="dropdown-item text-red"><i
+                                                                    class="fa fa-fw fa-trash"></i>
+                                                                Inactivar
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </td>
                                     </tr>
                                 @empty
-                                    <tr>
-                                        <td colspan="5">Datos no encontrados</td>
-                                    </tr>
+                                    <td>No hay Datos</td>
                                 @endforelse
                                 </tbody>
+
                             </table>
                         </div>
                        <div class="card-footer d-flex align-items-center">
-                            {{-- {!! $equipment->links('tablar::pagination') !!} --}}
+                            {!! $environments->links('tablar::pagination') !!}
                         </div>
                     </div>
                 </div>

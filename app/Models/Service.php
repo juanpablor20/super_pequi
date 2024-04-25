@@ -15,28 +15,7 @@ class Service extends Model
     'serie_equi' => 'required',
     ];
        
-    // $equipment_id = $equipment->id; 
-//     if (!$usuario) {
 
-//         return "El usuario no existe";
-//     
-
-
-  public function validateEquipment($equipmentId) {
-   
-
-    // Validation logic
-    $equipment = Equipment::find($equipmentId);
-
-    if(!$equipment) {
-      return ("Equipment not found"); 
-    }
-
-    // Additional validation
-
-    return $equipment;
-
-  }
 
 
     protected $perPage = 20;
@@ -53,6 +32,10 @@ class Service extends Model
   public function equipment()
   {
     return $this->belongsTo(Equipment::class, 'equipment_id');
+  }
+  public function environment()
+  {
+    return $this->belongsTo(Environment::class, 'environmet_id');
   }
     
 

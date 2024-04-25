@@ -4,9 +4,13 @@
     home
 @endsection
 @section('content')
-   
+
     <!-- Page header -->
     <div class="page-header d-print-none">
+
+        @if(config('tablar','display_alert'))
+        @include('tablar::common.alert')
+    @endif
         <div class="container-xl">
             <div class="row g-2 align-items-center">
                 <div class="col">
@@ -66,7 +70,8 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Invoices</h3>
+                            <h3 class="card-title">Servicio</h3>
+                           
                         </div>
                         <div class="card-body border-bottom py-3">
                             <div class="d-flex">
@@ -141,80 +146,6 @@
                                             </td>
                                         </tr>
 
-                                        @if (session('error'))
-                                        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-                                        <script>
-                                            // Muestra el mensaje de error utilizando SweetAlert2
-                                            Swal.fire({
-                                                icon: 'error',
-                                                title: 'Error',
-                                                text: '{{ session('error') }}',
-                                                confirmButtonText: 'Aceptar'
-                                            });
-                                        </script>
-                                    @endif
-                                    
-                                    {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-                                    <script>
-                                        // Envía una solicitud AJAX al controlador
-                                        function enviarSolicitud(event) {
-                                            event.preventDefault(); // Evita el comportamiento predeterminado del formulario
-                                    
-                                            $.ajax({
-                                                type: 'POST',
-                                                url: '{{ route('prestamos') }}',
-                                                data: {
-                                                    // Tu data aquí si es necesario
-                                                },
-                                                success: function(response) {
-                                                    // Si hay un error, muestra el mensaje utilizando SweetAlert2
-                                                    if (response.error) {
-                                                        Swal.fire({
-                                                            icon: 'error',
-                                                            title: 'Error',
-                                                            text: response.error,
-                                                            confirmButtonText: 'Aceptar'
-                                                        });
-                                                    }
-                                                },
-                                                error: function(xhr, status, error) {
-                                                    // Si ocurre un error en la solicitud AJAX, muestra un mensaje genérico de error
-                                                    console.error(error);
-                                                    Swal.fire({
-                                                        icon: 'error',
-                                                        title: 'Error',
-                                                        text: '¡Ocurrió un error al procesar la solicitud!',
-                                                        confirmButtonText: 'Aceptar'
-                                                    });
-                                                }
-                                            });
-                                        }
-                                    
-                                        // Asigna la función a la acción de enviar el formulario
-                                        $(document).ready(function() {
-                                            $('#prestamo').submit(enviarSolicitud);
-                                        });
-                                    </script> --}}
-                                    
-                                    
-                                
-                                    @if (session('success'))
-                                        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-                                        <script>
-                                            // Muestra el mensaje de éxito utilizando SweetAlert2
-                                            Swal.fire({
-                                                icon: 'success',
-                                                title: 'Éxito',
-                                                text: '{{ session('success') }}',
-                                                confirmButtonText: 'Aceptar',
-                                                showCancelButton: true, // Muestra el botón de cancelar
-                                               // cancelButtonText: 'Ver usuario', // Texto del botón de cancelar
-                                                cancelButtonColor: '#3085d6', // Color del botón de cancelar
-                                                reverseButtons: true // Invierte el orden de los botones (Aceptar y Cancelar)
-                                            })
-                                            
-                                        </script>
-                                    @endif
 
                                     @empty
                                         <td colspan="9">No Hay Datos</td>

@@ -3,6 +3,7 @@
 //use App\Http\Controllers\Auth\RegisterController;
 
 use App\Http\Controllers\BibliotecarioController;
+use App\Http\Controllers\DevolucionController;
 use App\Http\Controllers\EquipmentController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -31,6 +32,7 @@ Route::resource('bibliotecarios', BibliotecarioController::class);
 // Route::get('prestamos', PrestamosController::class);
 // //Route::get('/services',  ServiceController::class);
 Route::post('/prestamos', [PrestamosController::class, 'store'])->name('prestamos');
+Route::post('/devolucion', [DevolucionController::class, 'devolver'])->name('devolucion');
 Route::get('/error', function () {
     return view('error');
 })->name('error');
@@ -62,3 +64,5 @@ Route::resource('/programs', App\Http\Controllers\ProgramController::class);
 
 Route::get('/buscarUsuario', [PrestamosController::class, 'buscarUsuario'])->name('buscarUsuario');
 Route::get('mostrarServicio/{id}', [ServiceController::class, 'show'])->name('mostrarServicio');
+Route::resource('/environments', App\Http\Controllers\EnvironmentController::class);
+Route::get('item.search', [ServiceController::class, 'show'])->name('item.search');

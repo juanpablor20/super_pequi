@@ -56,7 +56,7 @@
 <strong>estado del servicio:</strong>
 {{ $service->state_ser }}
 </div>
-<h2>informacion del solicitante del presamo</h2>
+<h2>informacion del solicitante del servicio</h2>
 <div class="form-group">
 <strong>nombre:</strong>
 {{ $service->Users->names }}

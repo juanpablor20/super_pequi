@@ -137,6 +137,12 @@ return [
             'icon' => 'ti ti-tournament',
             'url' => 'programs'
         ],
+        [
+
+            'text' => 'Ambientes',
+            'icon' => 'ti ti-smart-home',
+            'url' => 'environments'
+        ],
 
        
        

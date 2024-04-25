@@ -1,5 +1,5 @@
 <div class="modal modal-blur fade" id="devolucion" tabindex="-1" role="dialog" aria-hidden="true">
-    <form method="POST" action="{{ route('prestamos') }}" id="ajaxForm" role="form"
+    <form method="POST" action="{{ route('devolucion') }}" id="ajaxForm" role="form"
     enctype="multipart/form-data">
   @csrf
     <div class="modal-dialog modal-lg" role="document">
@@ -20,6 +20,8 @@
                     <label class="form-label">numero Serie</label>
                     <input type="text" class="form-control" name="serie_equi" placeholder="Numero de seire">
                 </div>
+                <input type="hidden" name="names" value="biblioteca">
+
                 {{-- <div class="mb-3">
                 <label for="form-label">Ambiente a Trasladar:</label><br>
                 <input type="text" class="form-control" name="places" placeholder="Ambiente a Trasladar"><br><br> --}}
