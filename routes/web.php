@@ -4,12 +4,15 @@
 
 use App\Http\Controllers\BibliotecarioController;
 use App\Http\Controllers\DevolucionController;
+use App\Http\Controllers\EnvironmentController;
 use App\Http\Controllers\EquipmentController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\EquipoController;
+use App\Http\Controllers\IndexCardController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\PrestamosController;
+use App\Http\Controllers\ProgramController;
 use  App\Http\Controllers\UserController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ServiceController;
@@ -19,20 +22,25 @@ Route::get('/', function () {
 });
 Auth::routes();
 
-Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::resource('/perfil', PerfilController::class);
 
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::resource('/users', UserController::class);
+    Route::resource('bibliotecarios', BibliotecarioController::class);
+    Route::resource('/perfil', PerfilController::class);
+    Route::resource('/equipment', EquipmentController::class);
+    Route::post('/prestamos', [PrestamosController::class, 'store'])->name('prestamos');
+    Route::post('/devolucion', [DevolucionController::class, 'devolver'])->name('devolucion');
+    Route::resource('/indexcards', IndexCardController::class);
+    Route::resource('/programs', ProgramController::class);
+    Route::get('/buscarUsuario', [PrestamosController::class, 'buscarUsuario'])->name('buscarUsuario');
+    Route::get('mostrarServicio/{id}', [ServiceController::class, 'show'])->name('mostrarServicio');
+    Route::resource('/environments', EnvironmentController::class);
+    Route::get('item.search', [ServiceController::class, 'show'])->name('item.search');
+});
 
-Route::resource('/equipment', EquipmentController::class);
-Route::resource('/users', UserController::class);
-Route::resource('bibliotecarios', BibliotecarioController::class);
- 
-// Route::post('/prestamos', PrestamosController::class);
-// Route::get('prestamos', PrestamosController::class);
-// //Route::get('/services',  ServiceController::class);
-Route::post('/prestamos', [PrestamosController::class, 'store'])->name('prestamos');
-Route::post('/devolucion', [DevolucionController::class, 'devolver'])->name('devolucion');
+
 Route::get('/error', function () {
     return view('error');
 })->name('error');
@@ -56,13 +64,3 @@ Route::get('/error', function () {
 
 
 // Rutas para el registro de bibliotecarios
-
-
-
-Route::resource('/indexcards', App\Http\Controllers\IndexCardController::class);
-Route::resource('/programs', App\Http\Controllers\ProgramController::class);
-
-Route::get('/buscarUsuario', [PrestamosController::class, 'buscarUsuario'])->name('buscarUsuario');
-Route::get('mostrarServicio/{id}', [ServiceController::class, 'show'])->name('mostrarServicio');
-Route::resource('/environments', App\Http\Controllers\EnvironmentController::class);
-Route::get('item.search', [ServiceController::class, 'show'])->name('item.search');
