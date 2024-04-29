@@ -23,11 +23,12 @@ class HomeController extends Controller
     {
         //$environment = Environment::query()->pluck('names', 'id')->all();
         //return view('home');
-        $services = Service::with('Users', 'equipment')
-            ->whereHas('equipment', function ($query) {
-                $query->where('states', 'en_prestamo');
-            })
-            ->get();
+        $services = Service::where('state_ser', 'prestado')
+        ->whereHas('equipment', function ($query) {
+            $query->where('states', 'en_prestamo');
+        })
+        ->get();
+            
 
         return view('home', compact('services'))
             ->with('i', (request()->input('page', 1) - 1) * 10);

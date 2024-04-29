@@ -36,7 +36,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Numero de Documento</label>
-                    <input type="number_identification" name="number_identification" value="10004250142" class="form-control @error('number_identification') is-invalid @enderror" placeholder="Numero de identidad">
+                    <input type="number_identification" name="number_identification" value="10004250145" class="form-control @error('number_identification') is-invalid @enderror" placeholder="Numero de identidad">
                     @error('number_identification')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -55,13 +55,29 @@
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
-                {{-- <div class="mb-3">
-                    <label class="form-label">Numero de Telefono</label>
-                    <input type="text" name="gender_sex" class="form-control @error('gender_sex') is-invalid @enderror" placeholder="Enter genero">
-                    @error('sex_user')
+                <div class="mb-3">
+                    <label class="form-label">Correo:</label>
+                    <input type="text" name="email_con" class="form-control @error('email_con')  is-invalid @enderror" placeholder="Correo">
+                    @error('email_con')
                     <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div> --}}
+                    @enderror 
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Telefono:</label>
+                    <input type="text" name="telephone_con" class="form-control @error('telephone_con')  is-invalid @enderror" placeholder="Numero de Telefono">
+                    @error('telephone_con')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror 
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Direccion:</label>
+                    <input type="text" name="addres_add" class="form-control @error('addres_add')  is-invalid @enderror" placeholder="Direccion">
+                    @error('addres_add')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror 
+                </div>
+               
            
                
                 <div class="mb-3">

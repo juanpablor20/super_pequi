@@ -1,6 +1,6 @@
 @extends('tablar::page')
 
-@section('title', 'Update Usuario')
+@section('title', 'biliotecario')
 
 @section('content')
     <!-- Page header -->
@@ -9,9 +9,7 @@
             <div class="row g-2 align-items-center">
                 <div class="col">
                     <!-- Page pre-title -->
-                    <div class="page-pretitle">
-                        Update
-                    </div>
+                    
                     <h2 class="page-title">
                         {{ __('Actualizar') }}
                     </h2>

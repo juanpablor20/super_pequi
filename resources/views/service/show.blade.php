@@ -66,15 +66,15 @@
     {{$service->Users->last_name}}
 </div>
 <div class="form-grup">
-    <strong>tipo de identificacion</strong>
+    <strong>tipo de identificacion:</strong>
     {{$service->Users->type_identification}} 
 </div>
 <div class="form-group">
-    <strong>numero de identificacion</strong>
+    <strong>numero de identificacion:</strong>
     {{$service->Users->number_identification}}
 </div>
 <div class="form-group">
-    <strong>sexo</strong>
+    <strong>sexo:</strong>
     {{$service->Users->sex_user}}
 </div>
 <div class="form-group">
@@ -83,15 +83,15 @@
 </div>
 <h2>informacion del equipo</h2>
 <div class="form-grup">
-    <strong>tipo de equipo</strong>
+    <strong>tipo de equipo:</strong>
     {{$service->equipment->type_equi}}
 </div>
 <div class="form-group">
-    <strong>caracteristicas</strong>
+    <strong>caracteristicas:</strong>
     {{$service->equipment->characteristics}}
 </div>
 <div class="form-group">
-    <strong>Numero de Serie</strong>
+    <strong>Numero de Serie:</strong>
     {{$service->equipment->serie_equi}}
 </div>
 
@@ -101,23 +101,7 @@
             </div>
         </div>
     </div>
-    @if (session('success'))
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        // Muestra el mensaje de éxito utilizando SweetAlert2
-        Swal.fire({
-            icon: 'success',
-            title: 'Éxito',
-            text: '{{ session('success') }}',
-            confirmButtonText: 'Aceptar',
-            showCancelButton: true, // Muestra el botón de cancelar
-           // cancelButtonText: 'Ver usuario', // Texto del botón de cancelar
-            cancelButtonColor: '#3085d6', // Color del botón de cancelar
-            reverseButtons: true // Invierte el orden de los botones (Aceptar y Cancelar)
-        })
-        
-    </script>
-@endif
+  
 @endsection
 
 

@@ -15,11 +15,11 @@ class PrestamosController extends Controller
 {
     public function store(Request $request)
     {
-      
+
         $usuario = $this->findUserByIdentification($request->number_identification);
         $equipment = $this->findEquipmentBySerie($request->serie_equi);
         $environment = $this->findEnvironmentByName($request->names);
-    
+
         if (!$environment) {
             return redirect()->route('home')->with('error', 'El lugar de traslado no existe.');
         } elseif (!$equipment) {
@@ -28,9 +28,11 @@ class PrestamosController extends Controller
             return redirect()->route('home')->with('error', 'El usuario no existe en nuestro sistema.');
         } elseif (!$this->isEquipmentAvailable($equipment)) {
             return redirect()->route('home')->with('error', 'El equipo no está disponible para préstamo.');
-        } elseif ($this->userHasSimilarEquipmentBorrowed($usuario, $equipment)) {
-            return redirect()->route('home')->with('error', 'El usuario ya tiene un equipo del mismo tipo prestado.');
-        }
+        } 
+        // elseif ($this->userHasSimilarEquipmentBorrowed($usuario, $equipment)) {
+        //     return $equipment;
+        //     //return redirect()->route('home')->with('error', 'El usuario ya tiene un equipo del mismo tipo prestado.');
+        // }
 
         // Iniciar una transacción de base de datos
         DB::beginTransaction();
@@ -65,7 +67,7 @@ class PrestamosController extends Controller
         }
     }
 
-    
+
 
     private function findUserByIdentification($identification)
     {
@@ -87,12 +89,15 @@ class PrestamosController extends Controller
         return $equipment && $equipment->states == 'disponible';
     }
 
-    private function userHasSimilarEquipmentBorrowed($user, $equipment)
-    {
-        return $user->services()->whereHas('equipment', function ($query) use ($equipment) {
-            $query->where('type_equi', $equipment->type_equi)->where('state_ser', 'prestado');
-        })->count() > 0;
-    }
+    // private function userHasSimilarEquipmentBorrowed($user, $equipment)
+    // {
+    //     return $user->services()->whereHas('equipment', function ($query) use ($equipment) {
+    //         $query->where('type_equi', $equipment->type_equi);
+    //     })->whereIn('state_ser', ['prestado', 'devuelto'])->count() > 0;
+    // }
+
+    
+
 
     private function createService($user, $equipment, $environment)
     {

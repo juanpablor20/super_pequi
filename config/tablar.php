@@ -143,6 +143,11 @@ return [
             'icon' => 'ti ti-smart-home',
             'url' => 'environments'
         ],
+        [
+            'text' => 'Historial',
+            'icon' => 'ti ti-history',
+            'url' => 'historial'
+        ],
 
        
        

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Environment;
 use App\Models\Service;
+use Illuminate\Auth\Events\Login;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Takielias\TablarKit\Facades\TablarKit;
@@ -28,4 +29,6 @@ class ServiceController extends Controller
     $data = TablarKit::searchItem($query, $responseSchema);
     return response()->json($data);
 }
+
 }
+

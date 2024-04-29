@@ -18,10 +18,11 @@ class Users extends Model
 		'names' => 'required',
 		'last_name' => 'required',
 		'type_identification' => 'required',
-		'number_identification' => 'required',
+		'number_identification' => 'required|unique:users,number_identification',
     'sex_user' => 'required',
     'gender_sex' => 'required',
     ];
+ 
 
     protected $perPage = 20;
 
