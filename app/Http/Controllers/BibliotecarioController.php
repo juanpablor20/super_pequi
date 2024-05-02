@@ -14,37 +14,37 @@ class BibliotecarioController extends Controller
 {
 
     public function index()
-{
-    $bibliotecarioRole = Role::where('name', 'bibliotecario')->where('guard_name', 'web')->first();
+    {
+        $bibliotecarioRole = Role::where('name', 'bibliotecario')->where('guard_name', 'web')->first();
 
-    $bibliotecarios = Users::role($bibliotecarioRole)->paginate(10); // Paginar los resultados
+        $bibliotecarios = Users::role($bibliotecarioRole)->paginate(10); // Paginar los resultados
 
-    // Si no hay registros, redirige a la vista de creación
-    if ($bibliotecarios->isEmpty()) {
-        return redirect()->route('bibliotecarios.create');
+        // Si no hay registros, redirige a la vista de creación
+        if ($bibliotecarios->isEmpty()) {
+            return redirect()->route('bibliotecarios.create');
+        }
+
+        // Si hay registros, muestra la vista con los registros existentes
+        return view('bibliotecarios.index', compact('bibliotecarios'))
+            ->with('i', ($bibliotecarios->currentPage() - 1) * $bibliotecarios->perPage());
     }
 
-    // Si hay registros, muestra la vista con los registros existentes
-    return view('bibliotecarios.index', compact('bibliotecarios'))
-        ->with('i', ($bibliotecarios->currentPage() - 1) * $bibliotecarios->perPage());
-}
 
-   
-    
+
 
     public function create()
     {
         $user = new Users();
         return view('bibliotecarios.create', compact('user'));
     }
-  
+
 
     public function store(Request $request)
     {
         $request->validate(Users::$rules);
         $user = Users::create($request->all());
 
-       
+
 
         $contacts = Contacts::create([
             'email_con' => $request->input('email_con'),
@@ -69,7 +69,7 @@ class BibliotecarioController extends Controller
         $contacts->save();
         $address->save();
 
-        return redirect()->route('bibliotecarios.index')->with('Exito', 'Bibliotecario creado con éxito.');
+        return redirect()->route('bibliotecarios.index')->with('success', 'Bibliotecario creado con éxito.');
     }
 
 
@@ -100,13 +100,13 @@ class BibliotecarioController extends Controller
         // Actualiza los datos de la dirección
         $bibliotecario->address->addres_add = $request->addres_add;
         $bibliotecario->address->save();
-      //  return $bibliotecario;
-        return redirect()->route('bibliotecarios.index')->with('Exelente', 'Biliotecario Actualizado Exitosamente');
+        //  return $bibliotecario;
+        return redirect()->route('bibliotecarios.index')->with('success', 'Biliotecario Actualizado Exitosamente');
     }
 
     public function destroy($id)
     {
         $user = Users::find($id)->delete();
-        return redirect()->route('bibliotecarios.index')->with('Exito', 'Bibliotecario inactivado Exitosamente');
+        return redirect()->route('bibliotecarios.index')->with('success', 'Bibliotecario inactivado Exitosamente');
     }
 }

@@ -10,10 +10,10 @@
                 <div class="col">
                     <!-- Page pre-title -->
                     <div class="page-pretitle">
-                        Update
+                        Actualizar 
                     </div>
                     <h2 class="page-title">
-                        {{ __('Index Card ') }}
+                        {{ __('Fichas') }}
                     </h2>
                 </div>
                 <!-- Page title actions -->
@@ -28,7 +28,7 @@
                                 <line x1="12" y1="5" x2="12" y2="19"/>
                                 <line x1="5" y1="12" x2="19" y2="12"/>
                             </svg>
-                            Index Card List
+                            Liasta de Fichas
                         </a>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Index Card Details</h3>
+                            <h3 class="card-title">Detalles de la Ficha</h3>
                         </div>
                         <div class="card-body">
                             <form method="POST"
@@ -53,7 +53,7 @@
                                   enctype="multipart/form-data">
                                 {{ method_field('PATCH') }}
                                 @csrf
-                                @include('index-card.form', compact('programa'))
+                                @include('index-card.form')
                             </form>
                         </div>
                     </div>

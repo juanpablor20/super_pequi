@@ -8,23 +8,11 @@
        
     </div>
 </div>
-<div class="form-group mb-3">
-    <label class="form-label">   {{ Form::label('Estado') }}</label>
-    <div>
-        {{ Form::text('states', $indexCard->states, ['class' => 'form-control' .
-        ($errors->has('states') ? ' is-invalid' : ''), 'placeholder' => 'Ingrese el estado de la ficha  ']) }}
-        {!! $errors->first('states', '<div class="invalid-feedback">:message</div>') !!}
-        <small class="form-hint">En caso de <b>un registro antisipado</b> se recomienda inactivarla.</small>
-    </div>
-</div>
+
 <div class="form-group mb-3">
     <label class="form-label">{{form::label('Programa')}}</label>
-    <select class="form-control" id="programa" name="program_id">
-        <option value="">Vincula la ficha con el programa al que pertenecerá</option>
-        @foreach($programas as $programa)
-            <option value="{{ $programa->id }}">{{ $programa->names_pro }}</option>
-        @endforeach
-    </select>
+   
+<x-tom-select remote-data="true" name="program_id" item-search-route="programa.search"></x-tom-select>
 </div>
 
     <div class="form-footer">

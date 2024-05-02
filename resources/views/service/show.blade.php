@@ -94,6 +94,12 @@
     <strong>Numero de Serie:</strong>
     {{$service->equipment->serie_equi}}
 </div>
+<h2>Lugar de traslado</h2>
+<div class="form-group">
+    <strong>Trasladado a:</strong>
+    {{$service->environment->names}}
+</div>
+
 
                         </div>
                     </div>

@@ -8,11 +8,7 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+   
     public function __construct()
     {
         $this->middleware('auth');
@@ -21,13 +17,15 @@ class HomeController extends Controller
    
     public function index()
     {
-        //$environment = Environment::query()->pluck('names', 'id')->all();
-        //return view('home');
+        
         $services = Service::where('state_ser', 'prestado')
-        ->whereHas('equipment', function ($query) {
-            $query->where('states', 'en_prestamo');
+        ->whereDoesntHave('equipment', function ($query) {
+            $query->where('states', 'devuelto');
         })
         ->get();
+    
+
+     //  dd($services);
             
 
         return view('home', compact('services'))

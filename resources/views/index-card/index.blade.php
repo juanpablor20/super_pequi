@@ -98,22 +98,20 @@
 
 
                                             <td>
+                                                <div class="btn-list flex-nowrap">
+                                                    <a href="{{ route('indexcards.edit', $indexCard->id) }}"
+                                                        class="btn btn-secondary"><i class="ti ti-edit"></i></a>
+                                                    <form action="{{ route('indexcards.destroy', $indexCard->id) }}"
+                                                        method="POST"
+                                                        onsubmit="return confirm('Estás seguro de que quieres inactivar esta ficha?')">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger"><i
+                                                                class="ti ti-trash-off"></i></button>
+                                                    </form>
+                                                </div>
 
 
-                                                <a class="dropdown-item"
-                                                    href="{{ route('indexcards.edit', $indexCard->id) }}">
-                                                    Editar
-                                                </a>
-                                                <form action="{{ route('indexcards.destroy', $indexCard->id) }}"
-                                                    method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit"
-                                                        onclick="if(!confirm('Estas seguro de Realizar esta accion?')){return false;}"
-                                                        class="dropdown-item text-red"><i class="fa fa-fw fa-trash"></i>
-                                                        Eliminar
-                                                    </button>
-                                                </form>
 
                         </div>
 

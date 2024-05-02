@@ -99,7 +99,18 @@
 
                                         <td>
                                             <div class="btn-list flex-nowrap">
-                                                <div class="dropdown">
+                                                <div class="btn-list flex-nowrap">
+                                                     <a href="{{ route('programs.edit',$program->id) }}" class="btn btn-secondary"><i class="ti ti-edit"></i></a>
+                                                    <form action="{{ route('programs.destroy',$program->id) }}" method="POST" onsubmit="return confirm('Estás seguro de que quieres inactivar este programa?')">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" 
+                                                        class="btn btn-danger">
+                                                        <i class="ti ti-trash-off">
+                                                            </i></button>
+                                                    </form>
+                                                </div>
+                                                {{-- <div class="dropdown">
                                                    
                                                     
                                                         <a class="dropdown-item"
@@ -119,7 +130,7 @@
                                                             </button>
                                                         </form>
                                                    
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </td>
                                     </tr>

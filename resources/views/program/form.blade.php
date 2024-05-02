@@ -23,14 +23,14 @@
         {!! $errors->first('version', '<div class="invalid-feedback">:message</div>') !!}
     </div>
 </div>
-<div class="form-group mb-3">
+{{-- <div class="form-group mb-3">
     <label class="form-label">   {{ Form::label('estado') }}</label>
     <div>
         {{ Form::text('states', $program->states, ['class' => 'form-control' .
         ($errors->has('states') ? ' is-invalid' : ''), 'placeholder' => 'ejemplo, activo']) }}
         {!! $errors->first('states', '<div class="invalid-feedback">:message</div>') !!}
     </div>
-</div>
+</div> --}}
 
     <div class="form-footer">
         <div class="text-end">

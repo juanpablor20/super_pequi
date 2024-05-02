@@ -12,7 +12,7 @@ class Program extends Model
 		'names_pro' => 'required',
 		'code_pro' => 'required',
 		'version' => 'required',
-		'states' => 'required',
+		
     ];
 
     protected $perPage = 20;
@@ -22,7 +22,7 @@ class Program extends Model
      *
      * @var array
      */
-    protected $fillable = ['names_pro','code_pro','version','states'];
+    protected $fillable = ['names_pro','code_pro','version'];
 
 
     /**

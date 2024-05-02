@@ -72,6 +72,18 @@
                                 {{ $user->gender_sex }}
                             </div>
                             <div class="form-group">
+                                <strong>Correo</strong>
+                                {{$user->contacts->email_con }}
+                            </div>
+                            <div class="form-group">
+                                <strong>Telefono</strong>
+                                {{$user->contacts->telephone_con }}
+                            </div>
+                            <div class="form-group">
+                                <strong>Dirección</strong>
+                                {{$user->address->addres_add }}
+                            </div>
+                            <div class="form-group">
                                 <strong>estado:</strong>
                                 {{ $user->states }}
                             </div>

@@ -95,24 +95,15 @@
 
                                         <td>
                                             <div class="btn-list flex-nowrap">
-                                                <div class="dropdown">
-                                                        <a class="dropdown-item"
-                                                           href="{{ route('environments.edit',$environment->id) }}">
-                                                            Editar
-                                                        </a>
-                                                        <form
-                                                            action="{{ route('environments.destroy',$environment->id) }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit"
-                                                                    onclick="if(!confirm('Do you Want to Proceed?')){return false;}"
-                                                                    class="dropdown-item text-red"><i
-                                                                    class="fa fa-fw fa-trash"></i>
-                                                                Inactivar
-                                                            </button>
-                                                        </form>
-                                                    </div>
+                                                <div class="btn-list flex-nowrap">
+                                                   <a href="{{ route('environments.edit',$environment->id) }}" class="btn btn-secondary"><i class="ti ti-edit"></i></a>
+                                                    <form action="{{ route('environments.destroy',$environment->id) }}" method="POST" onsubmit="return confirm('Estás seguro de que quieres inactivar este ambiente?')">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger"><i class="ti ti-trash-off"></i></button>
+                                                    </form>
+                                                </div>
+                                            
                                                 </div>
                                             </div>
                                         </td>

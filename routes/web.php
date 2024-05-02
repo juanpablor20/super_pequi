@@ -16,6 +16,8 @@ use App\Http\Controllers\ProgramController;
 use  App\Http\Controllers\UserController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ServiceController;
+use App\Models\Service;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -35,6 +37,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/buscarUsuario', [PrestamosController::class, 'buscarUsuario'])->name('buscarUsuario');
     Route::get('mostrarServicio/{id}', [ServiceController::class, 'show'])->name('mostrarServicio');
     Route::get('item.search', [ServiceController::class, 'show'])->name('item.search');
+    Route::get('/programa.search', [ServiceController::class, 'programaSearch'])->name('programa.search');
     Route::get('/historial', [HistorialController::class, 'historico'])->name('historial');
     Route::get('/filtro_service', [HistorialController::class, 'filterService'])->name('filtro_service');
 });
