@@ -36,7 +36,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/devolucion', [DevolucionController::class, 'devolver'])->name('devolucion');
     Route::get('/buscarUsuario', [PrestamosController::class, 'buscarUsuario'])->name('buscarUsuario');
     Route::get('mostrarServicio/{id}', [ServiceController::class, 'show'])->name('mostrarServicio');
-    Route::get('item.search', [ServiceController::class, 'show'])->name('item.search');
+    Route::get('aula.search', [ServiceController::class, 'aulaSearch'])->name('aula.search');
     Route::get('/programa.search', [ServiceController::class, 'programaSearch'])->name('programa.search');
     Route::get('/historial', [HistorialController::class, 'historico'])->name('historial');
     Route::get('/filtro_service', [HistorialController::class, 'filterService'])->name('filtro_service');

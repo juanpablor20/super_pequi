@@ -21,15 +21,22 @@ class IndexCardController extends Controller
 
     public function create()
     {
-        $programas = program::all();
+       
         $indexCard = new IndexCard();
-        return view('index-card.create', compact('indexCard', 'programas'));
+        return view('index-card.create', compact('indexCard'));
     }
 
     public function store(Request $request)
     {
 
         request()->validate(IndexCard::$rules);
+        $numeroFicha = $request->input('number');
+        $existe = IndexCard::where('number', $numeroFicha)->exists();
+        if ($existe) {
+            // El número de documento ya existe en la base de datos
+            //return true;
+            return redirect()->back()->with('error', 'El número de ficha ya Existe.');
+        }
         $indexCard = IndexCard::create($request->all());
 
 
@@ -62,7 +69,7 @@ class IndexCardController extends Controller
         $indexCard->update($request->all());
 
         return redirect()->route('indexcards.index')
-            ->with('success', 'IndexCard updated successfully');
+            ->with('success', 'ficha Actualizada exitosamente');
     }
 
     public function destroy($id)
@@ -71,6 +78,6 @@ class IndexCardController extends Controller
         $indexCard = IndexCard::find($id)->delete();
         return $indexCard;
         return redirect()->route('indexcards.index')
-            ->with('success', 'IndexCard deleted successfully');
+            ->with('success', 'Ficha Inactivada Exitosamente');
     }
 }

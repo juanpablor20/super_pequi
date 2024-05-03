@@ -21,8 +21,8 @@ class PrestamosController extends Controller
         $environment = $this->findEnvironmentByName($request->names);
 
         if (!$environment) {
-            return redirect()->route('home')->with('error', 'El lugar de traslado no existe.');
-        } elseif (!$equipment) {
+            return redirect()->back()->with('error', 'El lugar de traslado no Existe');
+           } elseif (!$equipment) {
             return redirect()->route('home')->with('error', 'El equipo no existe en nuestro sistema.');
         } elseif (!$usuario) {
             return redirect()->route('home')->with('error', 'El usuario no existe en nuestro sistema.');
@@ -43,7 +43,7 @@ class PrestamosController extends Controller
             $this->updateUserState($usuario, 'with_equipment');
 
             DB::commit();
-
+             
             return redirect()->route('home')->with('success', 'Préstamo creado exitosamente.');
         } catch (\Exception $e) {
             // Revertir la transacción si ocurre algún error
@@ -102,13 +102,17 @@ class PrestamosController extends Controller
     private function createService($user, $equipment, $environment)
     {
         $service = new Service();
-        $service->librarian_id = Auth::id();
-        $service->user_id = $user->id;
-        $service->equipment_id = $equipment->id;
-        $service->environment_id = $environment->id;
-        $service->date_ser = Carbon::now(); // Fecha y hora actual
-        $service->state_ser = 'prestado';
-        $service->save();
+       dd($service->librarian_id = Auth::id());
+
+        // $service->user_id = $user->id;
+        // $service->equipment_id = $equipment->id;
+        // $service->environment_id = $environment->id;
+        // return $service;
+        // $service->date_ser = Carbon::now(); // Fecha y hora actual
+        // $service->state_ser = 'prestado';
+
+      
+
     }
 
     private function updateEquipmentState($equipment, $state)

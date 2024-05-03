@@ -110,27 +110,7 @@
                                                             </i></button>
                                                     </form>
                                                 </div>
-                                                {{-- <div class="dropdown">
-                                                   
-                                                    
-                                                        <a class="dropdown-item"
-                                                           href="{{ route('programs.edit',$program->id) }}">
-                                                            Edit
-                                                        </a>
-                                                        <form
-                                                            action="{{ route('programs.destroy',$program->id) }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit"
-                                                                    onclick="if(!confirm('Do you Want to Proceed?')){return false;}"
-                                                                    class="dropdown-item text-red"><i
-                                                                    class="fa fa-fw fa-trash"></i>
-                                                                Delete
-                                                            </button>
-                                                        </form>
-                                                   
-                                                </div> --}}
+                                              
                                             </div>
                                         </td>
                                     </tr>

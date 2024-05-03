@@ -20,7 +20,7 @@ class ServiceController extends Controller
         return view('service.show', compact('service'));
     }
 
-    function search(): JsonResponse
+    function aulaSearch(): JsonResponse
     {
         $responseSchema = [
             'item_id' => 'id',

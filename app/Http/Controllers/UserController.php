@@ -53,8 +53,13 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate(Users::$rules);
-
-
+        $numeroDocumento = $request->input('number_identification');
+        $existe = Users::where('number_identification', $numeroDocumento)->exists();
+        if ($existe) {
+            // El número de documento ya existe en la base de datos
+            //return true;
+            return redirect()->back()->with('error', 'El número de documento ya está registrado.');
+        }
 
         $user = Users::create($request->all());
 
