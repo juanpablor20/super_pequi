@@ -9,7 +9,6 @@
             <div class="row g-2 align-items-center">
                 <div class="col">
                     <!-- Page pre-title -->
-
                     <h2 class="page-title">
                         {{ __('usuario') }}
                     </h2>
@@ -46,7 +45,6 @@
                             <h3 class="card-title">Detalles del usuario</h3>
                         </div>
                         <div class="card-body">
-
                             <div class="form-group">
                                 <strong>Nombres:</strong>
                                 {{ $user->names }}
@@ -73,21 +71,49 @@
                             </div>
                             <div class="form-group">
                                 <strong>Correo</strong>
-                                {{$user->contacts->email_con }}
+                                {{ $user->contacts->email_con }}
                             </div>
                             <div class="form-group">
                                 <strong>Telefono</strong>
-                                {{$user->contacts->telephone_con }}
+                                {{ $user->contacts->telephone_con }}
                             </div>
                             <div class="form-group">
                                 <strong>Dirección</strong>
-                                {{$user->address->addres_add }}
+                                {{ $user->address->addres_add }}
                             </div>
                             <div class="form-group">
                                 <strong>estado:</strong>
                                 {{ $user->states }}
                             </div>
-
+                        </div>
+                        <div class="card-footer">
+                            <h2>Préstamos del usuario</h2>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Fecha de prestamo</th>
+                                        <th>Fecha de Devolucion</th>
+                                        <th>Equipo</th>
+                                        <th>Numero de Serie</th>
+                                        <th>Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse ($prestamos as $prestamo)
+                                        <tr>
+                                            <td>{{ $prestamo->date_ser }}</td>
+                                            <td>{{ $prestamo->return_ser}}</td>
+                                            <td>{{ $prestamo->equipment->type_equi }}</td>
+                                            <td>{{ $prestamo->equipment->serie_equi }}</td>
+                                            <td>{{ $prestamo->status }}</td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="3">No hay préstamos para este usuario.</td>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

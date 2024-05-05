@@ -10,7 +10,7 @@ class HistorialController extends Controller
 {
     public function historico()
     {
-        $librarianIds = Service::pluck('librarian_id');
+        $librarianIds = Service::pluck('librarian_borrower_id');
         $librarians = Users::whereIn('id', $librarianIds)->get();
         
         $services = Service::paginate(10);

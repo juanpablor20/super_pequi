@@ -19,20 +19,17 @@ class PrestamosController extends Controller
         $usuario = $this->findUserByIdentification($request->number_identification);
         $equipment = $this->findEquipmentBySerie($request->serie_equi);
         $environment = $this->findEnvironmentByName($request->names);
-
-        if (!$environment) {
-            return redirect()->back()->with('error', 'El lugar de traslado no Existe');
-           } elseif (!$equipment) {
-            return redirect()->route('home')->with('error', 'El equipo no existe en nuestro sistema.');
-        } elseif (!$usuario) {
+        if (!$usuario) {
             return redirect()->route('home')->with('error', 'El usuario no existe en nuestro sistema.');
+        } elseif (!$equipment) {
+            return redirect()->route('home')->with('error', 'El equipo no existe en nuestro sistema.');
         } elseif (!$this->isEquipmentAvailable($equipment)) {
             return redirect()->route('home')->with('error', 'El equipo no está disponible para préstamo.');
-        } 
-        // elseif ($this->userHasSimilarEquipmentBorrowed($usuario, $equipment)) {
-        //     return $equipment;
-        //     //return redirect()->route('home')->with('error', 'El usuario ya tiene un equipo del mismo tipo prestado.');
-        // }
+        } elseif (!$environment) {
+            return redirect()->back()->with('error', 'El lugar de traslado no Existe');
+        } elseif ($this->userHasSimilarEquipmentBorrowed($usuario, $equipment)) {
+            return redirect()->route('home')->with('error', 'El usuario ya tiene un equipo del mismo tipo prestado.');
+        }
 
         // Iniciar una transacción de base de datos
         DB::beginTransaction();
@@ -43,7 +40,7 @@ class PrestamosController extends Controller
             $this->updateUserState($usuario, 'with_equipment');
 
             DB::commit();
-             
+
             return redirect()->route('home')->with('success', 'Préstamo creado exitosamente.');
         } catch (\Exception $e) {
             // Revertir la transacción si ocurre algún error
@@ -52,7 +49,6 @@ class PrestamosController extends Controller
             return redirect()->route('home')->with('error', 'Ha ocurrido un error al realizar el préstamo.');
         }
     }
-
     public function buscarUsuario(Request $request)
     {
         $user = $this->findUserByIdentification($request->input('numberIdentification'));
@@ -89,30 +85,34 @@ class PrestamosController extends Controller
         return $equipment && $equipment->states == 'disponible';
     }
 
-    // private function userHasSimilarEquipmentBorrowed($user, $equipment)
-    // {
-    //     return $user->services()->whereHas('equipment', function ($query) use ($equipment) {
-    //         $query->where('type_equi', $equipment->type_equi);
-    //     })->whereIn('state_ser', ['prestado', 'devuelto'])->count() > 0;
-    // }
+    private function userHasSimilarEquipmentBorrowed($user, $equipment)
+    {
+        // Buscar servicios del usuario para el mismo tipo de equipo prestado
+        $similarServices = Service::where('user_borrower_id', $user->id)
+            ->whereHas('equipment', function ($query) use ($equipment) {
+                $query->where('type_equi', $equipment->type_equi);
+            })
+            ->whereIn('status', ['pendiente', 'devuelto'])
+            ->count();
 
-    
+        // Si encuentra al menos un servicio similar, significa que el usuario ya tiene un equipo del mismo tipo prestado
+        return $similarServices > 0;
+    }
+
+
 
 
     private function createService($user, $equipment, $environment)
     {
         $service = new Service();
-       dd($service->librarian_id = Auth::id());
+        $service->librarian_borrower_id = Auth::id();
+        $service->user_borrower_id = $user->id;
+        $service->equipment_id = $equipment->id;
+        $service->environment_id = $environment->id;
+        $service->date_ser = Carbon::now(); // Fecha y hora actual
+        $service->status = 'pendiente';
 
-        // $service->user_id = $user->id;
-        // $service->equipment_id = $equipment->id;
-        // $service->environment_id = $environment->id;
-        // return $service;
-        // $service->date_ser = Carbon::now(); // Fecha y hora actual
-        // $service->state_ser = 'prestado';
-
-      
-
+        $service->save();
     }
 
     private function updateEquipmentState($equipment, $state)

@@ -17,7 +17,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <input type="hidden" name="bibliotecario_id" value="{{ Auth::id() }}">
+                        {{-- <input type="hidden" name="bibliotecario_id" value="{{ Auth::id() }}"> --}}
                         <label class="form-label">Número de Documento</label>
                         <input type="text" class="form-control" name="number_identification" placeholder="Número de documento" required>
                         {{-- @if ($errors->has('number_identification'))

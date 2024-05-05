@@ -54,9 +54,11 @@
 </div>
 <div class="form-group">
 <strong>estado del servicio:</strong>
-{{ $service->state_ser }}
+{{ $service->status }}
 </div>
-<h2>informacion del solicitante del servicio</h2>
+<div class="card-header">
+<h3 class="card-title">informacion del solicitante del servicio</h3>
+</div>
 <div class="form-group">
 <strong>nombre:</strong>
 {{ $service->Users->names }}
@@ -81,7 +83,10 @@
     <strong>telefono:</strong>
     {{$service->Users->contacts->telephone_con}}
 </div>
-<h2>informacion del equipo</h2>
+
+<div class="card-header">
+<h3 class="card-title">informacion del equipo</h3>
+</div>
 <div class="form-grup">
     <strong>tipo de equipo:</strong>
     {{$service->equipment->type_equi}}

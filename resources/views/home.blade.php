@@ -110,8 +110,11 @@
                                         @endrole
 
                                         <th>Fecha de Prestamo</th>
-                                        <th>Numero de Documento</th>
+                                        <th>Nombre</th>
+                                        <th>Roll</th>
+                                        <th>Tipo de Equipo</th>
                                         <th>Numero de Serie</th>
+                                        <th>Lugar de Traslado</th>
                                         <th>Estado</th>
                                         <th>Acciones</th>
                                     </tr>
@@ -119,39 +122,53 @@
                                 <tbody>
                                     @forelse ($services as $service)
                                         <tr>
-                                            <td><input class="form-check-input m-0 align-middle" type="checkbox"
-                                                    aria-label="Select service"></td>
+                                            <td><input class="form-check-input m-0 align-middle" type="checkbox" aria-label="Select service"></td>
                                             <td>{{ ++$i }}</td>
-
                                             <td>{{ $service->date_ser }}</td>
-                                            <td>{{ $service->Users->number_identification }}</td>
-                                            <td>{{ $service->equipment->serie_equi }}</td>
-
                                             <td>
-                                                @if ($service->state_ser == 'prestado')
+                                                @if($service->Users)
+                                                    {{ $service->Users->names }}
+                                                @else
+                                                    Usuario no encontrado
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if($service->Users && $service->Users->roles->isNotEmpty())
+                                                    @foreach ($service->Users->roles as $role)
+                                                        {{ $role->name }}
+                                                    @endforeach
+                                                @else
+                                                    Sin rol asignado
+                                                @endif
+                                            </td>
+                                            <td>{{ $service->equipment->type_equi }}</td>
+                                            <td>{{ $service->equipment->serie_equi }}</td>
+                                            <td>{{ $service->environment->names }}</td>
+                                            <td>
+                                                @if ($service->status == 'pendiente')
                                                     <span class="badge bg-warning text-dark me-1"></span> pendiente
-                                                @elseif ($service->state_ser == 'devuelto')
+                                                @elseif ($service->status == 'devuelto')
                                                     <span class="badge bg-secundary me-1"></span>devuelto
                                                 @endif
                                             </td>
                                             <td>
                                                 <div class="btn-list flex-nowrap">
-                                                    <a href="{{ route('mostrarServicio', $service->id) }}"
-                                                        class="btn btn-primary"><i class="ti ti-eye-check"></i></a>
+                                                    <a href="{{ route('mostrarServicio', $service->id) }}" class="btn btn-primary"><i class="ti ti-eye-check"></i></a>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="btn-list flex-nowrap">
-
+                                
                                                 </div>
                                             </td>
                                         </tr>
-
-
                                     @empty
-                                        <td colspan="9">No Hay Datos</td>
+                                        <tr>
+                                            <td colspan="9">No Hay Datos</td>
+                                        </tr>
                                     @endforelse
                                 </tbody>
+                                
                             </table>
                         </div>
                     </div>

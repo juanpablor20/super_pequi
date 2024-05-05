@@ -8,6 +8,7 @@ use App\Models\Address;
 use App\Models\Contacts;
 use App\Models\IndexCard;
 use App\Models\Relationship;
+use App\Models\Service;
 use App\Models\Users;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Http\JsonResponse;
@@ -94,7 +95,10 @@ class UserController extends Controller
     public function show($id)
     {
         $user = Users::with('contacts', 'Address')->find($id);
-        return view('user.show', compact('user'));
+        //$user = Users::findOrFail($id);
+        $prestamos = Service::where('user_borrower_id', $user->id)->get();
+        // Obtengo todos los préstamos asociados con el usuario
+        return view('user.show', compact('user', 'prestamos'));
     }
     public function edit($id)
     {

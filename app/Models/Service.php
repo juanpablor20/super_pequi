@@ -26,7 +26,7 @@ class Service extends Model
 
   public function Users()
   {
-    return $this->belongsTo(Users::class, 'user_id');
+    return $this->belongsTo(Users::class, 'user_borrower_id');
   }
 
   public function equipment()

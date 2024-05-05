@@ -46,6 +46,11 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Usuarios</h3>
+                            <div class="card-options col-6">
+                                <a href="#" class="btn btn-danger"><i class="ti ti-file-type-pdf"></i></a>
+                                <a href="#" class="btn btn-success"><i class="ti ti-file-type-xls"></i></a>
+                                <a href="#" class="btn btn-info"><i class="ti ti-printer"></i></a>
+                            </div>
                         </div>
                         <div class="card-body border-bottom py-3">
                             <div class="d-flex">
@@ -100,7 +105,7 @@
                                                 @if($user->states == 'active')
                                                     <span class="badge bg-success me-1"></span> Activo
                                                 @elseif($user->states == 'with_equipment')
-                                                    <span class="badge bg-warning text-dark me-1"></span> con_equipo
+                                                    <span class="badge bg-warning text-dark me-1"></span> con equipo
                                                 @elseif($user->states == 'inactive')
                                                     
                                                     <span class="badge bg-danger me-1"></span> Inactivo

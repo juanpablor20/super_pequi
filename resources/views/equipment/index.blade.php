@@ -50,6 +50,11 @@
                             {{-- <x-tabulator :table="$equiposTable"></x-tabulator> --}}
 
                             <h3 class="card-title">Equipos</h3>
+                            <div class="card-options col-6">
+                                <a href="#" class="btn btn-danger"><i class="ti ti-file-type-pdf"></i></a>
+                                <a href="#" class="btn btn-success"><i class="ti ti-file-type-xls"></i></a>
+                                <a href="#" class="btn btn-info"><i class="ti ti-printer"></i></a>
+                            </div>
                         </div>
                         <div class="card-body border-bottom py-3">
                             <div class="d-flex">
