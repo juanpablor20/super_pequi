@@ -13,7 +13,7 @@
                 <form action="{{ route('login') }}" method="post" autocomplete="off" novalidate>
                     @csrf
                     <div class="mb-3">
-                        <label class="form-label">Username</label>
+                        <label class="form-label">user</label>
                         <input type="email" class="form-control @error('users') is-invalid @enderror" name="users"
                             placeholder="Username" autocomplete="off">
                         @error('users')

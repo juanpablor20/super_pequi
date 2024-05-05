@@ -8,9 +8,9 @@
     <!-- Page header -->
     <div class="page-header d-print-none">
 
-        @if(config('tablar','display_alert'))
-        @include('tablar::common.alert')
-    @endif
+        @if (config('tablar', 'display_alert'))
+            @include('tablar::common.alert')
+        @endif
         <div class="container-xl">
             <div class="row g-2 align-items-center">
                 <div class="col">
@@ -56,7 +56,7 @@
                                 <line x1="5" y1="12" x2="19" y2="12" />
                             </svg>
                             Registrar Devolucion
-                            
+
                         </a>
                     </div>
                 </div>
@@ -72,7 +72,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Servicio</h3>
-                           
+
                         </div>
                         <div class="card-body border-bottom py-3">
                             <div class="d-flex">
@@ -122,18 +122,19 @@
                                 <tbody>
                                     @forelse ($services as $service)
                                         <tr>
-                                            <td><input class="form-check-input m-0 align-middle" type="checkbox" aria-label="Select service"></td>
+                                            <td><input class="form-check-input m-0 align-middle" type="checkbox"
+                                                    aria-label="Select service"></td>
                                             <td>{{ ++$i }}</td>
                                             <td>{{ $service->date_ser }}</td>
                                             <td>
-                                                @if($service->Users)
+                                                @if ($service->Users)
                                                     {{ $service->Users->names }}
                                                 @else
                                                     Usuario no encontrado
                                                 @endif
                                             </td>
                                             <td>
-                                                @if($service->Users && $service->Users->roles->isNotEmpty())
+                                                @if ($service->Users && $service->Users->roles->isNotEmpty())
                                                     @foreach ($service->Users->roles as $role)
                                                         {{ $role->name }}
                                                     @endforeach
@@ -153,12 +154,13 @@
                                             </td>
                                             <td>
                                                 <div class="btn-list flex-nowrap">
-                                                    <a href="{{ route('mostrarServicio', $service->id) }}" class="btn btn-primary"><i class="ti ti-eye-check"></i></a>
+                                                    <a href="{{ route('mostrarServicio', $service->id) }}"
+                                                        class="btn btn-primary"><i class="ti ti-eye-check"></i></a>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="btn-list flex-nowrap">
-                                
+
                                                 </div>
                                             </td>
                                         </tr>
@@ -168,7 +170,7 @@
                                         </tr>
                                     @endforelse
                                 </tbody>
-                                
+
                             </table>
                         </div>
                     </div>
@@ -177,4 +179,3 @@
         </div>
     </div>
 @endsection
-
