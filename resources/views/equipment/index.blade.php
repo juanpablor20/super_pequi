@@ -3,6 +3,10 @@
 @section('title')
     pequi
 @endsection
+@section('css')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/2.0.6/css/dataTables.bootstrap4.css">
+@endsection
 
 @section('content')
     <!-- Page header -->
@@ -68,8 +72,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="table-responsive min-vh-100">
-                            <table class="table card-table table-vcenter text-nowrap datatable">
+                        <div class="table-responsive min-vh-100", id="example">
+                            <table class="table card-table table-vcenter text-nowrap datatable" id="example">
                                 <thead>
                                 <tr>
                                     <th class="w-1"><input class="form-check-input m-0 align-middle" type="checkbox"
@@ -145,4 +149,30 @@
             </div>
         </div>
     </div>
+   
+@endsection
+@section('js')
+   <!-- Incluir jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Incluir Bootstrap JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+   <!-- Incluir jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Incluir DataTables -->
+<script src="https://cdn.datatables.net/2.0.6/js/dataTables.js"></script>
+
+<!-- Incluir DataTables Bootstrap 4 -->
+<script src="https://cdn.datatables.net/2.0.6/js/dataTables.bootstrap4.js"></script>
+
+<script>
+   // $('#equipment').DataTable();
+  // new DataTable('#example');
+  document.addEventListener("DOMContentLoaded", function() {
+        // Tu código que utiliza DataTables va aquí
+        new DataTable('#example');
+    });
+</script>
 @endsection
