@@ -18,6 +18,7 @@ class HistorialController extends Controller
 
         return view('service.historico', compact('services', 'librarians', 'i'));
     } 
+    
 
     public function filterService(Request $request)
     {

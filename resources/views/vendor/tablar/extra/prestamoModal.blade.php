@@ -4,7 +4,7 @@
             <h3 class="card-title">Nuevo Servicio</h3>
         </x-slot>
         <x-slot name="ribbon">
-            <div class="ribbon bg-red">Nuevo</div>
+            <div class="ribbon bg-blur">Nuevo Prestamo</div>
         </x-slot>
     </x-card>
     <form method="POST" action="{{ route('prestamos') }}" role="form" enctype="multipart/form-data">

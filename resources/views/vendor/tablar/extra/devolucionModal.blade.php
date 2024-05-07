@@ -1,4 +1,12 @@
 <div class="modal modal-blur fade" id="devolucion" tabindex="-1" role="dialog" aria-hidden="true">
+    <x-card>
+        <x-slot name="header">
+            <h3 class="card-title">Nuevo Servicio</h3>
+        </x-slot>
+        <x-slot name="ribbon">
+            <div class="ribbon bg-red">Nueva devolucion</div>
+        </x-slot>
+    </x-card>
     <form method="POST" action="{{ route('devolucion') }}" id="ajaxForm" role="form"
     enctype="multipart/form-data">
   @csrf

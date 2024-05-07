@@ -35,7 +35,7 @@
                                     <div class="card-body border-bottom py-3">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <form action="{{ route('filtro_service') }}" method="GET">
+                                                {{-- <form action="{{ route('filtro_service') }}" method="GET">
                                                     <div class="mb-3">
                                                         <label for="service_type" class="form-label">Tipo de
                                                             Servicio:</label>
@@ -47,7 +47,7 @@
                                                         </select>
                                                     </div>
                                                     <button type="submit" class="btn btn-sm btn-primary">Buscar</button>
-                                                </form>
+                                                </form> --}}
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="input-group">

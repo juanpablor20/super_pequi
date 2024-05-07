@@ -5,12 +5,12 @@
     <body>
     <div class="page">
         <!-- Sidebar -->
-        @include('tablar::partials.navbar.sidebar')
-        @include('tablar::partials.header.sidebar-top')
+        @include('tablar::partials.navbar.sidebar') 
+        @include('tablar::partials.header.sidebar-top') 
         <div class="page-wrapper">
             <!-- Page Content -->
             @yield('content')
-            @include('tablar::partials.footer.bottom')
+            @include('tablar::partials.footer.infolegal')
         </div>
     </div>
     </body>

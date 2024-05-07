@@ -92,7 +92,7 @@ class PrestamosController extends Controller
             ->whereHas('equipment', function ($query) use ($equipment) {
                 $query->where('type_equi', $equipment->type_equi);
             })
-            ->whereIn('status', ['pendiente', 'devuelto'])
+            ->whereIn('status', ['pendiente'])
             ->count();
 
         // Si encuentra al menos un servicio similar, significa que el usuario ya tiene un equipo del mismo tipo prestado

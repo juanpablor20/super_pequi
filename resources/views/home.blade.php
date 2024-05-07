@@ -3,6 +3,7 @@
 @section('title')
     home
 @endsection
+
 @section('content')
 
     <!-- Page header -->

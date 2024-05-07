@@ -17,6 +17,7 @@ class HomeController extends Controller
 
     public function index()
     {
+        
 
 
         $services = Service::where('status', 'pendiente')->get();
