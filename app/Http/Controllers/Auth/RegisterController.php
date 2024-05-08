@@ -16,7 +16,7 @@ use Spatie\Permission\Models\Role;
 
 class RegisterController extends Controller
 {
-    
+
     use RegistersUsers;
 
     protected $redirectTo = '/home';
@@ -30,18 +30,27 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'names' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'names' => ['required', 'string', 'max:255'],
+            'type_identification' => ['required'],
+            'number_identification' => ['required', 'numeric', 'unique:users,number_identification'],
+            'sex_user' => ['required'],
+            'gender_sex' => ['required'],
+            'email_con' => ['required', 'string', 'email', 'max:255'],
+            'telephone_con' => ['required'],
+            'telephone_con' => ['required'],
+            'addres_add' => ['required'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            //'names' => ['required', 'string', 'max:255'],
         ]);
+            
+           
+    
+        
     }
 
     protected function create(array $data)
     {
-        $validator = $this->validator($data);
-
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-
         $user = Users::create([
             'names' => $data['names'],
             'last_name' => $data['last_name'],
@@ -50,36 +59,29 @@ class RegisterController extends Controller
             'sex_user' => $data['sex_user'],
             'gender_sex' => $data['gender_sex'],
         ]);
-
-        $login = Logins::create([
-            'users' => $data['number_identification'],
-            'password' => Hash::make($data['password']),
-        ]);
-
+    
+    
         $contacts = Contacts::create([
             'email_con' => $data['email_con'],
             'telephone_con' => $data['telephone_con'],
             'id_user_con' => $user->id,
         ]);
-
+    
         $address = Address::create([
             'addres_add' => $data['addres_add'],
             'id_user_add' => $user->id,
         ]);
-
+    
         if ($roleName = $data['role']) {
             $role = Role::where('name', $roleName)->first();
             if ($role) {
                 $user->assignRole($role);
             }
         }
-
-        Auth::login($login);
-
-        // if ($roleName === 'coordinador') {
-        //     return redirect()->route('home');
-        // } else {
-        //     return redirect()->route('bibliotecarios.index');
-        // }
+        return Logins::create([
+            'users' => $data['number_identification'],
+            'password' => Hash::make($data['password']),
+        ]);
+    
     }
 }

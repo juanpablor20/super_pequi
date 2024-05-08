@@ -42,6 +42,7 @@ class BibliotecarioController extends Controller
     public function store(Request $request)
     {
         $request->validate(Users::$rules);
+
         $user = Users::create($request->all());
 
 
@@ -61,6 +62,7 @@ class BibliotecarioController extends Controller
             'users' => $request['number_identification'],
             'password' => Hash::make($request['password']),
         ]);
+
 
 
         $user->assignRole('bibliotecario');
@@ -89,7 +91,7 @@ class BibliotecarioController extends Controller
 
     public function update(Request $request, Users $bibliotecario)
     {
-        $request->validate(Users::$rules);
+     //   $request->validate(Users::$rules);
         //dd($request->all());
         //return $bibliotecario;
         $bibliotecario->update($request->all());
@@ -100,6 +102,13 @@ class BibliotecarioController extends Controller
         // Actualiza los datos de la dirección
         $bibliotecario->address->addres_add = $request->addres_add;
         $bibliotecario->address->save();
+
+        // Encuentra el registro de login correspondiente y actualiza la contraseña
+        $login = Logins::where('users', $bibliotecario->number_identification)->firstOrFail();
+        $login->password = Hash::make($request->password);
+        $login->save();
+
+
         //  return $bibliotecario;
         return redirect()->route('bibliotecarios.index')->with('success', 'Biliotecario Actualizado Exitosamente');
     }

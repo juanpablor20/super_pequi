@@ -1,5 +1,7 @@
 <?php
 
+use function Laravel\Prompts\text;
+
 return [
 
     /*
@@ -148,7 +150,11 @@ return [
             'icon' => 'ti ti-history',
             'url' => 'historial'
         ],
-
+        [
+            'text' => 'reportes',
+            'icon' => 'ti ti-message-report',
+            'url' => 'disabilities'
+        ],
        
        
         

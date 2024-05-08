@@ -10,7 +10,7 @@ class Service extends Model
 
   static $rules = [
     'date_ser' => 'required',
-    'state_ser' => 'required',
+    
     'user_id' => 'required',
     'serie_equi' => 'required',
   ];
@@ -21,7 +21,7 @@ class Service extends Model
   protected $perPage = 20;
 
 
-  protected $fillable = ['date_ser', 'state_ser', 'user_id', 'equipment_id', 'environmet_id'];
+  protected $fillable = ['date_ser', 'status', 'user_id', 'equipment_id', 'environmet_id'];
 
 
   public function Users()

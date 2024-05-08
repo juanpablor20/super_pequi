@@ -43,15 +43,25 @@ class DevolucionController extends Controller
         }
 
         // Buscar el servicio asociado a este equipo y usuario
-        $service = Service::where('user_borrower_id', $user->id)
-                          ->where('equipment_id', $equipment->id)
-                          ->where('status', 'pendiente')
-                          ->first();
 
-        // Validar que el usuario que está devolviendo el equipo sea el mismo que lo prestó
+        $service = Service::where('user_borrower_id', $user->id)
+            ->where('equipment_id', $equipment->id)
+            ->where('status', 'pendiente')
+            ->first();
+
+        // Validar que el usuario que está devolviendo el equipo sea el mismo que lo pres
         if (!$service) {
-            return redirect()->route('home')->with('message2', 'El usuario no tiene este equipo en préstamo.');
+
+            $servicio = Service::where('equipment_id', $equipment->id)->where('status', 'pendiente')->first();
+            $serviceId = $servicio->id;
+            session()->flash('serviceId', $serviceId);
+
+            return redirect()->route('disabilities.create');
+           // return redirect()->back()->with('message2', 'ocurrio un error');
         }
+
+        // $serviceId = $service->id; 
+        // return redirect()->route('disabilities.create', ['serviceId' => $serviceId]);
 
         // Marcar el servicio como devuelto y registrar la fecha y hora de devolución
         DB::beginTransaction();
@@ -64,6 +74,8 @@ class DevolucionController extends Controller
             // Actualizar el estado del equipo a "disponible"
             $equipment->states = 'disponible';
             $equipment->save();
+
+
 
             // Actualizar el estado del usuario según sea necesario
 

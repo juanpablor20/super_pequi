@@ -117,6 +117,7 @@
                                         <th>Numero de Serie</th>
                                         <th>Lugar de Traslado</th>
                                         <th>Estado</th>
+                                       
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
@@ -146,6 +147,7 @@
                                             <td>{{ $service->equipment->type_equi }}</td>
                                             <td>{{ $service->equipment->serie_equi }}</td>
                                             <td>{{ $service->environment->names }}</td>
+                                           
                                             <td>
                                                 @if ($service->status == 'pendiente')
                                                     <span class="badge bg-warning text-dark me-1"></span> pendiente
@@ -179,4 +181,6 @@
             </div>
         </div>
     </div>
+
+ 
 @endsection

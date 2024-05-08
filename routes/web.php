@@ -4,6 +4,7 @@
 
 use App\Http\Controllers\BibliotecarioController;
 use App\Http\Controllers\DevolucionController;
+use App\Http\Controllers\DisabilityController;
 use App\Http\Controllers\EnvironmentController;
 use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\HistorialController;
@@ -40,6 +41,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/programa.search', [ServiceController::class, 'programaSearch'])->name('programa.search');
     Route::get('/historial', [HistorialController::class, 'historico'])->name('historial');
     Route::get('/filtro_service', [HistorialController::class, 'filterService'])->name('filtro_service');
+    Route::resource('/disabilities', App\Http\Controllers\DisabilityController::class);
+     Route::get('/disabilities', [DisabilityController::class, 'create'])->name('disabilities.create');
+     Route::get('/disabilities', [DisabilityController::class, 'index'])->name('disabilities.index');
+
 });
 
 
@@ -66,3 +71,4 @@ Route::get('/error', function () {
 
 
 // Rutas para el registro de bibliotecarios
+

@@ -12,52 +12,51 @@
             <div class="card-body">
                 <h2 class="card-title text-center mb-4">Registrar Nuevo Usuario</h2>
                 <input type="hidden" name="role" value="coordinador">
-
                 <div class="mb-3">
                     <label class="form-label">Nombre</label>
-                    <input type="text" name="names"  class="form-control @error('names') is-invalid @enderror" placeholder="Enter Nombre">
+                    <input type="text" name="names"  class="form-control @error('names') is-invalid @enderror" placeholder="Ingresar Nombre">
                     @error('names')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Apellido</label>
-                    <input type="text" name="last_name"  class="form-control @error('last_name') is-invalid @enderror" placeholder="Enter apellido">
+                    <input type="text" name="last_name"  class="form-control @error('last_name') is-invalid @enderror" placeholder="Ingresar apellido">
                     @error('last_name')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="mb-3">
                     <label class="form-label">tipo de documento</label>
-                    <input type="text" name="type_identification" class="form-control @error('type_identification') is-invalid @enderror" placeholder="Enter Tipo de Documento">
+                    <input type="text" name="type_identification" class="form-control @error('type_identification') is-invalid @enderror" placeholder="Ingresar Tipo de Documento">
                     @error('type_identification')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Numero de Documento</label>
-                    <input type="number_identification" name="number_identification"  class="form-control @error('number_identification') is-invalid @enderror" placeholder="Numero de identidad">
+                    <input type="number_identification" name="number_identification"  class="form-control @error('number_identification') is-invalid @enderror" placeholder="Ingresar Numero de identidad">
                     @error('number_identification')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="mb-3">
                     <label class="form-label">tipo de sexo</label>
-                    <input type="text" name="sex_user" value="m" class="form-control @error('sex_user') is-invalid @enderror" placeholder="Enter Tipo de sexo">
+                    <input type="text" name="sex_user"  class="form-control @error('sex_user') is-invalid @enderror" placeholder="Ingresar Tipo de sexo">
                     @error('sex_user')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Genero</label>
-                    <input type="text" name="gender_sex" value="el macho" class="form-control @error('gender_sex') is-invalid @enderror" placeholder="Enter genero">
+                    <input type="text" name="gender_sex"  class="form-control @error('gender_sex') is-invalid @enderror" placeholder="Ingresar genero">
                     @error('sex_user')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Correo:</label>
-                    <input type="text" name="email_con" class="form-control @error('email_con')  is-invalid @enderror" placeholder="Correo">
+                    <input type="text" name="email_con" class="form-control @error('email_con')  is-invalid @enderror" placeholder="Ingresar Correo">
                     @error('email_con')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror 
@@ -65,14 +64,14 @@
 
                 <div class="mb-3">
                     <label class="form-label">Telefono:</label>
-                    <input type="text" name="telephone_con" class="form-control @error('telephone_con')  is-invalid @enderror" placeholder="Numero de Telefono">
+                    <input type="text" name="telephone_con" class="form-control @error('telephone_con')  is-invalid @enderror" placeholder="Ingresar Numero de Telefono">
                     @error('telephone_con')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror 
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Direccion:</label>
-                    <input type="text" name="addres_add" class="form-control @error('addres_add')  is-invalid @enderror" placeholder="Direccion">
+                    <input type="text" name="addres_add" class="form-control @error('addres_add')  is-invalid @enderror" placeholder="Ingresar Direccion">
                     @error('addres_add')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror 
@@ -83,7 +82,7 @@
                 <div class="mb-3">
                     <label class="form-label">Password</label>
                     <div class="input-group input-group-flat">
-                        <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password"
+                        <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Ingresar Password"
                                autocomplete="off">
                         <span class="input-group-text">
                   <a href="#" class="link-secondary" title="Show password" data-bs-toggle="tooltip"><!-- Download SVG icon from http://tabler-icons.io/i/eye -->
@@ -104,7 +103,7 @@
                 <div class="mb-3">
                     <label class="form-label">Confirm Password</label>
                     <div class="input-group input-group-flat">
-                        <input type="password" name="password_confirmation" class="form-control @error('password_confirmation') is-invalid @enderror" placeholder="Password"
+                        <input type="password" name="password_confirmation" class="form-control @error('password_confirmation') is-invalid @enderror" placeholder="Ingresar Password"
                                autocomplete="off">
                         <span class="input-group-text">
                   <a href="#" class="link-secondary" title="Show password" data-bs-toggle="tooltip"><!-- Download SVG icon from http://tabler-icons.io/i/eye -->
@@ -121,19 +120,14 @@
                         @enderror
                     </div>
                 </div>
-                <div class="mb-3">
-                    <label class="form-check">
-                        <input type="checkbox" class="form-check-input"/>
-                        <span class="form-check-label">Agree the <a href="#" tabindex="-1">terms and policy</a>.</span>
-                    </label>
-                </div>
+                
                 <div class="form-footer">
-                    <button type="submit" class="btn btn-primary w-100">Create new account</button>
+                    <button type="submit" class="btn btn-primary w-100">Crear nueva cuenta</button>
                 </div>
             </div>
         </form>
         <div class="text-center text-muted mt-3">
-            Already have account? <a href="{{route('login')}}" tabindex="-1">Sign in</a>
+            Ya tienes cuenta? <a href="{{route('login')}}" tabindex="-1">Sign in</a>
         </div>
     </div>
 @endsection

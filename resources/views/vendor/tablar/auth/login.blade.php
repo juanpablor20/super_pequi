@@ -2,6 +2,7 @@
 @section('title', 'Login')
 @section('content')
     <div class="container container-tight py-4">
+      
         <div class="text-center mb-1 mt-5">
             <a href="" class="navbar-brand navbar-brand-autodark">
                 <img src="{{ asset(config('tablar.auth_logo.img.path', 'assets/logo.svg')) }}" height="36"
@@ -9,11 +10,11 @@
         </div>
         <div class="card card-md">
             <div class="card-body">
-                <h2 class="h2 text-center mb-4">Login</h2>
+                <h2 class="h2 text-center mb-4">Iniciar Sesión</h2>
                 <form action="{{ route('login') }}" method="post" autocomplete="off" novalidate>
                     @csrf
                     <div class="mb-3">
-                        <label class="form-label">user</label>
+                        <label class="form-label">USUARIO</label>
                         <input type="email" class="form-control @error('users') is-invalid @enderror" name="users"
                             placeholder="Username" autocomplete="off">
                         @error('users')
@@ -21,7 +22,7 @@
                         @enderror
                     </div>
                     </span>
-                    </label>
+                    <label class="form-label">CONTRASEÑA</label>
                     <div class="input-group input-group-flat">
                         <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
                             placeholder="password" autocomplete="off">
@@ -44,7 +45,7 @@
                     </div>
             </div>
             <div class="form-footer">
-                <button type="submit" class="btn btn-primary w-100">Iniciar Sesion</button>
+                <button type="submit" class="btn btn-primary w-100">Login</button>
             </div>
             </form>
         </div>
