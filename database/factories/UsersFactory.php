@@ -2,18 +2,19 @@
 
 namespace Database\Factories;
 
+use App\Models\Users;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Spatie\Permission\Contracts\Role;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Users>
  */
-class UserFactory extends Factory
+class UsersFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+
+    protected $model = Users::class;
+
+
     public function definition(): array
     {
         return [
@@ -24,6 +25,6 @@ class UserFactory extends Factory
             'sex_user' => $this->faker->randomElement(['m', 'f']),
             'gender_sex' => $this->faker->randomElement(['hombre', 'mujer']),
           
-         ];  
+        ];
     }
 }

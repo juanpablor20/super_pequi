@@ -15,18 +15,18 @@
                         <input type="hidden" name="token" value="{{ $token }}">
 
                         <div class="card-body p-6">
-                            <div class="card-title">@lang('Reset password')</div>
+                            <div class="card-title">@lang('Restablecer la contraseña')</div>
 
-                            <p class="text-muted">@lang('Enter your email address and your password will be reset and emailed to you.')</p>
+                            <p class="text-muted">@lang('Ingrese su dirección de correo electrónico y su contraseña se restablecerá y se le enviará por correo electrónico.')</p>
                             <div class="form-group">
-                                <label class="form-label" for="exampleInputEmail1">@lang('Email address')</label>
+                                <label class="form-label" for="exampleInputEmail1">@lang('Dirección de correo electrónico')</label>
                                 <input
                                     type="email"
                                     class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
                                     id="email"
-                                    name="email"
+                                    name="email_con"
                                     aria-describedby="emailHelp"
-                                    placeholder="Enter email"
+                                    placeholder="Ingrese su correo"
                                     value="{{ $email ?? old('email') }}"
                                     required
                                     autofocus>

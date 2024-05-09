@@ -10,6 +10,7 @@ class HistorialTable extends DataTable
 {
     public function __construct()
     {
+        
         $this->setDataSource(Service::with('equipment')->select('services.id', 'equipment_id', 'services.user_borrower_id', 'services.user_returner_id', 'services.librarian_borrower_id', 'services.librarian_returner_id', 'services.date_ser', 'services.return_ser', 'services.status', 'services.environment_id'))
         ->column(name: 'equipment.serie_equi', title: 'Número de Serie', search: true)
         ->column(name: 'user_borrower_id', title: 'Caracteristicas', search: true)

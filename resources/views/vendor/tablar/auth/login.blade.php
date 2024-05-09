@@ -43,6 +43,7 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
+                    <a href="{{route('password.request')}}">olvidé la contraseña</a>
             </div>
             <div class="form-footer">
                 <button type="submit" class="btn btn-primary w-100">Login</button>

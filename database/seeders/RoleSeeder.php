@@ -25,5 +25,6 @@ class RoleSeeder extends Seeder
        $rol1->givePermissionTo($permission);
        
        $rol2->givePermissionTo($permission);
+       
     }
 }

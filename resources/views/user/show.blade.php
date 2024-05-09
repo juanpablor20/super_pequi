@@ -1,6 +1,6 @@
 @extends('tablar::page')
 
-@section('title', 'View User')
+@section('title', 'Usuario')
 
 @section('content')
     <!-- Page header -->
@@ -46,6 +46,9 @@
                         </div>
                         <div class="card-body">
                             <div class="form-group">
+                        
+                            </div>
+                            <div class="form-group">
                                 <strong>Nombres:</strong>
                                 {{ $user->names }}
                             </div>
@@ -81,6 +84,7 @@
                                 <strong>Dirección</strong>
                                 {{ $user->address->addres_add }}
                             </div>
+
                             <div class="form-group">
                                 <strong>estado:</strong>
                                 {{ $user->states }}

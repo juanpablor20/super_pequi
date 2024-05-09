@@ -41,6 +41,7 @@ class UserController extends Controller
         } else {
             return "Uno de los roles ('aprendices' o 'instructor') no existe.";
         }
+      
     }
 
 

@@ -18,7 +18,7 @@ class BibliotecarioController extends Controller
         $bibliotecarioRole = Role::where('name', 'bibliotecario')->where('guard_name', 'web')->first();
 
         $bibliotecarios = Users::role($bibliotecarioRole)->paginate(10); // Paginar los resultados
-
+       
         // Si no hay registros, redirige a la vista de creación
         if ($bibliotecarios->isEmpty()) {
             return redirect()->route('bibliotecarios.create');

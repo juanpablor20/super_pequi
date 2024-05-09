@@ -20,6 +20,10 @@ class Logins extends Authenticatable
     protected $casts = [
         'password' => 'hashed',
     ];
+    public function user()
+{
+    return $this->belongsTo(Users::class, 'number_identification', 'users');
+}
 }
 
   

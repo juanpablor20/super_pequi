@@ -17,19 +17,21 @@
                 <div class="col">
                     <!-- Page pre-title -->
                     <div class="page-pretitle">
-                        panel Principal
+                        Panel Principal
                         @can('bibliotecatio')
                             ...juan pablo
                         @endcan
                     </div>
                     <h2 class="page-title">
                         @role('bibliotecario')
-                            <h2>esto solo se muestra al bibliotecario</h2>
+                            <h2>Esto solo se muestra al bibliotecario</h2>
                         @endrole
                         @role('coordinador')
-                            <h1>esto es para juan</h1>
+                            <h1>Esto es para juan</h1>
                         @endrole
                         Pequi
+                    </h2>
+                     
                     </h2>
                 </div>
                 <!-- Page title actions -->
