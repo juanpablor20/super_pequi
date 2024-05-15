@@ -15,26 +15,10 @@ class DevolucionController extends Controller
 {
     public function devolver(Request $request)
     {
-        // Buscar el usuario por su número de identificación
-        $user = Users::where('number_identification', $request->number_identification)->first();
-
-        // Verificar si el usuario existe
-        if (!$user) {
-            return redirect()->route('home')->with('error', 'El usuario no existe.');
-        }
-
         // Buscar el equipo por su serie
         $equipment = Equipment::where('serie_equi', $request->serie_equi)->first();
         if (!$equipment) {
             return redirect()->route('home')->with('error', 'El Equipo no Existe.');
-        }
-
-        // Buscar el ambiente por su nombre
-        $environment = Environment::where('names', $request->names)->first();
-
-        // Verificar si el ambiente existe
-        if (!$environment) {
-            return redirect()->route('home')->with('error', 'El ambiente no existe.');
         }
 
         // Verificar si el equipo está en préstamo
@@ -42,42 +26,36 @@ class DevolucionController extends Controller
             return redirect()->route('home')->with('error', 'El equipo no está marcado como prestado.');
         }
 
-        // Buscar el servicio asociado a este equipo y usuario
-
-        $service = Service::where('user_borrower_id', $user->id)
-            ->where('equipment_id', $equipment->id)
+        // Obtener el servicio asociado al equipo
+        $service = Service::where('equipment_id', $equipment->id)
             ->where('status', 'pendiente')
             ->first();
 
-        // Validar que el usuario que está devolviendo el equipo sea el mismo que lo pres
-        if (!$service) {
+        // Obtener el usuario que realizó el préstamo
+        $borrowerUser = Users::find($service->user_borrower_id);
 
-            $servicio = Service::where('equipment_id', $equipment->id)->where('status', 'pendiente')->first();
-            $serviceId = $servicio->id;
-            session()->flash('serviceId', $serviceId);
-
-            return redirect()->route('disabilities.create');
-           // return redirect()->back()->with('message2', 'ocurrio un error');
-        }
-
-        // $serviceId = $service->id; 
-        // return redirect()->route('disabilities.create', ['serviceId' => $serviceId]);
-
-        // Marcar el servicio como devuelto y registrar la fecha y hora de devolución
-        DB::beginTransaction();
-        try {
-            $service->status = 'devuelto';
-            $service->return_ser = Carbon::now();
+        // Verificar si el usuario que devuelve el equipo es diferente al que lo prestó
+        if ($borrowerUser->id !== Auth::id()) {
+            // Si es diferente, guardar el ID del usuario que devuelve el equipo
             $service->librarian_returner_id = Auth::id();
             $service->save();
 
-            // Actualizar el estado del equipo a "disponible"
+            // Mandar una alerta
+            session()->flash('different_user_alert', true);
+        }
+
+        // Marcar el equipo como devuelto y registrar la fecha y hora de devolución
+        DB::beginTransaction();
+        try {
+            // Marcar el equipo como devuelto
             $equipment->states = 'disponible';
             $equipment->save();
 
-
-
-            // Actualizar el estado del usuario según sea necesario
+            // Registrar la fecha y hora de devolución
+            $returnDate = Carbon::now();
+            $service->status = 'devuelto';
+            $service->return_ser = $returnDate;
+            $service->save();
 
             DB::commit();
 

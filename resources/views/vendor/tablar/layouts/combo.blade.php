@@ -10,6 +10,7 @@
         <div class="page-wrapper">
             <!-- Page Content -->
             @yield('content')
+            
             @include('tablar::partials.footer.infolegal')
         </div>
     </div>

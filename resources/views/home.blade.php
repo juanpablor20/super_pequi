@@ -26,7 +26,7 @@
                         @role('bibliotecario')
                             <h2>Esto solo se muestra al bibliotecario</h2>
                         @endrole
-                        @role('coordinador')
+                        @role('cordinador')
                             <h1>Esto es para juan</h1>
                         @endrole
                         Pequi
@@ -111,6 +111,16 @@
                                         @role('bibliotecario')
                                             <th>esto solo se muestra al bibliotecario</th>
                                         @endrole
+                                        @role('cordinador')
+    <!-- Contenido específico para coordinadores -->
+    <p>Bienvenido, coordinador. Este contenido solo se muestra a los coordinadores.</p>
+@endrole
+
+@role('bibliotecario')
+    <!-- Contenido específico para bibliotecarios -->
+    <p>Bienvenido, bibliotecario. Este contenido solo se muestra a los bibliotecarios.</p>
+@endrole
+
 
                                         <th>Fecha de Prestamo</th>
                                         <th>Nombre</th>

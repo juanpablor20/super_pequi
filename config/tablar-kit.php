@@ -2,13 +2,7 @@
 
 return [
 
-    /* --------------------------------------------------------------------------------------------
-    * Tablar Kit Components
-    * --------------------------------------------------------------------------------------------
-    * This section lists all components available in the Tablar Kit package. You can enable or
-    * disable components by including or excluding them from this list, thus customizing the
-    * components available in your application.
-    */
+  
 
     'components' => [
         'alert' => Takielias\TablarKit\Components\Alerts\Alert::class,

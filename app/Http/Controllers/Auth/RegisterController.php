@@ -29,28 +29,32 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'names' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
-            'names' => ['required', 'string', 'max:255'],
-            'type_identification' => ['required'],
-            'number_identification' => ['required', 'numeric', 'unique:users,number_identification'],
-            'sex_user' => ['required'],
-            'gender_sex' => ['required'],
-            'email_con' => ['required', 'string', 'email', 'max:255'],
-            'telephone_con' => ['required'],
-            'telephone_con' => ['required'],
-            'addres_add' => ['required'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            //'names' => ['required', 'string', 'max:255'],
+            // // 'names' => ['required', 'string', 'max:255'],
+            // // 'last_name' => ['required', 'string', 'max:255'],
+            // // 'names' => ['required', 'string', 'max:255'],
+            // // 'type_identification' => ['required'],
+            // // 'number_identification' => ['required', 'numeric', 'unique:users,number_identification'],
+            // // 'sex_user' => ['required'],
+            // // 'gender_sex' => ['required'],
+            // // 'email_con' => ['required', 'string', 'email', 'max:255'],
+            // // 'telephone_con' => ['required'],
+            // // 'telephone_con' => ['required'],
+            // // 'addres_add' => ['required'],
+            // // 'password' => ['required', 'string', 'min:8', 'confirmed'],
+            // //'names' => ['required', 'string', 'max:255'],
         ]);
-            
-           
-    
+        
         
     }
 
     protected function create(array $data)
     {
+        // Crear el rol del usuario si está definido
+        if ($roleName = $data['role']) {
+            $role = Role::where('name', $roleName)->first();
+        }
+    
+        // Crear el usuario
         $user = Users::create([
             'names' => $data['names'],
             'last_name' => $data['last_name'],
@@ -60,7 +64,12 @@ class RegisterController extends Controller
             'gender_sex' => $data['gender_sex'],
         ]);
     
+        // Asignar rol al usuario si está definido
+        if (isset($role)) {
+            $user->assignRole($role);
+        }
     
+        // Crear los registros relacionados con el usuario
         $contacts = Contacts::create([
             'email_con' => $data['email_con'],
             'telephone_con' => $data['telephone_con'],
@@ -72,16 +81,10 @@ class RegisterController extends Controller
             'id_user_add' => $user->id,
         ]);
     
-        if ($roleName = $data['role']) {
-            $role = Role::where('name', $roleName)->first();
-            if ($role) {
-                $user->assignRole($role);
-            }
-        }
+        // Crear el registro de inicio de sesión
         return Logins::create([
             'users' => $data['number_identification'],
             'password' => Hash::make($data['password']),
         ]);
-    
     }
 }

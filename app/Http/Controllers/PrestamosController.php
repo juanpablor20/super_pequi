@@ -30,6 +30,7 @@ class PrestamosController extends Controller
         } elseif ($this->userHasSimilarEquipmentBorrowed($usuario, $equipment)) {
             return redirect()->route('home')->with('error', 'El usuario ya tiene un equipo del mismo tipo prestado.');
         }
+        
 
         // Iniciar una transacción de base de datos
         DB::beginTransaction();
@@ -61,7 +62,8 @@ class PrestamosController extends Controller
         } else {
             return response()->json(['error' => 'Usuario no encontrado'], 404);
         }
-    }
+    } 
+ 
 
 
 
@@ -113,6 +115,19 @@ class PrestamosController extends Controller
         $service->status = 'pendiente';
 
         $service->save();
+    }
+    public function verificarPrestamosExpirados()
+    {
+        // Busca todos los préstamos activos que han excedido su tiempo límite
+        $prestamosExpirados = Service::where('date_ser', '<', Carbon::now()->subHours(1))
+                                        ->whereNull('return_date') 
+                                        ->get();
+
+        // Si hay préstamos expirados, envía una alerta al bibliotecario
+        if ($prestamosExpirados->isNotEmpty()) {
+            return redirect()->route('home')->with('error', 'equipo exeigdsag');
+          
+               }
     }
 
     private function updateEquipmentState($equipment, $state)
