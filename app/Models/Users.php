@@ -22,7 +22,7 @@ class Users extends Model
     'last_name' => 'required|min:2|max:50',
     'type_identification' => 'required',
     'number_identification' => 'required|numeric|unique:users,number_identification',
-    'sex_user' => 'required',
+    'sex_user' => 'required|string',
     'gender_sex' => 'required',
     'email_con' => 'required|email',
     'telephone_con' => 'required|regex:/^\d{10}$/',

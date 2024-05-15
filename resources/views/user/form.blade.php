@@ -38,9 +38,18 @@
     </div>
     <div class="mb-3 col-md-6">
         <label class="form-label">Género</label>
-        <input type="text" name="gender_sex" value="{{ old('gender_sex', $user->gender_sex ?? '') }}"
-            class="form-control @error('gender_sex') is-invalid @enderror" placeholder="Género">
+        {{-- <input type="text" name="gender_sex" value="{{ old('gender_sex', $user->gender_sex ?? '') }}"
+            class="form-control @error('gender_sex') is-invalid @enderror" placeholder="Género"> --}}
+
+
+        <select name="gender_sex" value="{{ old('gender_sex', $user->gender_sex ?? '') }}"
+             class="form-select @error('gender_sex') is-invalid @enderror" placeholder="genero">
+            <option value="">Selecciona un rol</option>
+            <option value="gay" {{ old('gender_sex', $user->gender_sex) == 'ap' ? 'selected' : '' }}>gay</option>
+            <option value="ins" {{ old('gender_sex', $user->gender_sex) == 'in' ? 'selected' : '' }}>trans</option>
+        </select>
         {!! $errors->first('gender_sex', '<div class="invalid-feedback">:message</div>') !!}
+
     </div>
 </div>
 <div class="row">
