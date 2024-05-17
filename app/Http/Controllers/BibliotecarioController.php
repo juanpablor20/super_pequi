@@ -42,7 +42,7 @@ class BibliotecarioController extends Controller
     public function store(Request $request)
     {
         $request->validate(Users::$rules);
-
+        $request->validate(Users::$rules1);
         $user = Users::create($request->all());
 
 

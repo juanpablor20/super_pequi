@@ -47,23 +47,24 @@ class UserController extends Controller
 
     public function create()
     {
-        $ficha = IndexCard::query()->pluck('number', 'id')->all();
+       // $ficha = IndexCard::query()->pluck('number', 'id')->all();
+        $ficha = IndexCard::where('states', 'active')->get();
+
         $user = new Users();
         return view('user.create', compact('user', 'ficha'));
     }
 
     public function store(Request $request)
     {
-        $request->validate(Users::$rules);
+       $request->validate(Users::$rules);
         $numeroDocumento = $request->input('number_identification');
         $existe = Users::where('number_identification', $numeroDocumento)->exists();
         if ($existe) {
-            // El número de documento ya existe en la base de datos
-            //return true;
+        
             return redirect()->back()->with('error', 'El número de documento ya está registrado.');
         }
 
-        $user = Users::create($request->all());
+       $user = Users::create($request->all());
 
         $contacts = Contacts::create([
             'email_con' => $request->input('email_con'),
@@ -75,10 +76,15 @@ class UserController extends Controller
             'addres_add' => $request->input('addres_add'),
             'id_user_add' => $user->id,
         ]);
+        $role = $request->input('role');
+        if ($role == 'aprendices')
+        {
         $ficha = Relationship::create([
             'index_card_id' => $request->input('index_card'), 
             'user_rel_id' => $user->id,
         ]);
+        }
+        
         $role = $request->input('role');
         if ($role == 'aprendices') {
             $user->assignRole('aprendices');
@@ -86,7 +92,7 @@ class UserController extends Controller
         } elseif ($role == 'instructor') {
             $user->assignRole('instructor'); // Asignar el rol de "instructor"
         }
-        $ficha->save();
+        
         $contacts->save();
         $address->save();
 
@@ -103,10 +109,12 @@ class UserController extends Controller
     }
     public function edit($id)
     {
+      //  $ficha = IndexCard::query()->pluck('number', 'id')->all();
+        $ficha = IndexCard::where('state', 'active');
         $user = Users::find($id);
         $contact = $user->contact;
         $address = $user->address;
-        return view('user.edit', compact('user', 'contact', 'address'));
+        return view('user.edit', compact('user', 'contact', 'address', 'ficha'));
     }
 
     public function update(Request $request, Users $user)

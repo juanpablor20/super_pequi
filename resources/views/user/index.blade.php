@@ -95,12 +95,11 @@
                                         <tr>
                                             <td><input class="form-check-input m-0 align-middle" type="checkbox"
                                                     aria-label="Select user"></td>
-                                            {{-- <td>{{ ++$i }}</td> --}}
+                                            <td>{{ ++$i }}</td>
 
                                             <td>{{ $user->names }}</td>
                                             <td>{{ $user->last_name }}</td>
                                             <td>{{ $user->number_identification }}</td>
-
                                             <td>
                                                 @if ($user->states == 'active')
                                                     <span class="badge bg-success me-1"></span> Activo
@@ -110,7 +109,6 @@
                                                     <span class="badge bg-danger me-1"></span> Inactivo
                                                 @endif
                                             </td>
-
                                             <td>
                                                 <div class="btn-list flex-nowrap">
                                                     <a href="{{ route('users.show', $user->id) }}" class="btn btn-primary"><i

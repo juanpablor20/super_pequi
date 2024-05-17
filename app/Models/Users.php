@@ -26,8 +26,11 @@ class Users extends Model
     'gender_sex' => 'required',
     'email_con' => 'required|mail',
     'telephone_con' => 'required|regex:/^\d{10}$/',
-    'addres_add' => 'required|min:5',
-    'password' => ['required', 'string', 'min:8', 'confirmed'],
+    'addres_add' => 'required',
+  
+  ];
+  static $rules1 = [
+  'password' => ['required', 'string', 'min:8', 'confirmed'],
   ];
   static $updateRules = [
     'names' => 'required',

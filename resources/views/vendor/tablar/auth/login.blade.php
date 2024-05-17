@@ -5,8 +5,8 @@
 
         <div class="text-center mb-1 mt-5">
             <a href="" class="navbar-brand navbar-brand-autodark">
-                <img src="{{ asset(config('tablar.auth_logo.img.path', 'assets/logo.svg')) }}" height="36"
-                    alt=""></a>
+                <img src="{{ asset(config('tablar.auth_logo.img.path', 'assets/logo.svg')) }}" height="100"
+                    alt="450"></a>
         </div>
         <div class="card card-md">
             <div class="card-body">

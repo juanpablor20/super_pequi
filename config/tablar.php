@@ -42,7 +42,7 @@ return [
     */
 
     'auth_logo' => [
-        'enabled' => false,
+        'enabled' => true,
         'img' => [
             'path' => 'assets/PcFlex-logo.png',
             'alt' => 'Auth Logo',
