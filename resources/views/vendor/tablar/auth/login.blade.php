@@ -2,7 +2,7 @@
 @section('title', 'Login')
 @section('content')
     <div class="container container-tight py-4">
-      
+
         <div class="text-center mb-1 mt-5">
             <a href="" class="navbar-brand navbar-brand-autodark">
                 <img src="{{ asset(config('tablar.auth_logo.img.path', 'assets/logo.svg')) }}" height="100"
@@ -15,7 +15,7 @@
                     @csrf
                     <div class="mb-3">
                         <label class="form-label">USUARIO</label>
-                        <input type="email" class="form-control @error('users') is-invalid @enderror" name="users"
+                        <input type="number" class="form-control @error('users') is-invalid @enderror" name="users"
                             placeholder="Username" autocomplete="off">
                         @error('users')
                             <div class="invalid-feedback">{{ $message }}</div>

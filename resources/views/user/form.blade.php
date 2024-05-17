@@ -3,7 +3,7 @@
         <label class="form-label">Nombre</label>
         <input type="text" name="names" value="{{ old('names', $user->names ?? '') }}"
             class="form-control @error('names') is-invalid @enderror" placeholder="Nombre">
-        @error('names')
+        @error('nam')
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror
     </div>
@@ -16,30 +16,59 @@
 </div>
 <div class="row">
     <div class="mb-3 col-md-6">
-        <label class="form-label">Tipo de Documento</label>
-        <input type="text" name="type_identification" value="{{ old('type_identification', $user->type_identification ?? '') }}"
-            class="form-control @error('type_identification') is-invalid @enderror" placeholder="Tipo de Documento">
-        {!! $errors->first('type_identification', '<div class="invalid-feedback">:message</div>') !!}
+        <label class="form-label">Tipo de identificacion:</label>
+
+                    <select name="type_identification" value="{{ old('type_identification') }}"
+                        class="form-select @error('type_identification') is-invalid @enderror" placeholder="Tipo de identificacion">
+                       <option value="">Tipo de identificacion</option>
+                       <option value="Cedula de ciudadania" {{ old('type_identification') == 'Cedula de ciudadania' ? 'selected' : '' }}>Cedula de ciudadania</option>
+                       <option value="Cedula de extranjeria" {{ old('sex_usertype_identification') == 'Cedula de extranjeria' ? 'selected' : '' }}>Cedula de extranjeria</option>
+                       <option value="Targeta de identidad" {{ old('type_identification') == 'Targeta de identidad' ? 'selected' : '' }}>Targeta de identidad</option>
+                       <option value="Permiso por proteccion temporal" {{ old('sex_usertype_identification') == 'Permiso por proteccion temporal' ? 'selected' : '' }}>Permiso por proteccion temporal</option>
+                       <option value="Permiso especial de permanencia" {{ old('type_identification') == 'Permiso especial de permanencia' ? 'selected' : '' }}>Permiso especial de permanencia</option>
+                   </select>
+                   {!! $errors->first('type_identification', '<div class="invalid-feedback">:message</div>') !!}
     </div>
     <div class="mb-3 col-md-6">
-        <label class="form-label">Numero de Documento</label>
-        <input type="text" name="number_identification" value="{{ old('number_identification', $user->number_identification ?? '') }}"
-            class="form-control @error('number_identification') is-invalid @enderror" placeholder="Numero de Documento">
+        <label class="form-label">Numero de identificacion:</label>
+        <input type="number" name="number_identification" value="{{ old('number_identification', $user->number_identification ?? '') }}"
+            class="form-control @error('number_identification') is-invalid @enderror"
+            placeholder="Numero de Documento">
         {!! $errors->first('number_identification', '<div class="invalid-feedback">:message</div>') !!}
     </div>
 </div>
 <div class="row">
     <div class="mb-3 col-md-6">
-        <label class="form-label">Sexo Usuario</label>
-        <input type="text" name="sex_user" value="{{ old('sex_user', $user->sex_user ?? '') }}"
-            class="form-control @error('sex_user') is-invalid @enderror" placeholder="Sexo">
-        {!! $errors->first('sex_user', '<div class="invalid-feedback">:message</div>') !!}
+        <label class="form-label">Tipo de sexo:</label>
+
+        <select name="sex_user" value="{{ old('sex_user') }}"
+            class="form-select @error('sex_user') is-invalid @enderror" placeholder="Sexo">
+           <option value="">Selecciona un sexo</option>
+           <option value="Masculino" {{ old('sex_user') == 'Masculino' ? 'selected' : '' }}>Masculino</option>
+           <option value="Femenino" {{ old('sex_user') == 'Femenino' ? 'selected' : '' }}>Femenino</option>
+           <option value="No_binario" {{ old('sex_user') == 'No_binario' ? 'selected' : '' }}>No_binario</option>
+       </select>
+       {!! $errors->first('sex_user', '<div class="invalid-feedback">:message</div>') !!}
     </div>
     <div class="mb-3 col-md-6">
         <label class="form-label">Género</label>
-        <input type="text" name="gender_sex" value="{{ old('gender_sex', $user->gender_sex ?? '') }}"
-            class="form-control @error('gender_sex') is-invalid @enderror" placeholder="Género">
-        {!! $errors->first('gender_sex', '<div class="invalid-feedback">:message</div>') !!}
+        <select name="gender_sex" value="{{ old('gender_sex') }}"
+                        class="form-select @error('gender_sex') is-invalid @enderror" placeholder="Genero">
+                       <option value="">Selecciona un genero</option>
+                       <option value="Heterosexual" {{ old('gender_sex') == 'Heterosexual' ? 'selected' : '' }}>Heterosexual</option>
+                       <option value="Homosexual" {{ old('gender_sex') == 'Homosexual' ? 'selected' : '' }}>Homosexual</option>
+                       <option value="Bisexual" {{ old('gender_sex') == 'Bisexual' ? 'selected' : '' }}>Bisexual</option>
+                       <option value="Transexual" {{ old('gender_sex') == 'Transexual' ? 'selected' : '' }}>Transexual</option>
+                       <option value="Intersexual" {{ old('gender_sex') == 'Intersexual' ? 'selected' : '' }}>Intersexual</option>
+                       <option value="Pansexual" {{ old('gender_sex') == 'Pansexual' ? 'selected' : '' }}>Pansexual</option>
+                       <option value="Asexual" {{ old('gender_sex') == 'Asexual' ? 'selected' : '' }}>Asexual</option>
+                       <option value="Demisexual" {{ old('gender_sex') == 'Demisexual' ? 'selected' : '' }}>Demisexual</option>
+                       <option value="Género fluido" {{ old('gender_sex') == 'Género fluido' ? 'selected' : '' }}>Género fluido</option>
+                       <option value="No binario" {{ old('gender_sex') == 'No binario' ? 'selected' : '' }}>No binario</option>
+
+                   </select>
+                   {!! $errors->first('gender_sex', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
     </div>
 </div>
 <div class="row">

@@ -43,8 +43,8 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'names' => ['required', 'string', 'max:255'],
         ]);
-        
-        
+
+
     }
 
     protected function create(array $data)
@@ -53,7 +53,7 @@ class RegisterController extends Controller
         if ($roleName = $data['role']) {
             $role = Role::where('name', $roleName)->first();
         }
-    
+
         // Crear el usuario
         $user = Users::create([
             'names' => $data['names'],
@@ -63,24 +63,24 @@ class RegisterController extends Controller
             'sex_user' => $data['sex_user'],
             'gender_sex' => $data['gender_sex'],
         ]);
-    
+
         // Asignar rol al usuario si está definido
         if (isset($role)) {
             $user->assignRole($role);
         }
-    
+
         // Crear los registros relacionados con el usuario
         $contacts = Contacts::create([
             'email_con' => $data['email_con'],
             'telephone_con' => $data['telephone_con'],
             'id_user_con' => $user->id,
         ]);
-    
+
         $address = Address::create([
             'addres_add' => $data['addres_add'],
             'id_user_add' => $user->id,
         ]);
-    
+
         // Crear el registro de inicio de sesión
         return Logins::create([
             'users' => $data['number_identification'],
