@@ -1,5 +1,5 @@
 <a href="#">
-    <img src="{{asset(config('tablar.auth_logo.img.path','assets/logo.svg'))}}" width="300" height="300"
+    <img src="{{asset(config('tablar.auth_logo.img.path','assets/logo.svg'))}}" width="200" height="100"
          alt="{{asset(config('tablar.title','Tablar'))}}"
-         class="navbar-brand-image">
+         class="">
 </a>

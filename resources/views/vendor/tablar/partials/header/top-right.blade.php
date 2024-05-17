@@ -1,31 +1,14 @@
-
 <div class="nav-item dropdown">
+    <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
+       aria-label="Open user menu">
+                        <span class="avatar avatar-sm"
+                              style="background-image: url({{asset('assets/avatars/000m.jpg')}})"></span>
+        <div class="d-none d-xl-block ps-2">
+         <div>{{Auth()->user()->users}}</div> 
+            
 
-    <input type="file" id="upload-avatar" style="display: none;">
-<a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu" onclick="document.getElementById('upload-avatar').click(); return false;">
-    <span class="avatar avatar-sm" id="user-avatar" style="background-image: url({{asset('assets/avatars/000m.jpg')}})"></span>
-</a>
-
-<script>
-    document.getElementById('upload-avatar').addEventListener('change', function() {
-        const file = this.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById('user-avatar').style.backgroundImage = `url(${e.target.result})`;
-            };
-            reader.readAsDataURL(file);
-        }
-    });
-</script>
-
-
-
-<div class="d-none d-xl-block ps-2">
-
-    <div class="mt-1 small text-muted">Bienvenido a Pcflex</div>
-</div>
-
+            <div class="mt-1 small text-muted">Bienvenido a Pcflex</div>
+        </div>
     </a>
     <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
 

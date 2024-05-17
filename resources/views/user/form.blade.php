@@ -70,7 +70,7 @@
                    {!! $errors->first('gender_sex', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
     </div>
-</div>
+
 <div class="row">
     <div class="mb-3 col-md-6">
         <label class="form-label">Correo</label>

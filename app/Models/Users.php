@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Events\UserUpdated;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -21,10 +21,10 @@ class Users extends Model
     'names' => 'required|min:2|max:50',
     'last_name' => 'required|min:2|max:50',
     'type_identification' => 'required',
-    'number_identification' => 'required|numeric|unique:users,number_identification|min:7|max:12',
+    'number_identification' => 'required|numeric|digits_between:6,12|unique:users,number_identification',
     'sex_user' => 'required|string',
     'gender_sex' => 'required',
-    'email_con' => 'required|mail',
+    'email_con' => 'required|email',
     'telephone_con' => 'required|regex:/^\d{10}$/',
     'addres_add' => 'required',
   
@@ -65,4 +65,8 @@ class Users extends Model
   {
     return $this->hasMany(Relationship::class, 'index_card_id', 'user_rel_id', 'id');
   }
+  public function login()
+    {
+        return $this->belongsTo(Logins::class, 'number_identification', 'users');
+    }
 }
