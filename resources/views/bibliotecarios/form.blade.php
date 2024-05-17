@@ -23,7 +23,7 @@
         <div>
             <input type="text" name="type_identification" value="{{ old('type_identification', $user->type_identification ?? '') }}"
                 class="form-control @error('type_identification') is-invalid @enderror" placeholder="Tipo de Documento">
-            {!! $errors->first('type_identification', '<div class="invalid-feedback">:message</div>') !!}
+            {!! $errors->first('type', '<div class="invalid-feedback">:message</div>') !!}
         </div>
     </div>
 
@@ -33,7 +33,7 @@
             <input type="text" name="number_identification" value="{{ old('number_identification', $user->number_identification ?? '') }}"
                 class="form-control @error('number_identification') is-invalid @enderror"
                 placeholder="Numero de Documento">
-            {!! $errors->first('number_identification', '<div class="invalid-feedback">:message</div>') !!}
+            {!! $errors->first('number', '<div class="invalid-feedback">:message</div>') !!}
         </div>
     </div>
 </div>
@@ -44,7 +44,7 @@
         <div>
             <input type="text" name="sex_user" value="{{ old('sex_user', $user->sex_user ?? '') }}"
                 class="form-control @error('sex_user') is-invalid @enderror" placeholder="Sexo del Usuario">
-            {!! $errors->first('sex_user', '<div class="invalid-feedback">:message</div>') !!}
+            {!! $errors->first('sex', '<div class="invalid-feedback">:message</div>') !!}
         </div>
     </div>
 
@@ -53,7 +53,7 @@
         <div>
             <input type="text" name="gender_sex" value="{{ old('gender_sex', $user->gender_sex ?? '') }}"
                 class="form-control @error('gender_sex') is-invalid @enderror" placeholder="Género">
-            {!! $errors->first('gender_sex', '<div class="invalid-feedback">:message</div>') !!}
+            {!! $errors->first('gender', '<div class="invalid-feedback">:message</div>') !!}
         </div>
     </div>
 </div>
@@ -64,7 +64,7 @@
         <div>
             <input type="text" name="email_con" value="{{ old('email_con', $user->contacts->email_con ?? '') }}"
                 class="form-control @error('email_con') is-invalid @enderror" placeholder="Correo">
-            {!! $errors->first('email_con', '<div class="invalid-feedback">:message</div>') !!}
+            {!! $errors->first('email', '<div class="invalid-feedback">:message</div>') !!}
         </div>
     </div>
 
@@ -73,7 +73,7 @@
         <div>
             <input type="text" name="telephone_con" value="{{ old('telephone_con', $user->contacts->telephone_con ?? '') }}"
                 class="form-control @error('telephone_con') is-invalid @enderror" placeholder="Teléfono">
-            {!! $errors->first('telephone_con', '<div class="invalid-feedback">:message</div>') !!}
+            {!! $errors->first('telephone', '<div class="invalid-feedback">:message</div>') !!}
         </div>
     </div>
 </div>
@@ -84,7 +84,7 @@
         <div>
             <input type="text" name="addres_add" value="{{ old('addres_add', $user->address->addres_add ?? '') }}"
                 class="form-control @error('addres_add') is-invalid @enderror" placeholder="Dirección">
-            {!! $errors->first('addres_add', '<div class="invalid-feedback">:message</div>') !!}
+            {!! $errors->first('addres', '<div class="invalid-feedback">:message</div>') !!}
         </div>
     </div>
 </div>

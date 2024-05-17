@@ -44,11 +44,11 @@ return [
     'auth_logo' => [
         'enabled' => false,
         'img' => [
-            'path' => 'assets/tablar-logo.png',
+            'path' => 'assets/PcFlex-logo.png',
             'alt' => 'Auth Logo',
             'class' => '',
-            'width' => 50,
-            'height' => 50,
+            'width' => 70,
+            'height' => 70,
         ],
     ],
 
@@ -76,11 +76,11 @@ return [
     'layout_light_topbar' => true,
     'layout_enable_top_header' => false,
 
-   
+
 
     'sticky_top_nav_bar' => false,
 
-    
+
 
     'classes_body' => '',
 
@@ -99,41 +99,41 @@ return [
     'display_alert' => false,
 
 
-    
+
 
     'menu' => [
-        
-        
+
+
         [
             'text' => 'Home',
             'icon' => 'ti ti-home',
             'url' => 'home'
         ],
-        
+
         [
             'text' => 'Bibliotecario',
             'icon' => 'ti ti-users',
             'url' => 'bibliotecarios'
-           
+
         ],
         [
             'text' => 'Usuarios',
             'icon' => 'ti ti-users-group',
             'url' => 'users'
-           
+
         ],
         [
             'text' => 'Equipos',
             'icon' => 'ti ti-device-desktop',
             'url' => 'equipment'
-            
+
         ],
         [
-            
+
             'text' => 'Fichas',
             'icon' => 'ti ti-align-box-left-bottom',
             'url' => 'indexcards'
-            
+
         ],
         [
             'text' => 'programas',
@@ -156,9 +156,9 @@ return [
             'icon' => 'ti ti-message-report',
             'url' => 'disabilities'
         ],
-       
-       
-        
+
+
+
     ],
 
     /*
