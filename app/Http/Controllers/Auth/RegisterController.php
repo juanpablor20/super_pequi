@@ -29,19 +29,19 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            // // 'names' => ['required', 'string', 'max:255'],
-            // // 'last_name' => ['required', 'string', 'max:255'],
-            // // 'names' => ['required', 'string', 'max:255'],
-            // // 'type_identification' => ['required'],
-            // // 'number_identification' => ['required', 'numeric', 'unique:users,number_identification'],
-            // // 'sex_user' => ['required'],
-            // // 'gender_sex' => ['required'],
-            // // 'email_con' => ['required', 'string', 'email', 'max:255'],
-            // // 'telephone_con' => ['required'],
-            // // 'telephone_con' => ['required'],
-            // // 'addres_add' => ['required'],
-            // // 'password' => ['required', 'string', 'min:8', 'confirmed'],
-            // //'names' => ['required', 'string', 'max:255'],
+            'names' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'names' => ['required', 'string', 'max:255'],
+            'type_identification' => ['required'],
+            'number_identification' => ['required', 'numeric', 'unique:users,number_identification'],
+            'sex_user' => ['required'],
+            'gender_sex' => ['required'],
+            'email_con' => ['required', 'string', 'email', 'max:255'],
+            'telephone_con' => ['required'],
+            'telephone_con' => ['required'],
+            'addres_add' => ['required'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'names' => ['required', 'string', 'max:255'],
         ]);
         
         

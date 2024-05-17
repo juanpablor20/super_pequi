@@ -24,8 +24,7 @@
     <div class="mb-3 col-md-6">
         <label class="form-label">Numero de Documento</label>
         <input type="text" name="number_identification" value="{{ old('number_identification', $user->number_identification ?? '') }}"
-            class="form-control @error('number_identification') is-invalid @enderror"
-            placeholder="Numero de Documento">
+            class="form-control @error('number_identification') is-invalid @enderror" placeholder="Numero de Documento">
         {!! $errors->first('number_identification', '<div class="invalid-feedback">:message</div>') !!}
     </div>
 </div>
@@ -64,20 +63,24 @@
             class="form-control @error('addres_add') is-invalid @enderror" placeholder="Dirección">
         {!! $errors->first('addres_add', '<div class="invalid-feedback">:message</div>') !!}
     </div>
-    <div class="mb-3 col-md-6">
-        <label class="form-label">numero de ficha</label>
-        <select name="index_card" class="form-select @error('role') is-invalid @enderror">
-           <option <x-select name="index_card" :options="$ficha"></x-select> </option>
-             </select>
-             {!! $errors->first('index_card', '<div class="invalid-feedback">:message</div>') !!}
+    <div class="mb-3 col-md-6" id="index_card_container">
+        <label class="form-label">Número de ficha</label>
+        <select name="index_card" class="form-select @error('index_card') is-invalid @enderror">
+            <option value="">Selecciona una ficha</option>
+            @foreach($ficha as $card)
+                <option value="{{ $card->id }}" {{ old('index_card', $user->index_card ?? '') == $card->id ? 'selected' : '' }}>
+                    {{ $card->number }}
+                </option>
+            @endforeach
+        </select>
+        {!! $errors->first('index_card', '<div class="invalid-feedback">:message</div>') !!}
     </div>
 </div>
-
 <div class="row">
     <div class="mb-3 col-md-6">
         <label class="form-label">Rol</label>
         <div>
-            <select name="role" class="form-select @error('role') is-invalid @enderror">
+            <select name="role" id="role" class="form-select @error('role') is-invalid @enderror">
                 <option value="">Selecciona un rol</option>
                 <option value="aprendices" {{ old('role', $user->role) == 'aprendices' ? 'selected' : '' }}>Aprendiz</option>
                 <option value="instructor" {{ old('role', $user->role) == 'instructor' ? 'selected' : '' }}>Instructor</option>
@@ -87,16 +90,31 @@
     </div>
 </div>
 
-
-
-
-
-
 <div class="form-footer">
     <div class="text-end">
         <div class="d-flex">
             <a href="{{ route('users.index') }}" class="btn btn-danger">Cancelar</a>
-            <button type="submit" class="btn btn-primary ms-auto ajax-submit">enviar</button>
+            <button type="submit" class="btn btn-primary ms-auto ajax-submit">Enviar</button>
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const roleSelect = document.getElementById('role');
+        const indexCardContainer = document.getElementById('index_card_container');
+
+        function toggleIndexCard() {
+            if (roleSelect.value === 'aprendices') {
+                indexCardContainer.style.display = '';
+            } else {
+                indexCardContainer.style.display = 'none';
+            }
+        }
+
+        roleSelect.addEventListener('change', toggleIndexCard);
+        
+        // Initial check
+        toggleIndexCard();
+    });
+</script>

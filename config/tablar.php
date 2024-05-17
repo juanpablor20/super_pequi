@@ -42,13 +42,13 @@ return [
     */
 
     'auth_logo' => [
-        'enabled' => false,
+        'enabled' => true,
         'img' => [
-            'path' => 'assets/tablar-logo.png',
+            'path' => 'assets/pcFlex-logo.png',
             'alt' => 'Auth Logo',
             'class' => '',
-            'width' => 50,
-            'height' => 50,
+            'width' => 300,
+            'height' => 100,
         ],
     ],
 

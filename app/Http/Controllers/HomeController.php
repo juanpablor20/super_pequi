@@ -19,9 +19,6 @@ class HomeController extends Controller
     {
         
 
-       
-
-       
         $services = Service::where('status', 'pendiente')->get();
 
 

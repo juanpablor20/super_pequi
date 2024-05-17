@@ -23,11 +23,15 @@ class Users extends Model
     'type_identification' => 'required',
     'number_identification' => 'required|numeric|unique:users,number_identification',
     'sex_user' => 'required',
+    'role' => 'required',
     'gender_sex' => 'required',
     'email_con' => 'required|email',
     'telephone_con' => 'required|regex:/^\d{10}$/',
-    'addres_add' => 'required|min:5',
-    'password' => ['required', 'string', 'min:8', 'confirmed'],
+    'addres_add' => 'required',
+  
+  ];
+  static $rules1 = [
+  'password' => ['required', 'string', 'min:8', 'confirmed'],
   ];
   static $updateRules = [
     'names' => 'required',
