@@ -49,23 +49,24 @@ class BibliotecarioController extends Controller
 
         $contacts = Contacts::create([
             'email_con' => $request->input('email_con'),
-            'telephone_con' => $request->input('telephone_con'),
+           'telephone_con' => $request->input('telephone_con'),
             'id_user_con' => $user->id,
         ]);
-
+         
         $address = Address::create([
             'addres_add' => $request->input('addres_add'),
             'id_user_add' => $user->id,
         ]);
+       
 
         $login = Logins::create([
             'users' => $request['number_identification'],
             'password' => Hash::make($request['password']),
         ]);
-
-
-
         $user->assignRole('bibliotecario');
+
+
+        
 
         $login->save();
         $contacts->save();

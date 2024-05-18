@@ -14,6 +14,7 @@ class Logins extends Authenticatable
     use HasFactory;
     use HasRoles;
     use HasApiTokens, HasFactory, Notifiable;
+    use HasRoles;
 
     protected $fillable = ['users', 'password'];
     protected $hidden = ['password', 'remember_token'];

@@ -12,7 +12,7 @@
             @csrf
             <div class="card-body">
                 <h1 class="text-center mb-2" style="color: #000000; font-size: 2.5rem; font-weight: bold; text-transform: uppercase;">Registro Coordinacion</h1>
-                <input type="hidden" name="role" value="coordinador">
+                <input type="hidden" name="role" value="cordinador">
                 <div class="mb-3">
                      <!-- Primera Columna -->
                      <div class="row">

@@ -85,10 +85,24 @@
                                 {{ $user->address->addres_add }}
                             </div>
 
+                           
                             <div class="form-group">
                                 <strong>estado:</strong>
                                 {{ $user->states }}
                             </div>
+                            <h2>Ficha</h2>
+                            <ul>
+                                @foreach($user->Relacion as $relacion)
+                                    <li>
+                                       
+                                        @if($relacion->ficha)
+                                            {{ $relacion->ficha->index_card_id }}
+                                        @else
+                                            Sin ficha
+                                        @endif
+                                    </li>
+                                @endforeach
+                            </ul>
                         </div>
                         <div class="card-footer">
                             <h2>Préstamos del usuario</h2>

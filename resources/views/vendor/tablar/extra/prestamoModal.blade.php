@@ -31,8 +31,7 @@
                     <div class="mb-3">
                         <label class="form-label">Lugar de traslado</label>
                         <div class="input-group">
-                        <input <x-tom-select remote-data="true" name="names" item-search-route="aula.search" class="form-control"></x-tom-select>
-                        </div>
+                       </div>
                     </div>
                     
                     

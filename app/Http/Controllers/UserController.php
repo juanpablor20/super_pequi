@@ -101,7 +101,7 @@ class UserController extends Controller
   
     public function show($id)
     {
-        $user = Users::with('contacts', 'Address')->find($id);
+        $user = Users::with('contacts', 'Address', 'Relacion')->find($id);
         //$user = Users::findOrFail($id);
         $prestamos = Service::where('user_borrower_id', $user->id)->get();
         // Obtengo todos los préstamos asociados con el usuario

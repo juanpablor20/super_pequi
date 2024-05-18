@@ -69,4 +69,5 @@ class Users extends Model
     {
         return $this->belongsTo(Logins::class, 'number_identification', 'users');
     }
+    
 }

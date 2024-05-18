@@ -116,7 +116,7 @@
                                                     <a href="{{ route('users.edit', $user->id) }}"
                                                         class="btn btn-secondary"><i class="ti ti-edit"></i></a>
                                                     <form action="{{ route('users.destroy', $user->id) }}" method="POST"
-                                                        onsubmit="return confirm('Estás seguro de que quieres inactivar este equipo?')">
+                                                        onsubmit="return confirm('Estás seguro de que quieres inactivar este usuario?')">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger"><i
