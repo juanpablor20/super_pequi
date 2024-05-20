@@ -125,9 +125,9 @@
 
 
                                         <th>Fecha de Prestamo</th>
-                                        @foreach ($user as $hola)
+                                        {{-- @foreach ($user as $hola)
                                         {{ $hola->name }}
-                                    @endforeach
+                                    @endforeach --}}
                                         <th>Nombre</th>
                                         <th>Roll</th>
                                         <th>Tipo de Equipo</th>

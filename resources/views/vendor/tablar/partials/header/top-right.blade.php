@@ -4,7 +4,7 @@
                         <span class="avatar avatar-sm"
                               style="background-image: url({{asset('assets/avatars/000m.jpg')}})"></span>
         <div class="d-none d-xl-block ps-2">
-         <div>{{Auth()->user()->names}}</div> 
+         <div>{{Auth()->user()->names}} {{Auth()->user()->last_name}}</div> 
          
 
             <div class="mt-1 small text-muted">Bienvenido a Pcflex</div>
