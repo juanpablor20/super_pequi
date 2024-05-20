@@ -9,6 +9,8 @@
     <!-- Page header -->
     <div class="page-header d-print-none">
 
+       
+
         @if (config('tablar', 'display_alert'))
             @include('tablar::common.alert')
         @endif
@@ -123,6 +125,9 @@
 
 
                                         <th>Fecha de Prestamo</th>
+                                        @foreach ($user as $hola)
+                                        {{ $hola->name }}
+                                    @endforeach
                                         <th>Nombre</th>
                                         <th>Roll</th>
                                         <th>Tipo de Equipo</th>

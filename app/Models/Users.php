@@ -12,7 +12,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Validation\Rule;
 use Spatie\Permission\Contracts\Role;
 
-class Users extends Model
+class Users extends Authenticatable
 {
   protected $guard_name = 'web';
   use Notifiable, HasRoles;
@@ -69,5 +69,7 @@ class Users extends Model
     {
         return $this->belongsTo(Logins::class, 'number_identification', 'users');
     }
+    
+   
     
 }
