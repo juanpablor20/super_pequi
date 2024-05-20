@@ -102,64 +102,63 @@ return [
 
 
     'menu' => [
-
-
         [
             'text' => 'Home',
             'icon' => 'ti ti-home',
-            'url' => 'home'
+            'url' => 'home',
+           
         ],
-
         [
             'text' => 'Bibliotecario',
             'icon' => 'ti ti-users',
-            'url' => 'bibliotecarios'
-
+            'url' => 'bibliotecarios',
+            'hasAnyRole' => ['bibliotecario'] // Ocultar solo para bibliotecario
         ],
         [
             'text' => 'Usuarios',
             'icon' => 'ti ti-users-group',
-            'url' => 'users'
-
+            'url' => 'users',
+            'hasAnyRole' => ['cordinador'] // Ocultar para coordinador
         ],
         [
             'text' => 'Equipos',
             'icon' => 'ti ti-device-desktop',
-            'url' => 'equipment'
-
+            'url' => 'equipment',
+            'hasAnyRole' => ['cordinador'] 
         ],
         [
-
             'text' => 'Fichas',
             'icon' => 'ti ti-align-box-left-bottom',
-            'url' => 'indexcards'
-
+            'url' => 'indexcards',
+            'hasAnyRole' => ['cordinador'] 
+            
         ],
         [
             'text' => 'programas',
             'icon' => 'ti ti-tournament',
-            'url' => 'programs'
+            'url' => 'programs',
+            'hasAnyRole' => ['cordinador'] 
         ],
         [
-
             'text' => 'Ambientes',
             'icon' => 'ti ti-smart-home',
-            'url' => 'environments'
+            'url' => 'environments',
+            'hasAnyRole' => ['cordinador'] 
         ],
         [
             'text' => 'Historial',
             'icon' => 'ti ti-history',
-            'url' => 'historial'
+            'url' => 'historial',
+            'hasAnyRole' => ['cordinador'] 
         ],
         [
             'text' => 'reportes',
             'icon' => 'ti ti-message-report',
-            'url' => 'disabilities'
+            'url' => 'disabilities',
+            'hasAnyRole' => ['cordinador'] 
         ],
-
-
-
     ],
+    
 
     /*
     |--------------------------------------------------------------------------
@@ -173,13 +172,14 @@ return [
     */
 
     'filters' => [
-        TakiElias\Tablar\Menu\Filters\GateFilter::class,
+      //  TakiElias\Tablar\Menu\Filters\GateFilter::class,
         TakiElias\Tablar\Menu\Filters\HrefFilter::class,
         TakiElias\Tablar\Menu\Filters\SearchFilter::class,
         TakiElias\Tablar\Menu\Filters\ActiveFilter::class,
         TakiElias\Tablar\Menu\Filters\ClassesFilter::class,
         TakiElias\Tablar\Menu\Filters\LangFilter::class,
         TakiElias\Tablar\Menu\Filters\DataFilter::class,
+        App\Filter\RolePermissionMenuFilter::class,
     ],
 
     /*

@@ -26,9 +26,9 @@ Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::resource('/users', UserController::class);
-    Route::resource('bibliotecarios', BibliotecarioController::class);
-    Route::resource('/perfil', PerfilController::class);
+    Route::resource('/users', UserController::class)->middleware('can:users');
+    Route::resource('bibliotecarios', BibliotecarioController::class)->middleware('can:index.bibliotecario');
+    // Route::resource('/perfil', PerfilController::class);
     Route::resource('/equipment', EquipmentController::class);
     Route::resource('/environments', EnvironmentController::class);
     Route::resource('/indexcards', IndexCardController::class);
@@ -46,6 +46,21 @@ Route::middleware(['auth'])->group(function () {
      Route::get('/disabilities', [DisabilityController::class, 'index'])->name('disabilities.index');
 
 });
+// Route::middleware(['auth'])->group(function () {
+//     // Otras rutas...
+
+//     Route::group(['middleware' => ['role:']], function () {
+//         // Rutas para coordinadores
+//         Route::resource('bibliotecarios', BibliotecarioController::class)->except(['create', 'store', 'show', 'update', 'destroy']);
+//         Route::get('bibliotecarios/create', [BibliotecarioController::class, 'create'])->name('bibliotecarios.create')->middleware('permission:bibliotecario.create');
+//         Route::post('bibliotecarios', [BibliotecarioController::class, 'store'])->name('bibliotecarios.store')->middleware('permission:bibliotecario.create');
+//         Route::get('bibliotecarios/{bibliotecario}', [BibliotecarioController::class, 'show'])->name('bibliotecarios.show')->middleware('permission:bibliotecario.view');
+//         Route::get('bibliotecarios/{bibliotecario}/edit', [BibliotecarioController::class, 'edit'])->name('bibliotecarios.edit')->middleware('permission:bibliotecario.edit');
+//         Route::put('bibliotecarios/{bibliotecario}', [BibliotecarioController::class, 'update'])->name('bibliotecarios.update')->middleware('permission:bibliotecario.edit');
+//         Route::delete('bibliotecarios/{bibliotecario}', [BibliotecarioController::class, 'destroy'])->name('bibliotecarios.destroy')->middleware('permission:bibliotecario.delete');
+//     });
+// });
+
 
 
 Route::get('/error', function () {
@@ -68,7 +83,6 @@ Route::get('/error', function () {
 //         Route::post('users', RegisterController::class)->name('register');
 //     });
 // });
-
 
 // Rutas para el registro de bibliotecarios
 

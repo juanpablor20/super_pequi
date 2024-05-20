@@ -20,22 +20,16 @@
                     <!-- Page pre-title -->
                     <div class="page-pretitle">
                         Panel Principal
-                        @can('bibliotecatio')
-                            ...juan pablo
-                        @endcan
+                       
                     </div>
                     <h2 class="page-title">
-                        @role('bibliotecario')
-                            <h2>Esto solo se muestra al bibliotecario</h2>
-                        @endrole
-                        @role('cordinador')
-                            <h1>Esto es para juan</h1>
-                        @endrole
+                       
                         Pequi
                     </h2>
                      
                     </h2>
                 </div>
+                @role('bibliotecario')
                 <!-- Page title actions -->
                 <div class="col-12 col-md-auto ms-auto d-print-none">
                     <div class="btn-list">
@@ -69,6 +63,7 @@
         </div>
 
     </div>
+    @endrole
     <!-- Page body -->
     <div class="page-body">
         <div class="container-xl">
@@ -107,22 +102,6 @@
                                                 <polyline points="6 15 12 9 18 15" />
                                             </svg>
                                         </th>
-                                        @role('cordinador')
-                                            <th>esto solo se muestraa al cordinador</th>
-                                        @endrole
-                                        @role('bibliotecario')
-                                            <th>esto solo se muestra al bibliotecario</th>
-                                        @endrole
-                                        @role('cordinador')
-    <!-- Contenido específico para coordinadores -->
-    <p>Bienvenido, coordinador. Este contenido solo se muestra a los coordinadores.</p>
-@endrole
-
-@role('bibliotecario')
-    <!-- Contenido específico para bibliotecarios -->
-    <p>Bienvenido, bibliotecario. Este contenido solo se muestra a los bibliotecarios.</p>
-@endrole
-
 
                                         <th>Fecha de Prestamo</th>
                                         {{-- @foreach ($user as $hola)
