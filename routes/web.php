@@ -7,6 +7,7 @@ use App\Http\Controllers\DevolucionController;
 use App\Http\Controllers\DisabilityController;
 use App\Http\Controllers\EnvironmentController;
 use App\Http\Controllers\EquipmentController;
+use App\Http\Controllers\FilterController;
 use App\Http\Controllers\HistorialController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -26,25 +27,28 @@ Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::resource('/users', UserController::class)->middleware('can:users');
+    Route::resource('/users', UserController::class);
     Route::resource('bibliotecarios', BibliotecarioController::class)->middleware('can:index.bibliotecario');
+    Route::post('bibliotecarios/{id}/active', [BibliotecarioController::class, 'activate'])->name('bibliotecarios.activate')->middleware('can:index.bibliotecario');
+    
+
     // Route::resource('/perfil', PerfilController::class);
     Route::resource('/equipment', EquipmentController::class);
-    Route::resource('/environments', EnvironmentController::class);
-    Route::resource('/indexcards', IndexCardController::class);
-    Route::resource('/programs', ProgramController::class);
-    Route::post('/prestamos', [PrestamosController::class, 'store'])->name('prestamos');
-    Route::post('/devolucion', [DevolucionController::class, 'devolver'])->name('devolucion');
-    Route::get('/buscarUsuario', [PrestamosController::class, 'buscarUsuario'])->name('buscarUsuario');
-    Route::get('mostrarServicio/{id}', [ServiceController::class, 'show'])->name('mostrarServicio');
-    Route::get('aula.search', [ServiceController::class, 'aulaSearch'])->name('aula.search');
-    Route::get('/programa.search', [ServiceController::class, 'programaSearch'])->name('programa.search');
+    Route::resource('/environments', EnvironmentController::class)->middleware('can:users');
+    Route::resource('/indexcards', IndexCardController::class)->middleware('can:users');
+    Route::resource('/programs', ProgramController::class)->middleware('can:users');
+    Route::post('/prestamos', [PrestamosController::class, 'store'])->name('prestamos')->middleware('can:users');
+    Route::post('/devolucion', [DevolucionController::class, 'devolver'])->name('devolucion')->middleware('can:users');
+    Route::get('/buscarUsuario', [PrestamosController::class, 'buscarUsuario'])->name('buscarUsuario')->middleware('can:users');
+    Route::get('mostrarServicio/{id}', [ServiceController::class, 'show'])->name('mostrarServicio')->middleware('can:users');
+    Route::get('aula.search', [ServiceController::class, 'aulaSearch'])->name('aula.search')->middleware('can:users');
+    Route::get('/programa.search', [ServiceController::class, 'programaSearch'])->name('programa.search')->middleware('can:users');
     Route::get('/historial', [HistorialController::class, 'historico'])->name('historial');
-    Route::get('/filtro_service', [HistorialController::class, 'filterService'])->name('filtro_service');
+    Route::get('/filtro_service', [HistorialController::class, 'filterService'])->name('filtro_service')->middleware('can:users');
+    Route::get('/filtro_users', [FilterController::class, 'filterUser'])->name('filtro_users')->middleware('can:users');
     Route::resource('/disabilities', App\Http\Controllers\DisabilityController::class);
-     Route::get('/disabilities', [DisabilityController::class, 'create'])->name('disabilities.create');
-     Route::get('/disabilities', [DisabilityController::class, 'index'])->name('disabilities.index');
-
+    Route::get('/disabilities', [DisabilityController::class, 'create'])->name('disabilities.create');
+    Route::get('/disabilities', [DisabilityController::class, 'index'])->name('disabilities.index');
 });
 // Route::middleware(['auth'])->group(function () {
 //     // Otras rutas...
@@ -85,4 +89,3 @@ Route::get('/error', function () {
 // });
 
 // Rutas para el registro de bibliotecarios
-

@@ -3,7 +3,7 @@
 namespace App\Tables;
 
 use App\Models\Equipment;
-use Illuminate\Http\Request;
+
 use Takielias\TablarKit\DataTable\DataTable;
 use Takielias\TablarKit\Enums\ExportType;
 

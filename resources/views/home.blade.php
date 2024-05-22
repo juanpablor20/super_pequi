@@ -107,6 +107,7 @@
                                         {{-- @foreach ($user as $hola)
                                         {{ $hola->name }}
                                     @endforeach --}}
+                                    
                                         <th>Nombre</th>
                                         <th>Roll</th>
                                         <th>Tipo de Equipo</th>

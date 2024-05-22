@@ -2,7 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\Environment;
+
+use App\Models\Equipment;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,12 +17,14 @@ class EnvironmentFactory extends Factory
      * @return array<string, mixed>
      */
 
-     protected $model = Environment::class;
+     protected $model = Equipment::class;
 
     public function definition(): array
     {
         return [
-          'names' => $this->faker->name(),
+          'type_equi' => $this->faker->name(),
+          'characteristics' => $this->faker->sentence(),
+          'serie_equi' => $this->faker->unique()->randomNumber(),
         ];
     }
 }

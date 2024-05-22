@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Equipment;
 use App\Tables\EquipmentTable;
-use App\Tables\Equipo;
 use Illuminate\Http\Request;
-use Takielias\TablarKit\Components\Table\Tabulator;
+
 
 class EquipmentController extends Controller
 {
@@ -14,12 +13,11 @@ class EquipmentController extends Controller
     public function index(Request $request)
     {
         $table = new EquipmentTable();
-        $equipment = Equipment::all();
         if ($request->expectsJson()) {
             return $table->getData($request);
         }
 
-        return view('equipment.index', compact('table', 'equipment'));
+        return view('equipment.index', compact('table'));
     }
 
   
@@ -42,12 +40,6 @@ class EquipmentController extends Controller
             ->with('success', 'Equipo creado exitosamente.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $equipment = Equipment::find($id);

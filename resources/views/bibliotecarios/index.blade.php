@@ -90,7 +90,7 @@
                                     
 										<th>Nombres</th>
 										<th>Apellidos</th>
-										<th>Num Doc</th>
+										<th>Numero Documento</th>
 										<th>Estados</th>
 
                                     <th class="w-1"></th>
@@ -113,24 +113,32 @@
                                                 @if($usuario->states == 'active')
                                                     <span class="badge bg-success me-1"></span> Activo
                                                 @elseif($usuario->states == 'with_equipment')
-                                                    <span class="badge bg-warning text-dark me-1"></span> con_equipo
+                                                    <span class="badge bg-warning text-dark me-1"></span> Con Equipo
                                                 @elseif($usuario->states == 'inactive')
-                                                    
                                                     <span class="badge bg-danger me-1"></span> Inactivo
                                                 @endif
                                             </td>
-
+                                            
                                             <td>
                                                 <div class="btn-list flex-nowrap">
-                                                    <a href="{{ route('bibliotecarios.show',$usuario->id) }}" class="btn btn-primary"><i class="ti ti-eye-check"></i></a>
-                                                    <a href="{{ route('bibliotecarios.edit',$usuario->id) }}" class="btn btn-secondary"><i class="ti ti-edit"></i></a>
-                                                    <form action="{{ route('bibliotecarios.destroy',$usuario->id) }}" method="POST" onsubmit="return confirm('Estás seguro de que quieres inactivar este usuario?')">
+                                                    @if($usuario->states == 'active' || $usuario->states == 'with_equipment')
+                                                        <a href="{{ route('bibliotecarios.show', $usuario->id) }}" class="btn btn-primary"><i class="ti ti-eye-check"></i></a>
+                                                        <a href="{{ route('bibliotecarios.edit', $usuario->id) }}" class="btn btn-secondary"><i class="ti ti-edit"></i></a>
+                                                        <form action="{{ route('bibliotecarios.destroy', $usuario->id) }}" method="POST" class="form-delete">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="button" class="btn btn-danger btn-delete"><i class="ti ti-trash-off"></i></button>
+                                                        </form>
+                                                        
+                                                    @elseif($usuario->states == 'inactive')
+                                                    <form action="{{ route('bibliotecarios.activate', $usuario->id) }}" method="POST" class="form-activate">
                                                         @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger"><i class="ti ti-trash-off"></i></button>
+                                                        <button type="button" class="btn btn-success btn-activate"><i class="ti ti-reload"></i> Reactivar</button>
                                                     </form>
+                                                    @endif
                                                 </div>
                                             </td>
+                                            
                                     </tr>
                                 @empty
                                     <td>No Data Found</td>

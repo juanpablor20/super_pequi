@@ -118,13 +118,13 @@ return [
             'text' => 'Usuarios',
             'icon' => 'ti ti-users-group',
             'url' => 'users',
-            'hasAnyRole' => ['cordinador'] // Ocultar para coordinador
+           
         ],
         [
             'text' => 'Equipos',
             'icon' => 'ti ti-device-desktop',
             'url' => 'equipment',
-            'hasAnyRole' => ['cordinador'] 
+            
         ],
         [
             'text' => 'Fichas',
@@ -149,13 +149,13 @@ return [
             'text' => 'Historial',
             'icon' => 'ti ti-history',
             'url' => 'historial',
-            'hasAnyRole' => ['cordinador'] 
+            
         ],
         [
             'text' => 'reportes',
             'icon' => 'ti ti-message-report',
             'url' => 'disabilities',
-            'hasAnyRole' => ['cordinador'] 
+            
         ],
     ],
     

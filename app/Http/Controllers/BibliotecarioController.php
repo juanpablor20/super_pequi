@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Users;
 use App\Models\Address;
 use App\Models\Contacts;
+use Illuminate\Validation\Rule;
 use Spatie\Permission\Models\Role;
 
 class BibliotecarioController extends Controller
@@ -15,10 +16,10 @@ class BibliotecarioController extends Controller
 
     public function index()
     {
+        //busca al rol bibliotecario  y lo asigna ala variable  $bibliotecarioRole
         $bibliotecarioRole = Role::where('name', 'bibliotecario')->where('guard_name', 'web')->first();
-
         $bibliotecarios = Users::role($bibliotecarioRole)->paginate(10); // Paginar los resultados
-       
+
         // Si no hay registros, redirige a la vista de creación
         if ($bibliotecarios->isEmpty()) {
             return redirect()->route('bibliotecarios.create');
@@ -35,29 +36,33 @@ class BibliotecarioController extends Controller
     public function create()
     {
         $user = new Users();
+        //se llama al modelo para que eloquent cree el usuario en este caso bibliotecario 
         return view('bibliotecarios.create', compact('user'));
     }
 
 
     public function store(Request $request)
     {
-        $request->validate(Users::$rules);
-        $request->validate(Users::$rules1);
-        $user = Users::create($request->all());
+        $rules = array_merge(Users::getRules(), Users::getPasswordRules());
 
+        // Valida todas las reglas en una sola llamada
+        $validatedData = $request->validate($rules);
 
+        // Crea el usuario utilizando los datos validados
+        $user = Users::create($request->all()); //se crean usuarios utilizando eloquent
 
+        //informacion adicional
         $contacts = Contacts::create([
             'email_con' => $request->input('email_con'),
-           'telephone_con' => $request->input('telephone_con'),
+            'telephone_con' => $request->input('telephone_con'),
             'id_user_con' => $user->id,
         ]);
-         
+
         $address = Address::create([
             'addres_add' => $request->input('addres_add'),
             'id_user_add' => $user->id,
         ]);
-       
+
 
         $login = Logins::create([
             'users' => $request['number_identification'],
@@ -65,9 +70,7 @@ class BibliotecarioController extends Controller
         ]);
         $user->assignRole('bibliotecario');
 
-
-        
-
+        //metodos para guardar 
         $login->save();
         $contacts->save();
         $address->save();
@@ -92,9 +95,16 @@ class BibliotecarioController extends Controller
 
     public function update(Request $request, Users $bibliotecario)
     {
-     //   $request->validate(Users::$rules);
-        //dd($request->all());
-        //return $bibliotecario;
+        $request->validate(Users::getUpdateRules());
+
+
+        //se valida para que al actualizar no actualizen a un numero de documento existente
+        $userId = $bibliotecario->id;
+        $request->validate([
+            'number_identification' => [
+                Rule::unique('users')->ignore($userId),
+            ],
+        ]);
         $bibliotecario->update($request->all());
         $bibliotecario->contacts->email_con = $request->email_con;
         $bibliotecario->contacts->telephone_con = $request->telephone_con;
@@ -110,13 +120,26 @@ class BibliotecarioController extends Controller
         $login->save();
 
 
-        //  return $bibliotecario;
+
         return redirect()->route('bibliotecarios.index')->with('success', 'Biliotecario Actualizado Exitosamente');
     }
 
     public function destroy($id)
     {
-        $user = Users::find($id)->delete();
-        return redirect()->route('bibliotecarios.index')->with('success', 'Bibliotecario inactivado Exitosamente');
+        // Encuentra al usuario por su ID
+            $user = Users::find($id);
+            $user->states = 'inactive';
+            $user->save();
+
+            
+            return redirect()->back()->with('success', 'Usuario dado de baja.');
+    }
+    
+    public function activate($id)
+    {
+        $user = Users::find($id);
+        $user->states = 'active';
+        $user->save();
+        return redirect()->route('bibliotecarios.index')->with('success', 'bibliotecario activado.');
     }
 }

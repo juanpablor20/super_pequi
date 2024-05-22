@@ -51,7 +51,9 @@
                             <form method="POST" action="{{ route('bibliotecarios.store') }}" id="ajaxForm" role="form"
                                 enctype="multipart/form-data">
                                 @csrf
+                                
                                 @include('bibliotecarios.form')
+                                
                                 
                             </form>
                         </div>

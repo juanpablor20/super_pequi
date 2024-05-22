@@ -22,7 +22,9 @@ class RoleSeeder extends Seeder
 
        $permission = Permission::create(['name' => 'bibliotecario']);
        
+        $permissionbibliotecario = Permission::create(['name' => 'users']);
 
+        //esto protege las rutas de bibliotecario 
         $pricipalBibliotecario = Permission::create(['name' => 'index.bibliotecario']);
         $createBibliotecario = Permission::create(['name' => 'create.bibliotecario']);
         $readBibliotecario = Permission::create(['name' => 'show.bibliotecario']);
@@ -31,7 +33,7 @@ class RoleSeeder extends Seeder
 
         $rol1->givePermissionTo([$createBibliotecario,$pricipalBibliotecario, $readBibliotecario, $updateBibliotecario, $deleteBibliotecario]);
         
-      // $rol1->givePermissionTo($permission);
+       $rol2->givePermissionTo($permissionbibliotecario);
      
        
     }
