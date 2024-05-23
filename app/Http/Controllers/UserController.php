@@ -20,23 +20,21 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $roles = Role::whereIn('name', ['aprendices', 'instructor'])
-        ->where('guard_name', 'web')
-        ->get();
-          
-            
-       $table = new UserTable();
-      
-      if ($request->expectsJson())
-       return $table->getData($request);
-     return view('user.index', compact('table'));
+            ->where('guard_name', 'web')
+            ->get();
 
+
+        $table = new UserTable();
+
+        if ($request->expectsJson())
+            return $table->getData($request);
+        return view('user.index', compact('table'));
     }
 
     public function create()
     {
         // $ficha = IndexCard::query()->pluck('number', 'id')->all();
         $ficha = IndexCard::where('states', 'active')->get();
-
         $user = new Users();
         return view('user.create', compact('user', 'ficha'));
     }
@@ -63,8 +61,15 @@ class UserController extends Controller
             'addres_add' => $request->input('addres_add'),
             'id_user_add' => $user->id,
         ]);
+
         $role = $request->input('role');
         if ($role == 'aprendices') {
+
+            $validacionFicha = $request->input('index_card_id'); // Corregí el nombre de la variable
+
+            if (!$validacionFicha) {
+                return redirect()->back()->with('error', 'No ha seleccionado la ficha.');
+            }
             $ficha = Relationship::create([
                 'index_card_id' => $request->input('index_card'),
                 'user_rel_id' => $user->id,
@@ -88,14 +93,14 @@ class UserController extends Controller
     public function show($id)
     {
         $user = Users::with('contacts', 'Address', 'Relacion')->find($id);
-        //$user = Users::findOrFail($id);
         $prestamos = Service::where('user_borrower_id', $user->id)->get();
+
         // Obtengo todos los préstamos asociados con el usuario
         return view('user.show', compact('user', 'prestamos'));
     }
     public function edit($id)
     {
-        //  $ficha = IndexCard::query()->pluck('number', 'id')->all();
+
         $ficha = IndexCard::where('state', 'active');
         $user = Users::find($id);
         $contact = $user->contact;

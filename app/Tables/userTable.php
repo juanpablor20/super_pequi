@@ -6,7 +6,7 @@ use App\Models\Users;
 use Takielias\TablarKit\DataTable\DataTable;
 use Takielias\TablarKit\Enums\ExportType;
 
-use function PHPUnit\Framework\callback;
+
 
 class UserTable extends DataTable
 
@@ -21,11 +21,11 @@ class UserTable extends DataTable
        ->column(name: 'number_idnetification', title: 'Numero de Identificacion', search: true)
        ->column(name: 'sex_user', title: 'Sexo', search: true)
        ->column(name: 'states', title: 'Estado', search: true)
-       ->column(name: 'action', title: 'Acciones', callback: function($item){
-        return view('user.action', ['item => $item'])->render();
-       }, formatter: 'html')
-       ->setExportTypes([ExportType::CSV, ExportType::PDF, ExportType::XLS])
-       ->paginate(10);
+       ->column(name: 'action', title: 'Action', callback: function ($item) {
+        return view('user.action', ['item' => $item])->render();
+    }, formatter: 'html')
+    ->setExportTypes([ExportType::CSV, ExportType::PDF, ExportType::XLS])
+    ->paginate(10);
     }
 }
 

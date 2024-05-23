@@ -97,7 +97,7 @@
         <select name="index_card" class="form-select @error('index_card') is-invalid @enderror">
             <option value="">Selecciona una ficha</option>
             @foreach($ficha as $card)
-                <option value="{{ $card->id }}" {{ old('index_card', $user->index_card ?? '') == $card->id ? 'selected' : '' }}>
+                <option value="{{ $card->id }}" {{ old('index_card', $user->index_card ?? '') == $card->id ? 'selected' : '' }} >
                     {{ $card->number }}
                 </option>
             @endforeach
