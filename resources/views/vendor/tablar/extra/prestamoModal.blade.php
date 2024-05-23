@@ -19,27 +19,30 @@
                     <div class="mb-3">
                         {{-- <input type="hidden" name="bibliotecario_id" value="{{ Auth::id() }}"> --}}
                         <label class="form-label">Número de Documento</label>
-                        <input type="text" class="form-control" name="number_identification" placeholder="Número de documento" required>
+                        <input type="text" class="form-control" name="number_identification"
+                            placeholder="Número de documento" required>
                         {{-- @if ($errors->has('number_identification'))
                             <div class="text-danger">{{ $errors->first('number_identification') }}</div>
                         @endif --}}
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Número de Serie</label>
-                        <input type="text" class="form-control" name="serie_equi" placeholder="Número de serie" required>
+                        <input type="text" class="form-control" name="serie_equi" placeholder="Número de serie"
+                            required>
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3 col md-6">
                         <label class="form-label">Lugar de traslado</label>
-                        <div class="input-group">
-                       </div>
+
+                     <x-input remote-data="true" name="names" item-search-route="aula.search"></x-input>
                     </div>
-                    
-                    
+
+
                 </div>
                 <div class="modal-footer">
                     <div class="text-end">
                         <div class="d-flex">
-                            <button type="button" data-bs-dismiss="modal" aria-label="Close" class="btn btn-danger">Cancelar</button>
+                            <button type="button" data-bs-dismiss="modal" aria-label="Close"
+                                class="btn btn-danger">Cancelar</button>
                             <button type="submit" class="btn btn-primary ms-auto">Enviar</button>
                         </div>
                     </div>
