@@ -47,7 +47,8 @@ class DevolucionController extends Controller
                 $service->different_librarian_id = $user->id;
             }
             // Mandar una alerta
-            session()->flash('error', true);
+            session()->flash('message2', true);
+            return redirect()->route('disabilities.create', ['service_id' => $service->id]);
         }
     
         // Marcar el equipo como devuelto y registrar la fecha y hora de devolución

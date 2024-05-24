@@ -34,21 +34,28 @@ class DisabilityController extends Controller
     }
 
     public function store(Request $request)
-    {
-        //   request()->validate(Disability::$rules);
+{
+    // Validar los datos recibidos
+    $request->validate([
+        'description' => 'required|string',
+        'status' => 'required|string',
+        'punishment_date' => 'nullable|date',
+        'end_date' => 'nullable|date',
+        'service_id' => 'required|exists:services,id', // Asegurar que el servicio exista en la base de datos
+    ]);
 
-        $disability = Disability::create([
-            'description' => $request->input('description'),
-            'status' => $request->input('status'),
-            'punishment_date' => $request->input('punishment_date'),
-            'end_date' => $request->input('end_date'),
-            'service_id' => $request->input('service_id'),
-        ]);
-        $disability->save();
+    // Crear la discapacidad asociada al servicio
+    $disability = Disability::create([
+        'description' => $request->input('description'),
+        'status' => $request->input('status'),
+        'punishment_date' => $request->input('punishment_date'),
+        'end_date' => $request->input('end_date'),
+        'service_id' => $request->input('service_id'),
+    ]);
 
-        return redirect()->route('disabilities.index')
-            ->with('success', 'Disability created successfully.');
-    }
+    // Redireccionar a la página de índice de discapacidades
+    return redirect()->route('disabilities.index')->with('success', 'Disability created successfully.');
+}
 
 
     public function show($id)
