@@ -15,6 +15,8 @@ class DevolucionController extends Controller
 {
     public function devolver(Request $request)
     {
+
+        
         // Buscar el equipo por su serie
         $equipment = Equipment::where('serie_equi', $request->serie_equi)->first();
         if (!$equipment) {
@@ -42,9 +44,11 @@ class DevolucionController extends Controller
         if ($borrowerUser->id !== $user->id) {
             // Guardar el ID del usuario que devuelve el equipo
             $service->user_returner_id = $user->id;
+           $service->save();
             // Si el usuario que devuelve es un bibliotecario diferente al que prestó, guardar su ID también
             if ($user->role !== $borrowerUser->role) {
                 $service->different_librarian_id = $user->id;
+                $service->save();
             }
             // Mandar una alerta
             session()->flash('message2', true);
@@ -65,8 +69,8 @@ class DevolucionController extends Controller
             $service->save();
     
             DB::commit();
-    
-            return redirect()->route('home')->with('success', 'El equipo se ha devuelto correctamente.');
+          //  return session()->flash('message1', true);
+            return redirect()->back()->with('message1', true);
         } catch (\Exception $e) {
             DB::rollback();
             return redirect()->back()->with('error', $e->getMessage());

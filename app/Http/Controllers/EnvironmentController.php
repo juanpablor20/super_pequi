@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Environment;
+use App\Tables\AmbientesTable;
 use Illuminate\Http\Request;
 
 /**
@@ -11,17 +12,14 @@ use Illuminate\Http\Request;
  */
 class EnvironmentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+  
+    public function index(Request $request)
     {
-        $environments = Environment::paginate(10);
+        $table = new AmbientesTable();
 
-        return view('environment.index', compact('environments'))
-            ->with('i', (request()->input('page', 1) - 1) * $environments->perPage());
+        if ($request->expectsJson())
+            return $table->getData($request);
+        return view('environment.index', compact('table'));
     }
 
     /**

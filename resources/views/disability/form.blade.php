@@ -7,7 +7,7 @@
             'placeholder' => 'Description',
         ]) }}
         {!! $errors->first('description', '<div class="invalid-feedback">:message</div>') !!}
-        <small class="form-hint">disability <b>description</b> instruction.</small>
+        
     </div>
 </div>
 <input type="hidden" name="service_id" value="{{ $serviceId }}">

@@ -3,18 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Program;
+use App\Tables\ProgrmasTable;
 use Illuminate\Http\Request;
 
 
 class ProgramController extends Controller
 {
  
-    public function index()
+    public function index(Request $request)
     {
-        $programs = Program::paginate(10);
+      $table = new ProgrmasTable();
 
-        return view('program.index', compact('programs'))
-            ->with('i', (request()->input('page', 1) - 1) * $programs->perPage());
+        if ($request->expectsJson())
+            return $table->getData($request);
+        return view('program.index', compact('table'));
     }
 
   

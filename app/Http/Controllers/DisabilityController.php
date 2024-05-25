@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\DisabilityReportCreated;
 use App\Models\Disability;
+use App\Models\Service;
+use App\Tables\ReportesTable;
 use Illuminate\Http\Request;
 
 /**
@@ -16,20 +19,27 @@ class DisabilityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $disabilities = Disability::paginate(10);
+        $table = new ReportesTable();
 
-        return view('disability.index', compact('disabilities'))
-            ->with('i', (request()->input('page', 1) - 1) * $disabilities->perPage());
+        if ($request->expectsJson())
+            return $table->getData($request);
+        return view('disability.index', compact('table'));
     }
 
-
-    public function create()
+    public function create(Request $request)
     {
-
+        // Obtener el service_id de la URL si está presente
+        $serviceId = $request->input('service_id');
+    
+        // Si no se encuentra en la URL, intenta obtenerlo de la sesión
+        if (!$serviceId) {
+            $serviceId = session('serviceId');
+        }
+    
         $disability = new Disability();
-        $serviceId = session('serviceId');
+    
         return view('disability.create', compact('disability', 'serviceId'));
     }
 
@@ -41,9 +51,10 @@ class DisabilityController extends Controller
         'status' => 'required|string',
         'punishment_date' => 'nullable|date',
         'end_date' => 'nullable|date',
-        'service_id' => 'required|exists:services,id', // Asegurar que el servicio exista en la base de datos
+        // 'service_id' => 'required|exists:services,id', // Asegurar que el servicio exista en la base de datos
     ]);
 
+    $service = Service::find($request->input('service_id'));
     // Crear la discapacidad asociada al servicio
     $disability = Disability::create([
         'description' => $request->input('description'),
@@ -52,6 +63,7 @@ class DisabilityController extends Controller
         'end_date' => $request->input('end_date'),
         'service_id' => $request->input('service_id'),
     ]);
+    event(new DisabilityReportCreated($service));
 
     // Redireccionar a la página de índice de discapacidades
     return redirect()->route('disabilities.index')->with('success', 'Disability created successfully.');

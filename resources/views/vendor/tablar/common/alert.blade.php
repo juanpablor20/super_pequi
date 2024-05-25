@@ -2,11 +2,11 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         // Inactivación de usuario
         const deleteButtons = document.querySelectorAll('.btn-delete');
         deleteButtons.forEach(button => {
-            button.addEventListener('click', function (event) {
+            button.addEventListener('click', function(event) {
                 event.preventDefault();
                 const form = this.closest('.form-delete');
                 Swal.fire({
@@ -29,7 +29,7 @@
         // Activación de usuario
         const activateButtons = document.querySelectorAll('.btn-activate');
         activateButtons.forEach(button => {
-            button.addEventListener('click', function (event) {
+            button.addEventListener('click', function(event) {
                 event.preventDefault();
                 const form = this.closest('.form-activate');
                 Swal.fire({
@@ -70,7 +70,8 @@
                 if (result.isConfirmed) {
                     window.location.href = "{{ route('home') }}";
                 } else {
-                    window.location.href = "{{ route('disabilities.create') }}";
+                    confirmButtonText: 'Aceptar'
+
                 }
             });
         @elseif (Session::has('error'))
@@ -86,6 +87,24 @@
                 title: 'Éxito',
                 text: '{{ session('success') }}',
                 confirmButtonText: 'Aceptar'
+            });
+        @elseif (Session::has('message1'))
+            Swal.fire({
+                title: "Estas seguro de la Devolucion?",
+                text: "El equipo cuenta con un buen estado!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Si, seguro!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your file has been deleted.",
+                        icon: "success"
+                    });
+                }
             });
         @endif
     });

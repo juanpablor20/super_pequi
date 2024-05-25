@@ -4,17 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\IndexCard;
 use App\Models\program;
+use App\Tables\FichasTable;
 use Illuminate\Http\Request;
 
 
 class IndexCardController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $indexCards = IndexCard::paginate(10);
-        return view('index-card.index', compact('indexCards'))
-            ->with('i', (request()->input('page', 1) - 1) * $indexCards->perPage());
+        $table = new FichasTable();
+
+        if ($request->expectsJson())
+            return $table->getData($request);
+        return view('index-card.index', compact('table'));
     }
 
 

@@ -15,6 +15,9 @@ class EventServiceProvider extends ServiceProvider
      * @var array<class-string, array<int, class-string>>
      */
     protected $listen = [
+        'App\Events\DisabilityReportCreated' => [
+            'App\Listeners\HandleDisabilityReportCreated',
+        ],
         'App\Events\UserUpdated' => [
             'App\Listeners\UpdateLoginInformation',
         ],
@@ -22,6 +25,7 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
     ];
+    
 
     /**
      * Register any events for your application.
