@@ -2,17 +2,19 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 
 class Program extends Model
 {
-    
+    use HasFactory;
+
     static $rules = [
 		'names_pro' => 'required',
 		'code_pro' => 'required',
 		'version' => 'required',
-		
+
     ];
 
     protected $perPage = 20;
@@ -32,6 +34,6 @@ class Program extends Model
     {
         return $this->hasMany('App\Models\IndexCard', 'program_id', 'id');
     }
-    
+
 
 }
