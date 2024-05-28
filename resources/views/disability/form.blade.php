@@ -12,24 +12,8 @@
 </div>
 <input type="hidden" name="service_id" value="{{ $serviceId }}">
 
-<div class="form-group mb-3">
-    <label class="form-label"> {{ Form::label('status') }}</label>
-    <div>
-        {{ Form::text('status', $disability->status, [
-            'class' => 'form-control' . ($errors->has('status') ? ' is-invalid' : ''),
-            'placeholder' => 'Status',
-        ]) }}
-        {!! $errors->first('status', '<div class="invalid-feedback">:message</div>') !!}
-        <small class="form-hint">disability <b>status</b> instruction.</small>
-    </div>
-</div>
-<div class="form-group mb-3">
-    <label class="form-label"> {{ Form::label('punishment_date') }}</label>
-    <div>
-        <x-lite-picker name="punishment_date"></x-lite-picker>
 
-    </div>
-</div>
+
 
 <div class="form-group mb-3">
     <label class="form-label"> {{ Form::label('end_date') }}</label>
@@ -37,10 +21,6 @@
 
         <x-flat-picker name="end_date"></x-flat-picker>
 
-        {{-- {{ Form::text('end_date', $disability->end_date, ['class' => 'form-control' .
-        ($errors->has('end_date') ? ' is-invalid' : ''), 'placeholder' => 'End Date']) }}
-        {!! $errors->first('end_date', '<div class="invalid-feedback">:message</div>') !!}
-        <small class="form-hint">disability <b>end_date</b> instruction.</small> --}}
     </div>
 </div>
 

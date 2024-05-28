@@ -3,23 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Program;
-use App\Tables\ProgrmasTable;
+use App\Tables\ProgramasTable;
 use Illuminate\Http\Request;
 
 
 class ProgramController extends Controller
 {
- 
+
     public function index(Request $request)
     {
-      $table = new ProgrmasTable();
+        $table = new ProgramasTable();
 
         if ($request->expectsJson())
             return $table->getData($request);
         return view('program.index', compact('table'));
     }
 
-  
     public function create()
     {
         $program = new Program();
@@ -49,7 +48,7 @@ class ProgramController extends Controller
         return view('program.show', compact('program'));
     }
 
-    
+
     public function edit($id)
     {
         $program = Program::find($id);
@@ -57,7 +56,7 @@ class ProgramController extends Controller
         return view('program.edit', compact('program'));
     }
 
-   
+
     public function update(Request $request, Program $program)
     {
         request()->validate(Program::$rules);
@@ -68,7 +67,7 @@ class ProgramController extends Controller
             ->with('success', 'Programa actualizado exitosamente');
     }
 
- 
+
     public function destroy($id)
     {
         $program = Program::find($id)->delete();
