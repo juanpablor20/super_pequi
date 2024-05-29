@@ -25,10 +25,25 @@ class PrestamosController extends Controller
         $number_identification = $request->input('number_identification');
 
         $user = Users::where('number_identification', $number_identification)->first();
+        $userId = $user->id;
+        $usuario1 = Service::where('user_borrower_id', $userId)->get();
+        
+$ids = Service::where('user_borrower_id', $userId)->pluck('id');
 
-        $usuario1 = Service::where('user_borrower_id', $user)->get();
+$serviceIds = Service::where('user_borrower_id', $userId)->pluck('id');
 
-        return $usuario1;
+// Buscar en la tabla Disability si los IDs existen y tienen estado activo
+$resultado = Disability::whereIn('service_id', $serviceIds)
+    ->where('status', 'activo')
+    ->get();
+
+
+if ($resultado)
+{
+    return redirect()->back()->with('error', 'el usuario se encuentra sancionado');
+}
+
+      return$resultado;
 
 
 
