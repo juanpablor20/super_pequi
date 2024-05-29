@@ -1,9 +1,9 @@
 <div class="row row-cards">
     <div class="col-sm-6 col-md-3">
         <div class="mb-3">
-            <label class="form-label">Field</label>
+            <label class="form-label">Filtrar por</label>
             <select class="form-control form-select" id="filter-field">
-                <option value="">All</option>
+                <option value="">Todos</option>
                 @foreach($columns as $column)
                     @if($column['search'])
                         <option value="{{$column['field']}}">{{$column['title']}}</option>
@@ -12,10 +12,13 @@
             </select>
         </div>
     </div>
-    <div class="col-sm-6 col-md-3">
-        <div class="mb-3">
-            <label class="form-label">Type</label>
-            <select class="form-control form-select" id="filter-type">
+    {{-- <div class="col-sm-6 col-md-3"> --}}
+        <input id="filter-type" name="like" type="hidden" value="like" />
+        {{-- <div class="mb-3">
+            <label class="form-label">Type</label> --}}
+            {{-- <input type="hidden" name="like" id="filter-type"> --}}
+           
+            {{-- <select class="form-control form-select" id="filter-type">
                 <option value="=">=</option>
                 <option value="<"><</option>
                 <option value="<="><=</option>
@@ -23,19 +26,19 @@
                 <option value=">=">>=</option>
                 <option value="!=">!=</option>
                 <option value="like">like</option>
-            </select>
+            </select> --}}
+        {{-- </div> --}}
+    {{-- </div> --}}
+    <div class="col-sm-6 col-md-3">
+        <div class="mb-3">
+            <label class="form-label">Buscar</label>
+            <input type="test" id="filter-value" class="form-control" placeholder="Filtrar">
         </div>
     </div>
     <div class="col-sm-6 col-md-3">
         <div class="mb-3">
-            <label class="form-label">Value</label>
-            <input type="test" id="filter-value" class="form-control" placeholder="Search here">
-        </div>
-    </div>
-    <div class="col-sm-6 col-md-3">
-        <div class="mb-3">
-            <label class="form-label">Reset</label>
-            <button class="btn btn-warning" id="filter-clear">Clear Filter</button>
+            <label class="form-label">:)</label>
+            <button class="btn btn-warning" id="filter-clear">Limpiar Filtro</button>
         </div>
     </div>
 </div>
