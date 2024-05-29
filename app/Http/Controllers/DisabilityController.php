@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Events\DisabilityReportCreated;
@@ -22,12 +21,7 @@ class DisabilityController extends Controller
 
     public function create(Request $request)
     {
-        $serviceId = $request->input('service_id');
-
-        if (!$serviceId) {
-            $serviceId = session('serviceId');
-        }
-
+        $serviceId = $request->input('service_id', session('serviceId'));
         $disability = new Disability();
 
         return view('disability.create', compact('disability', 'serviceId'));
@@ -37,7 +31,7 @@ class DisabilityController extends Controller
     {
         $currentDate = Carbon::now()->startOfDay();
 
-        if ($request->input('end_date') < $currentDate) {
+        if (Carbon::parse($request->input('end_date'))->startOfDay()->lessThan($currentDate)) {
             return redirect()->back()->with('error', 'La fecha de finalización debe ser posterior a la fecha actual');
         }
 
@@ -54,40 +48,46 @@ class DisabilityController extends Controller
             'service_id' => $request->input('service_id'),
         ]);
 
-        $endDateFromDB = Carbon::parse($disability->end_date)->startOfDay();
-        $currentDate = Carbon::now()->startOfDay();
-        
-        // Verificar si la fecha de finalización de la sanción coincide con la fecha actual
-        if ($endDateFromDB->equalTo($currentDate)) {
-            // Emitir el evento SancionFinalizada
-            event(new SancionFinalizada($disability->id));
-        }
-        
+        $this->checkAndFireEndDateEvent($disability);
+
         $disability->punishment_date = Carbon::now();
         $disability->save();
-        
-
 
         event(new DisabilityReportCreated($service));
 
-        return redirect()->route('disabilities.index')->with('success', 'Disability created successfully.');
+        return redirect()->route('disabilities.index')->with('success', 'Reporte Creado con exito.');
     }
+
+    protected function checkAndFireEndDateEvent(Disability $disability)
+    {
+        $endDateFromDB = Carbon::parse($disability->end_date)->startOfDay();
+        $currentDate = Carbon::now()->startOfDay();
+    
+        if ($endDateFromDB->lessThanOrEqualTo($currentDate)) {
+            $disability->status = 'inactivo'; // Cambia el estado a 'inactivo'
+            $disability->save();
+    
+            event(new SancionFinalizada($disability->id));
+        }
+    }
+    
+    
 
     public function show($id)
     {
-        $disability = Disability::find($id);
+        $disability = Disability::findOrFail($id);
         return view('disability.show', compact('disability'));
     }
 
     public function edit($id)
     {
-        $disability = Disability::find($id);
+        $disability = Disability::findOrFail($id);
         return view('disability.edit', compact('disability'));
     }
 
     public function update(Request $request, Disability $disability)
     {
-        request()->validate(Disability::$rules);
+        $request->validate(Disability::$rules);
 
         $disability->update($request->all());
 
@@ -96,8 +96,10 @@ class DisabilityController extends Controller
 
     public function destroy($id)
     {
-        $disability = Disability::find($id)->delete();
+        Disability::findOrFail($id)->delete();
 
         return redirect()->route('disabilities.index')->with('success', 'Disability deleted successfully');
     }
 }
+
+

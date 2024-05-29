@@ -12,6 +12,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
+        $schedule->command('check:disabilities')->daily();
         // $schedule->command('inspire')->hourly();
     }
 

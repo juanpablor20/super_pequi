@@ -12,7 +12,7 @@ return new class extends Migration
         Schema::create('disabilities', function (Blueprint $table) {
             $table->id();
             $table->string('description');
-            $table->enum('status', ['activo', 'inactivo']);
+            $table->enum('status', ['activo', 'inactivo'])->default('activo');
             $table->timestamp('punishment_date')->useCurrent();
             $table->timestamp('end_date')->useCurrent();
             $table->unsignedBigInteger('service_id');

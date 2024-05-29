@@ -15,7 +15,7 @@
                         Lista de reportes 
                     </div>
                     <h2 class="page-title">
-                        {{ __('Disability ') }}
+                        {{ __('Reportes ') }}
                     </h2>
                 </div>
                 <!-- Page title actions -->

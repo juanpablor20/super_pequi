@@ -21,7 +21,7 @@ class Service extends Model
   protected $perPage = 20;
 
 
-  protected $fillable = ['date_ser', 'status', 'user_id', 'equipment_id', 'environmet_id'];
+  protected $fillable = ['date_ser', 'status', 'user_borrower_id', 'equipment_id', 'environmet_id'];
 
 
   public function Users()

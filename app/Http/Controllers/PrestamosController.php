@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Disability;
 use App\Models\Environment;
 use App\Models\Equipment;
 use App\Models\Service;
@@ -11,14 +12,29 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
+
+
 class PrestamosController extends Controller
 {
     public function store(Request $request)
     {
 
+
         $usuario = $this->findUserByIdentification($request->number_identification);
+
+        $number_identification = $request->input('number_identification');
+
+        $user = Users::where('number_identification', $number_identification)->first();
+
+        $usuario1 = Service::where('user_borrower_id', $user)->get();
+
+        return $usuario1;
+
+
+
         $equipment = $this->findEquipmentBySerie($request->serie_equi);
         $environment = $this->findEnvironmentByName($request->names);
+
         if (!$usuario) {
             return redirect()->route('home')->with('error', 'El usuario no existe en nuestro sistema.');
         } elseif (!$equipment) {
@@ -30,13 +46,16 @@ class PrestamosController extends Controller
         } elseif ($this->userHasSimilarEquipmentBorrowed($usuario, $equipment)) {
             return redirect()->route('home')->with('error', 'El usuario ya tiene un equipo del mismo tipo prestado.');
         }
-        
 
         // Iniciar una transacción de base de datos
         DB::beginTransaction();
 
         try {
-            $this->createService($usuario, $equipment, $environment);
+            $serviceId = $this->createService($usuario, $equipment, $environment);
+            // Verificar discapacidades activas
+            $activeDisability = Disability::where('service_id', $serviceId)
+                ->where('status', 'activo')
+                ->first();
             $this->updateEquipmentState($equipment, 'en_prestamo');
             $this->updateUserState($usuario, 'with_equipment');
 
@@ -62,8 +81,8 @@ class PrestamosController extends Controller
         } else {
             return response()->json(['error' => 'Usuario no encontrado'], 404);
         }
-    } 
- 
+    }
+
 
 
 
@@ -89,17 +108,16 @@ class PrestamosController extends Controller
 
     private function userHasSimilarEquipmentBorrowed($user, $equipment)
     {
-        // Buscar servicios del usuario para el mismo tipo de equipo prestado
+        // Busco servicios del usuario para el mismo tipo de equipo prestado
         $similarServices = Service::where('user_borrower_id', $user->id)
             ->whereHas('equipment', function ($query) use ($equipment) {
                 $query->where('type_equi', $equipment->type_equi);
             })
             ->whereIn('status', ['pendiente'])
             ->count();
-
-        // Si encuentra al menos un servicio similar, significa que el usuario ya tiene un equipo del mismo tipo prestado
         return $similarServices > 0;
     }
+
 
 
 
@@ -111,23 +129,26 @@ class PrestamosController extends Controller
         $service->user_borrower_id = $user->id;
         $service->equipment_id = $equipment->id;
         $service->environment_id = $environment->id;
-        $service->date_ser = Carbon::now(); // Fecha y hora actual
+        $service->date_ser = Carbon::now();
         $service->status = 'pendiente';
-
         $service->save();
+        $serviceId = $service->id;
+
+        $activeDisability = Disability::where('service_id', $serviceId)
+            ->where('status', 'activo')
+            ->first();
     }
     public function verificarPrestamosExpirados()
     {
-        // Busca todos los préstamos activos que han excedido su tiempo límite
-        $prestamosExpirados = Service::where('date_ser', '<', Carbon::now()->subHours(1))
-                                        ->whereNull('return_date') 
-                                        ->get();
 
-        // Si hay préstamos expirados, envía una alerta al bibliotecario
+        $prestamosExpirados = Service::where('date_ser', '<', Carbon::now()->subHours(1))
+            ->whereNull('return_date')
+            ->get();
+
+
         if ($prestamosExpirados->isNotEmpty()) {
             return redirect()->route('home')->with('error', 'equipo exeigdsag');
-          
-               }
+        }
     }
 
     private function updateEquipmentState($equipment, $state)
