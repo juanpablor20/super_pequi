@@ -402,8 +402,8 @@ class ComposerStaticInitd5d5e139adad6f56914789305ff5063c
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -654,6 +654,8 @@ class ComposerStaticInitd5d5e139adad6f56914789305ff5063c
 
     public static $classMap = array (
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
+        'App\\Events\\DisabilityReportCreated' => __DIR__ . '/../..' . '/app/Events/DisabilityReportCreated.php',
+        'App\\Events\\SancionFinalizada' => __DIR__ . '/../..' . '/app/Events/SancionFinalizada.php',
         'App\\Events\\UserUpdated' => __DIR__ . '/../..' . '/app/Events/UserUpdated.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Filter\\RolePermissionMenuFilter' => __DIR__ . '/../..' . '/app/Filter/RolePermissionMenuFilter.php',
@@ -688,6 +690,8 @@ class ComposerStaticInitd5d5e139adad6f56914789305ff5063c
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\ValidateSignature' => __DIR__ . '/../..' . '/app/Http/Middleware/ValidateSignature.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Listeners\\DesactivarSancion' => __DIR__ . '/../..' . '/app/Listeners/DesactivarSancion.php',
+        'App\\Listeners\\HandleDisabilityReportCreated' => __DIR__ . '/../..' . '/app/Listeners/HandleDisabilityReportCreated.php',
         'App\\Models\\Address' => __DIR__ . '/../..' . '/app/Models/Address.php',
         'App\\Models\\Disability' => __DIR__ . '/../..' . '/app/Models/Disability.php',
         'App\\Models\\Environment' => __DIR__ . '/../..' . '/app/Models/Environment.php',
@@ -708,8 +712,12 @@ class ComposerStaticInitd5d5e139adad6f56914789305ff5063c
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'App\\Services\\UserValidationRules' => __DIR__ . '/../..' . '/app/Services/UserValidationRules.php',
         'App\\Services\\prestamoService' => __DIR__ . '/../..' . '/app/Services/prestamoService.php',
+        'App\\Tables\\AmbientesTable' => __DIR__ . '/../..' . '/app/Tables/AmbientesTable.php',
         'App\\Tables\\EquipmentTable' => __DIR__ . '/../..' . '/app/Tables/EquipmentTable.php',
+        'App\\Tables\\FichasTable' => __DIR__ . '/../..' . '/app/Tables/FichasTable.php',
         'App\\Tables\\HistorialTable' => __DIR__ . '/../..' . '/app/Tables/HistorialTable.php',
+        'App\\Tables\\ProgramasTable' => __DIR__ . '/../..' . '/app/Tables/ProgramasTable.php',
+        'App\\Tables\\ReportesTable' => __DIR__ . '/../..' . '/app/Tables/ReportesTable.php',
         'ArchTech\\Enums\\Comparable' => __DIR__ . '/..' . '/archtechx/enums/src/Comparable.php',
         'ArchTech\\Enums\\Exceptions\\UndefinedCaseError' => __DIR__ . '/..' . '/archtechx/enums/src/Exceptions/UndefinedCaseError.php',
         'ArchTech\\Enums\\From' => __DIR__ . '/..' . '/archtechx/enums/src/From.php',
@@ -2419,6 +2427,7 @@ class ComposerStaticInitd5d5e139adad6f56914789305ff5063c
         'Illuminate\\Foundation\\Auth\\AuthenticatesUsers' => __DIR__ . '/..' . '/laravel/ui/auth-backend/AuthenticatesUsers.php',
         'Illuminate\\Foundation\\Auth\\ConfirmsPasswords' => __DIR__ . '/..' . '/laravel/ui/auth-backend/ConfirmsPasswords.php',
         'Illuminate\\Foundation\\Auth\\EmailVerificationRequest' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Auth/EmailVerificationRequest.php',
+        'Illuminate\\Foundation\\Auth\\Logins' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Auth/Logins.php',
         'Illuminate\\Foundation\\Auth\\RedirectsUsers' => __DIR__ . '/..' . '/laravel/ui/auth-backend/RedirectsUsers.php',
         'Illuminate\\Foundation\\Auth\\RegistersUsers' => __DIR__ . '/..' . '/laravel/ui/auth-backend/RegistersUsers.php',
         'Illuminate\\Foundation\\Auth\\ResetsPasswords' => __DIR__ . '/..' . '/laravel/ui/auth-backend/ResetsPasswords.php',
