@@ -22,11 +22,11 @@
                 <div class="mb-3">
                     <input type="hidden" name="bibliotecario_id" value="{{ Auth::id() }}">
                     <label class="form-label">Numero de Documento</label>
-                    <input type="text" class="form-control" name="number_identification" placeholder="Numero de documento">
+                    <input type="text" class="form-control" name="number_identification" placeholder="Numero de documento" required>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Numero de Serie</label>
-                    <input type="text" class="form-control" name="serie_equi" placeholder="Numero de seire">
+                    <input type="text" class="form-control" name="serie_equi" placeholder="Numero de seire" required>
                 </div>
                 <input type="hidden" name="names" value="biblioteca">
 
