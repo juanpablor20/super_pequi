@@ -7,14 +7,12 @@
         <div class="navbar-nav flex-row order-md-last">
             <div class="d-none d-md-flex">
                 @include('tablar::partials.header.theme-mode')
-                @include('tablar::partials.header.notifications')
+             
             </div>
             @include('tablar::partials.header.top-right')
         </div>
         <div class="collapse navbar-collapse" id="navbar-menu">
-            <div>
-                @include('tablar::partials.common.search-form')
-            </div>
+          
         </div>
     </div>
 </header>

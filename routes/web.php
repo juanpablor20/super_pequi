@@ -49,21 +49,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/disabilities', App\Http\Controllers\DisabilityController::class);
     Route::get('/disabilities', [DisabilityController::class, 'create'])->name('disabilities.create');
     Route::get('/disabilities', [DisabilityController::class, 'index'])->name('disabilities.index');
+    Route::get('/devolucion', [DevolucionController::class, 'showDevolucionForm'])->name('showDevolucionForm');
 });
-// Route::middleware(['auth'])->group(function () {
-//     // Otras rutas...
-
-//     Route::group(['middleware' => ['role:']], function () {
-//         // Rutas para coordinadores
-//         Route::resource('bibliotecarios', BibliotecarioController::class)->except(['create', 'store', 'show', 'update', 'destroy']);
-//         Route::get('bibliotecarios/create', [BibliotecarioController::class, 'create'])->name('bibliotecarios.create')->middleware('permission:bibliotecario.create');
-//         Route::post('bibliotecarios', [BibliotecarioController::class, 'store'])->name('bibliotecarios.store')->middleware('permission:bibliotecario.create');
-//         Route::get('bibliotecarios/{bibliotecario}', [BibliotecarioController::class, 'show'])->name('bibliotecarios.show')->middleware('permission:bibliotecario.view');
-//         Route::get('bibliotecarios/{bibliotecario}/edit', [BibliotecarioController::class, 'edit'])->name('bibliotecarios.edit')->middleware('permission:bibliotecario.edit');
-//         Route::put('bibliotecarios/{bibliotecario}', [BibliotecarioController::class, 'update'])->name('bibliotecarios.update')->middleware('permission:bibliotecario.edit');
-//         Route::delete('bibliotecarios/{bibliotecario}', [BibliotecarioController::class, 'destroy'])->name('bibliotecarios.destroy')->middleware('permission:bibliotecario.delete');
-//     });
-// });
+ 
 
 
 
@@ -72,20 +60,3 @@ Route::get('/error', function () {
 })->name('error');
 
 
-
-
-// Definir las rutas para los bibliotecarios
-
-//Route::resource('Registers', RegisterController::class);
-// Route::post('register', RegisterController::class);
-
-// Route::middleware(['auth'])->group(function () {
-//     // Rutas protegidas por autenticación
-//     Route::group(['middleware' => ['role:coordinator']], function () {
-//         // Rutas para coordinadores
-//         Route::get('users', RegisterController::class)->name('register.form');
-//         Route::post('users', RegisterController::class)->name('register');
-//     });
-// });
-
-// Rutas para el registro de bibliotecarios

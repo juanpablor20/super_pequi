@@ -32,9 +32,9 @@
                     </div>
                     <div class="mb-3 col md-6">
                         <label class="form-label">Lugar de traslado</label>
-                        <x-tom-select class="mb-3 col md-6" remote-data="true" name="program_id" item-search-route="programa.search"></x-tom-select>
+                        {{-- <x-tom-select class="mb-3 col md-6" remote-data="true" name="program_id" item-search-route="programa.search"></x-tom-select> --}}
 
-                     {{-- <x-input remote-data="true" name="names" item-search-route="aula.search"></x-input> --}}
+                     <x-input remote-data="true" name="names" item-search-route="aula.search"></x-input> 
                     </div>
 
 

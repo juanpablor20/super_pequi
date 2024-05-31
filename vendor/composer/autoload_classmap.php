@@ -6,6 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Console\\Commands\\CheckDisabilities' => $baseDir . '/app/Console/Commands/CheckDisabilities.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Events\\DisabilityReportCreated' => $baseDir . '/app/Events/DisabilityReportCreated.php',
     'App\\Events\\SancionFinalizada' => $baseDir . '/app/Events/SancionFinalizada.php',
@@ -215,10 +216,12 @@ return array(
     'Cron\\MinutesField' => $vendorDir . '/dragonmantank/cron-expression/src/Cron/MinutesField.php',
     'Cron\\MonthField' => $vendorDir . '/dragonmantank/cron-expression/src/Cron/MonthField.php',
     'Database\\Factories\\EnvironmentFactory' => $baseDir . '/database/factories/EnvironmentFactory.php',
+    'Database\\Factories\\ProgramFactory' => $baseDir . '/database/factories/ProgramFactory.php',
     'Database\\Factories\\UserFactory' => $baseDir . '/database/factories/UserFactory.php',
     'Database\\Factories\\UsersFactory' => $baseDir . '/database/factories/UsersFactory.php',
     'Database\\Seeders\\DatabaseSeeder' => $baseDir . '/database/seeders/DatabaseSeeder.php',
     'Database\\Seeders\\EnvironmentSeeder' => $baseDir . '/database/seeders/EnvironmentSeeder.php',
+    'Database\\Seeders\\ProgramSeeder' => $baseDir . '/database/seeders/ProgramSeeder.php',
     'Database\\Seeders\\RoleSeeder' => $baseDir . '/database/seeders/RoleSeeder.php',
     'Database\\Seeders\\UsersSeeder' => $baseDir . '/database/seeders/UsersSeeder.php',
     'DateError' => $vendorDir . '/symfony/polyfill-php83/Resources/stubs/DateError.php',

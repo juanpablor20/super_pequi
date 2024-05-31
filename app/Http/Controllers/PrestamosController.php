@@ -12,8 +12,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-
-
 class PrestamosController extends Controller
 {
     public function store(Request $request)
@@ -22,37 +20,35 @@ class PrestamosController extends Controller
 
         $usuario = $this->findUserByIdentification($request->number_identification);
 
+        if (!$usuario) {
+            return redirect()->route('home')->with('error', 'El usuario no existe en nuestro sistema.');
+        }
+
         $number_identification = $request->input('number_identification');
 
         $user = Users::where('number_identification', $number_identification)->first();
         $userId = $user->id;
         $usuario1 = Service::where('user_borrower_id', $userId)->get();
-        
-$ids = Service::where('user_borrower_id', $userId)->pluck('id');
 
-$serviceIds = Service::where('user_borrower_id', $userId)->pluck('id');
+        $ids = Service::where('user_borrower_id', $userId)->pluck('id');
 
-// Buscar en la tabla Disability si los IDs existen y tienen estado activo
-$resultado = Disability::whereIn('service_id', $serviceIds)
-    ->where('status', 'activo')
-    ->get();
+        $serviceIds = Service::where('user_borrower_id', $userId)->pluck('id');
+
+        // Buscar en la tabla Disability si los IDs existen y tienen estado activo
+        $resultado = Disability::whereIn('service_id', $serviceIds)
+            ->where('status', 'activo')
+            ->get();
 
 
-if ($resultado)
-{
-    return redirect()->back()->with('error', 'el usuario se encuentra sancionado');
-}
-
-      return$resultado;
-
+        if (!$resultado) {
+            return redirect()->back()->with('error', 'el usuario se encuentra sancionado');
+        }
 
 
         $equipment = $this->findEquipmentBySerie($request->serie_equi);
         $environment = $this->findEnvironmentByName($request->names);
 
-        if (!$usuario) {
-            return redirect()->route('home')->with('error', 'El usuario no existe en nuestro sistema.');
-        } elseif (!$equipment) {
+         if (!$equipment) {
             return redirect()->route('home')->with('error', 'El equipo no existe en nuestro sistema.');
         } elseif (!$this->isEquipmentAvailable($equipment)) {
             return redirect()->route('home')->with('error', 'El equipo no está disponible para préstamo.');
@@ -132,8 +128,6 @@ if ($resultado)
             ->count();
         return $similarServices > 0;
     }
-
-
 
 
 

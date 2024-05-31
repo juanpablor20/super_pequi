@@ -653,6 +653,7 @@ class ComposerStaticInitd5d5e139adad6f56914789305ff5063c
     );
 
     public static $classMap = array (
+        'App\\Console\\Commands\\CheckDisabilities' => __DIR__ . '/../..' . '/app/Console/Commands/CheckDisabilities.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Events\\DisabilityReportCreated' => __DIR__ . '/../..' . '/app/Events/DisabilityReportCreated.php',
         'App\\Events\\SancionFinalizada' => __DIR__ . '/../..' . '/app/Events/SancionFinalizada.php',
@@ -862,10 +863,12 @@ class ComposerStaticInitd5d5e139adad6f56914789305ff5063c
         'Cron\\MinutesField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MinutesField.php',
         'Cron\\MonthField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MonthField.php',
         'Database\\Factories\\EnvironmentFactory' => __DIR__ . '/../..' . '/database/factories/EnvironmentFactory.php',
+        'Database\\Factories\\ProgramFactory' => __DIR__ . '/../..' . '/database/factories/ProgramFactory.php',
         'Database\\Factories\\UserFactory' => __DIR__ . '/../..' . '/database/factories/UserFactory.php',
         'Database\\Factories\\UsersFactory' => __DIR__ . '/../..' . '/database/factories/UsersFactory.php',
         'Database\\Seeders\\DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeders/DatabaseSeeder.php',
         'Database\\Seeders\\EnvironmentSeeder' => __DIR__ . '/../..' . '/database/seeders/EnvironmentSeeder.php',
+        'Database\\Seeders\\ProgramSeeder' => __DIR__ . '/../..' . '/database/seeders/ProgramSeeder.php',
         'Database\\Seeders\\RoleSeeder' => __DIR__ . '/../..' . '/database/seeders/RoleSeeder.php',
         'Database\\Seeders\\UsersSeeder' => __DIR__ . '/../..' . '/database/seeders/UsersSeeder.php',
         'DateError' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateError.php',

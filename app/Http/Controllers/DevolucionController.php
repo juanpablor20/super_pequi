@@ -54,6 +54,8 @@ class DevolucionController extends Controller
             session()->flash('message2', true);
             return redirect()->route('disabilities.create', ['service_id' => $service->id]);
         }
+   
+
     
         // Marcar el equipo como devuelto y registrar la fecha y hora de devolución
         DB::beginTransaction();
@@ -69,12 +71,40 @@ class DevolucionController extends Controller
             $service->save();
     
             DB::commit();
-          //  return session()->flash('message1', true);
-            return redirect()->back()->with('message1', true);
+          
+            return redirect()->back()->with('success', true);
         } catch (\Exception $e) {
             DB::rollback();
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
+    public function showDevolucionForm(Request $request)
+    {
+        // Buscar el usuario por su número de identificación
+        $user = Users::where('number_identification', $request->number_identification)->first();
+        if (!$user) {
+            return redirect()->back()->with('error', 'Este usuario no existe en nuestro sistema');
+        }
+
+        // Buscar el equipo por su serie
+        $equipment = Equipment::where('serie_equi', $request->serie_equi)->first();
+        if (!$equipment) {
+            return redirect()->back()->with('error', 'El Equipo no Existe.');
+        }
+
+        // Obtener el servicio asociado al equipo y usuario con estado "pendiente"
+        $service = Service::where('user_id', $user->id)
+            ->where('equipment_id', $equipment->id)
+            ->where('status', 'pendiente')
+            ->first();
+
+        if (!$service) {
+            return redirect()->back()->with('error', 'No existe un servicio pendiente para este equipo y usuario.');
+        }
+
+        $service_id = $service->id;
+        return view('home', compact('service_id'));
+    }
+    
     
 }
