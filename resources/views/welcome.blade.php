@@ -11,7 +11,7 @@
         body {
             margin: 0;
             padding: 0;
-            background-color: #082bf380; /* Color de fondo */
+            background-color: #082bf3ce; /* Color de fondo */
             overflow-x: hidden; /* Evita el desplazamiento horizontal */
             font-family: Arial, sans-serif; /* Tipografía */
             color: #333; /* Color de texto */
@@ -43,20 +43,69 @@
             margin-bottom: 10px; /* Espaciado inferior */
         }
 
-        .btn-primary {
-            background-color: #007bff; /* Color de fondo del botón */
-            border-color: #007bff; /* Color del borde del botón */
-            padding: 10px 20px; /* Espaciado interno del botón */
-            border-radius: 5px; /* Borde redondeado */
-            color: #fff; /* Color de texto del botón */
-            text-decoration: none; /* Sin subrayado */
-            transition: background-color 0.3s, border-color 0.3s, color 0.3s; /* Transición suave */
-        }
+        .container {
+  display: table-cell;
+  padding: 1em;
+  text-align: center;
+  vertical-align: middle;
+}
+.btnfos {
+  color: #fff;
+  background-color: #333;
+  cursor: pointer;
+  display: block;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 45px;
+  max-width: 160px;
+  margin: 0 auto 5em;
+  position: relative;
+  text-transform: uppercase;
+  vertical-align: middle;
+  width: 100%;
+  text-align: center;
+  border-radius: 20%;
+  border-color: white;
 
-        .btn-primary:hover {
-            background-color: #0056b3; /* Cambio de color al pasar el ratón */
-            border-color: #0056b3; /* Cambio de color del borde al pasar el ratón */
-        }
+}
+@media (min-width: 400px) {
+  .btnfos {
+    display: inline-block;
+    margin-right: 2.5em;
+  }
+  .btnfos:nth-of-type(even) {
+    margin-right: 0;
+  }
+}
+@media (min-width: 600px) {
+  .btnfos:nth-of-type(even) {
+    margin-right: 2.5em;
+  }
+  .btnfos:nth-of-type(5) {
+    margin-right: 5px;
+  }
+}
+        .btnfos-5 {
+            border-color: #fff
+  /* border: 0 solid; */
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0);
+  outline: 1px solid;
+  outline-color: rgba(255, 255, 255, 0);
+  outline-offset: 0px;
+  text-shadow: none;
+  -webkit-transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
+          transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
+  outline-color: rgba(255, 255, 255, 0.5);
+  outline-offset: 0px;
+}
+
+.btnfos-5:hover {
+  border: 5px solid;
+  box-shadow: inset 0 0 20px rgba(31, 238, 4, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);
+  outline-offset: 15px;
+  outline-color: rgba(255, 255, 255, 0);
+  text-shadow: 1px 1px 2px #ffffff;
+}
     </style>
 </head>
 <body>
@@ -70,12 +119,12 @@
     </div>
     <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh;">
 
-        <div style="margin-bottom: 0px;">
+        <div ">
             <img src="{{ asset('assets/PcFlex-logo.png') }}" alt="Logo PCFlex">
         </div>
 
-        <div style="margin-top: 30px;">
-            <a href="{{ route('login') }}" class="btn btn-lg btn-primary">Login</a>
+        <div class="container">
+            <a href="{{ route('login') }}" class="btnfos btnfos-5">Login</a>
         </div>
         </div>
 

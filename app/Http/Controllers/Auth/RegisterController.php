@@ -7,6 +7,9 @@ use App\Models\Address;
 use App\Models\Contacts;
 use App\Models\Logins;
 use App\Models\Users;
+use App\Rules\ValidEmail;
+use App\Rules\ValidAddress;
+
 
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
@@ -36,10 +39,9 @@ class RegisterController extends Controller
             'number_identification' => ['required', 'numeric', 'unique:users,number_identification'],
             'sex_user' => ['required'],
             'gender_sex' => ['required'],
-            'email_con' => ['required', 'string', 'email', 'max:255'],
+            'email_con' => ['string', 'email', 'max:255', new ValidEmail],
             'telephone_con' => ['required'],
-            'telephone_con' => ['required'],
-            'addres_add' => ['required'],
+            'addres_add' => [new ValidAddress],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'names' => ['required', 'string', 'max:255'],
         ]);

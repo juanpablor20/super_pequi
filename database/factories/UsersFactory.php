@@ -21,10 +21,10 @@ class UsersFactory extends Factory
             'names' => $this->faker->name(),
             'last_name' => $this->faker->name(),
             'type_identification' => $this->faker->randomElement(['cc', 'ti']),
-            'number_identification' => $this->faker->unique()->safeEmail(),
+            'number_identification' => $this->faker->unique()->randomNumber(9, true),
             'sex_user' => $this->faker->randomElement(['m', 'f']),
             'gender_sex' => $this->faker->randomElement(['hombre', 'mujer']),
-          
+
         ];
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Equipment;
+use App\Models\Environment;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,7 +13,6 @@ class EnvironmentSeeder extends Seeder
      */
     public function run(): void
     {
-       
-        Equipment::factory(1000)->create();
+        Environment::factory(1000)->create();
     }
 }
