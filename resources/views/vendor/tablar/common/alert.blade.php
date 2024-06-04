@@ -68,6 +68,7 @@
                 reverseButtons: true
             }).then((result) => {
                 if (result.isConfirmed) {
+                
                     window.location.href = "{{ route('home') }}";
                 } else {
                     confirmButtonText: 'Aceptar'
@@ -108,4 +109,15 @@
             });
         @endif
     });
+
+    document.addEventListener("DOMContentLoaded", function() {
+    // Muestra el mensaje de carga
+    document.getElementById("loading-overlay").style.display = "block";
+
+    // Oculta el mensaje de carga después de 3 segundos (3000 milisegundos)
+    setTimeout(function() {
+        document.getElementById("loading-overlay").style.display = "none";
+    }, 3000); // Cambia este valor según cuánto tiempo dura la compilación o carga de tu aplicación
+});
+
 </script>

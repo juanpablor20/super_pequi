@@ -72,7 +72,10 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Servicio</h3>
-
+                            <div id="loading-overlay">
+                                <div id="loading-message">Cargando...</div>
+                            </div>
+                            
                         </div>
                         <div class="card-body border-bottom py-3">
                             <div class="d-flex">

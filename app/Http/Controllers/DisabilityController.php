@@ -1,10 +1,13 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Events\DisabilityReportCreated;
 use App\Events\SancionFinalizada;
 use App\Models\Disability;
+use App\Models\Equipment;
 use App\Models\Service;
+use App\Models\Users;
 use App\Tables\ReportesTable;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -18,6 +21,7 @@ class DisabilityController extends Controller
         }
         return view('disability.index', compact('table'));
     }
+
 
     public function create(Request $request)
     {
@@ -57,21 +61,80 @@ class DisabilityController extends Controller
 
         return redirect()->route('disabilities.index')->with('success', 'Reporte Creado con exito.');
     }
+    public function Report(Request $request)
+    {
+        $serviceId = $request->input('service_id', session('serviceId'));
+        $disability = new Disability();
+
+        return view('disability.disability');
+    }
+    public function ReportCreate(Request $request)
+    {
+        $currentDate = Carbon::now()->startOfDay();
+
+        if (Carbon::parse($request->input('end_date'))->startOfDay()->lessThan($currentDate)) {
+            return redirect()->back()->with('error', 'La fecha de finalización debe ser posterior a la fecha actual');
+        }
+
+        $request->validate([
+            'description' => 'required|string',
+            'end_date' => 'nullable|date',
+        ]);
+
+        $numero_serie = $request->input('numero_serie');
+        $numero_documento = $request->input('numero_documento');
+
+        $user = Users::where('number_identification', $numero_documento)->first();
+        $userId = $user->id;
+        $equipment = Equipment::where('serie_equi', $numero_serie)->first();
+        $equipmentId = $equipment->id;
+
+        $services = Service::where('user_borrower_id', $userId)
+            ->where('equipment_id', $equipmentId)
+            ->first();
+
+        if ($services) {
+            $serviceId = $services->id;
+            $disability = Disability::create([
+                'description' => $request->input('description'),
+                'end_date' => $request->input('end_date'),
+                'service_id' => $serviceId
+            ]);
+        } else {
+            return $services;
+            return redirect()->back()->with('error', 'Servicio no encontrado');
+        }
+
+        // $disability = Disability::create([
+        //     'description' => $request->input('description'),
+        //     'end_date' => $request->input('end_date'),
+        //     'service_id' => $request->input('service_id'),
+        // ]);
+
+        $this->checkAndFireEndDateEvent($disability);
+
+        $disability->punishment_date = Carbon::now();
+        $disability->save();
+
+        // event(new DisabilityReportCreated($service));
+
+        return redirect()->route('disabilities.index')->with('success', 'Reporte Creado con exito.');
+    }
 
     protected function checkAndFireEndDateEvent(Disability $disability)
     {
         $endDateFromDB = Carbon::parse($disability->end_date)->startOfDay();
         $currentDate = Carbon::now()->startOfDay();
-    
+
         if ($endDateFromDB->lessThanOrEqualTo($currentDate)) {
             $disability->status = 'inactivo'; // Cambia el estado a 'inactivo'
             $disability->save();
-    
+
             event(new SancionFinalizada($disability->id));
         }
     }
-    
-    
+
+
 
     public function show($id)
     {
@@ -101,5 +164,3 @@ class DisabilityController extends Controller
         return redirect()->route('disabilities.index')->with('success', 'Disability deleted successfully');
     }
 }
-
-

@@ -3,23 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
-/**
- * Class Disability
- *
- * @property $id
- * @property $description
- * @property $status
- * @property $punishment_date
- * @property $end_date
- * @property $service_id
- * @property $created_at
- * @property $updated_at
- *
- * @property Service $service
- * @package App
- * @mixin \Illuminate\Database\Eloquent\Builder
- */
 class Disability extends Model
 {
     

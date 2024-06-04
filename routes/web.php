@@ -18,6 +18,7 @@ use App\Http\Controllers\ProgramController;
 use  App\Http\Controllers\UserController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ServiceController;
+use App\Models\Disability;
 use App\Models\Service;
 
 Route::get('/', function () {
@@ -38,6 +39,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/indexcards', IndexCardController::class)->middleware('can:users');
     Route::resource('/programs', ProgramController::class)->middleware('can:users');
     Route::post('/prestamos', [PrestamosController::class, 'store'])->name('prestamos')->middleware('can:users');
+    Route::get('resivir', [DevolucionController::class, 'resivir'])->name('resivir');
+    Route::get('/Report', [DisabilityController::class, 'Report'])->name('Report');
+    Route::post('ReportCreate', [DisabilityController::class, 'ReportCreate'])->name('ReportCreate');
     Route::post('/devolucion', [DevolucionController::class, 'devolver'])->name('devolucion')->middleware('can:users');
     Route::get('/buscarUsuario', [PrestamosController::class, 'buscarUsuario'])->name('buscarUsuario')->middleware('can:users');
     Route::get('mostrarServicio/{id}', [ServiceController::class, 'show'])->name('mostrarServicio')->middleware('can:users');

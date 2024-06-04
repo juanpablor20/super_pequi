@@ -6,6 +6,7 @@
         </button>
         <div class="navbar-nav flex-row order-md-last">
             <div class="d-none d-md-flex">
+                
                 @include('tablar::partials.header.theme-mode')
              
             </div>

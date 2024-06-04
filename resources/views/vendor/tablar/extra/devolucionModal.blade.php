@@ -43,18 +43,18 @@
 <!-- Incluye SweetAlert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<script>
+ <script>
     document.addEventListener('DOMContentLoaded', function () {
         const form = document.getElementById('ajaxForm');
         const cancelButton = document.querySelector('.cancel-button');
-        const serviceId = "{{ $service_id }}"; // Leer el service_id desde Blade
+      
 
         form.addEventListener('submit', function (event) {
             event.preventDefault(); // Evita que el formulario se envíe automáticamente
 
             Swal.fire({
                 title: '¿Estás seguro?',
-                text: "¿Seguro que quieres hacer la devolución?",
+                text: "El equipo cuenta con un buen estado!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -75,4 +75,4 @@
             window.location.href = `/reportes/${serviceId}`; // Redirige a la página de reportes con el ID del servicio
         });
     });
-</script>
+</script> 
