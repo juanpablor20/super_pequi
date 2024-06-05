@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('index_cards', function (Blueprint $table) {
             $table->id();
-            $table->string('number', 60);
+            $table->string('number', 60)->unique();
             $table->enum('states', ['active', 'inactive'])->default('active');
             $table->unsignedBigInteger('program_id'); 
             $table->foreign('program_id')->references('id')->on('programs')->onDelete('cascade');

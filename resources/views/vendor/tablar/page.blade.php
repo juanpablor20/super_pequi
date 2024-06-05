@@ -7,6 +7,8 @@
     @yield('css')
 @stop
 
+
+
 @section('classes_body', $layoutHelper->makeBodyClasses())
 
 @includeIf('tablar::layouts.'. config('tablar.layout'))

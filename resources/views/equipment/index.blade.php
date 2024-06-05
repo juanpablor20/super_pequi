@@ -18,77 +18,10 @@
         </a>
     </div>
 </div>
-@if(config('tablar','display_alert'))
-@include('tablar::common.alert')
-@endif
-<div id="loading-overlay">
-    <div class="loader"></div>
-    <div id="loading-message">Cargando...</div>
-</div>
-
-
-    <x-tabulator :table="$table"  />
-
-    
-  <script >
-document.addEventListener("DOMContentLoaded", function() {
-    // Muestra el mensaje de carga
-    document.getElementById("loading-overlay").classList.add("active");
-
-    // Oculta el mensaje de carga después de 3 segundos (3000 milisegundos)
-    setTimeout(function() {
-        document.getElementById("loading-overlay").classList.remove("active");
-    }, 1000); // Cambia este valor según cuánto tiempo dura la compilación o carga de tu aplicación
-});
-
-
-  </script>
-  <style>
-   #loading-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.loader {
-    border: 5px solid #f3f3f3;
-    border-top: 5px solid #3498db;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-#loading-message {
-    color: #333;
-    font-size: 24px;
-    margin-left: 10px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-#loading-overlay.active {
-    opacity: 1;
-}
-
-#loading-overlay.active #loading-message {
-    opacity: 1;
-}
-
-
-  </style>
-@endsection
+<div class="page-body">
+    <div class="container-xl">
+        @if (config('tablar', 'display_alert'))
+            @include('tablar::common.alert')
+        @endif
+        <x-tabulator :table="$table"  />
+     @endsection 

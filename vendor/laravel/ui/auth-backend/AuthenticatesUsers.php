@@ -69,6 +69,13 @@ trait AuthenticatesUsers
 
         $user = Users::where('number_identification', $login->users)->first();
 
+        
+        $user1= User::where('states', 'active')->first();
+        if($user1)
+        {
+            log::error('su cuenta esta inactivada');
+        }
+
         if (!$user) {
             Log::error('No se encontró usuario con number_identification: ' . $login->users);
             return false;

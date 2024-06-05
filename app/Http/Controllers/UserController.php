@@ -111,7 +111,10 @@ class UserController extends Controller
     public function update(Request $request, Users $user)
     {
         $request->validate(Users::getUpdateRules());
-
+        if ($user->states == 'Whith_equipment') {
+            // Si el estado es "prestamo", redireccionar con un mensaje de error
+            return redirect()->back()->with('error', 'No se puede actualizar un usuario en estado de préstamo.');
+        }
         $userId = $user->id;
         $request->validate([
             'number_identification' => [

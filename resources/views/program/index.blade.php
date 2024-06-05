@@ -37,8 +37,11 @@
     </div>
     <!-- Page body -->
 
-            @if(config('tablar','display_alert'))
+    <div class="page-body">
+        <div class="container-xl">
+            @if (config('tablar', 'display_alert'))
                 @include('tablar::common.alert')
             @endif
             <x-tabulator :table="$table"  />
-@endsection
+         @endsection 
+

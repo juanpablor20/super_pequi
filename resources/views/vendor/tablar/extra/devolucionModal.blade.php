@@ -7,7 +7,7 @@
             <div class="ribbon bg-red">Nueva devolucion</div>
         </x-slot>
     </x-card>
-    <form method="POST" action="{{ route('devolucion') }}" id="ajaxForm" role="form" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('devolucion') }}" id="return" role="form" enctype="multipart/form-data">
         @csrf
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -45,7 +45,7 @@
 
  <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const form = document.getElementById('ajaxForm');
+        const form = document.getElementById('return');
         const cancelButton = document.querySelector('.cancel-button');
       
 
