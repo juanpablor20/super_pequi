@@ -16,44 +16,46 @@ class PrestamosController extends Controller
 {
     public function store(Request $request)
     {
-
-
         $usuario = $this->findUserByIdentification($request->number_identification);
 
         if (!$usuario) {
             return redirect()->route('home')->with('error', 'El usuario no existe en nuestro sistema.');
         }
-
+        
         $number_identification = $request->input('number_identification');
-
         $user = Users::where('number_identification', $number_identification)->first();
         $userId = $user->id;
-        $usuario1 = Service::where('user_borrower_id', $userId)->get();
+        $equipmentId = $request->input('equipment_id');
 
-        $ids = Service::where('user_borrower_id', $userId)->pluck('id');
+        // Verificar si el usuario ya tiene un préstamo activo para el mismo equipo
+        $existingLoan = Service::where('user_borrower_id', $userId)
+                            ->where('equipment_id', $equipmentId)
+                            ->whereNull('return_ser') // Suponiendo que `return_date` es nulo si el préstamo está activo
+                            ->first();
 
-        $serviceIds = Service::where('user_borrower_id', $userId)->pluck('id');
-
-        // Buscar en la tabla Disability si los IDs existen y tienen estado activo
-        $resultado = Disability::whereIn('service_id', $serviceIds)
-            ->where('status', 'activo')
-            ->get();
-
-
-        if (!$resultado) {
-            return redirect()->back()->with('error', 'el usuario se encuentra sancionado');
+        if ($existingLoan) {
+            return redirect()->back()->withErrors(['equipment_id' => 'Ya tienes un préstamo activo para este equipo.']);
         }
 
+        // Verificar si el usuario está sancionado
+        $serviceIds = Service::where('user_borrower_id', $userId)->pluck('id');
+        $resultado = Disability::whereIn('service_id', $serviceIds)
+            ->where('status', 'activo')
+            ->exists();
+
+        if ($resultado) {
+            return redirect()->back()->with('error', 'El usuario se encuentra sancionado');
+        }
 
         $equipment = $this->findEquipmentBySerie($request->serie_equi);
         $environment = $this->findEnvironmentByName($request->names);
 
-         if (!$equipment) {
+        if (!$equipment) {
             return redirect()->route('home')->with('error', 'El equipo no existe en nuestro sistema.');
         } elseif (!$this->isEquipmentAvailable($equipment)) {
             return redirect()->route('home')->with('error', 'El equipo no está disponible para préstamo.');
         } elseif (!$environment) {
-            return redirect()->back()->with('error', 'El lugar de traslado no Existe');
+            return redirect()->back()->with('error', 'El lugar de traslado no existe');
         } elseif ($this->userHasSimilarEquipmentBorrowed($usuario, $equipment)) {
             return redirect()->route('home')->with('error', 'El usuario ya tiene un equipo del mismo tipo prestado.');
         }
@@ -63,10 +65,6 @@ class PrestamosController extends Controller
 
         try {
             $serviceId = $this->createService($usuario, $equipment, $environment);
-            // Verificar discapacidades activas
-            $activeDisability = Disability::where('service_id', $serviceId)
-                ->where('status', 'activo')
-                ->first();
             $this->updateEquipmentState($equipment, 'en_prestamo');
             $this->updateUserState($usuario, 'with_equipment');
 
@@ -74,12 +72,12 @@ class PrestamosController extends Controller
 
             return redirect()->route('home')->with('success', 'Préstamo creado exitosamente.');
         } catch (\Exception $e) {
-            // Revertir la transacción si ocurre algún error
             DB::rollback();
 
             return redirect()->route('home')->with('error', 'Ha ocurrido un error al realizar el préstamo.');
         }
     }
+
     public function buscarUsuario(Request $request)
     {
         $user = $this->findUserByIdentification($request->input('numberIdentification'));
@@ -93,9 +91,6 @@ class PrestamosController extends Controller
             return response()->json(['error' => 'Usuario no encontrado'], 404);
         }
     }
-
-
-
 
     private function findUserByIdentification($identification)
     {
@@ -124,12 +119,10 @@ class PrestamosController extends Controller
             ->whereHas('equipment', function ($query) use ($equipment) {
                 $query->where('type_equi', $equipment->type_equi);
             })
-            ->whereIn('status', ['pendiente'])
+            ->whereNull('return_ser') // Suponiendo que `return_ser` es nulo si el préstamo está activo
             ->count();
         return $similarServices > 0;
     }
-
-
 
     private function createService($user, $equipment, $environment)
     {
@@ -141,22 +134,18 @@ class PrestamosController extends Controller
         $service->date_ser = Carbon::now();
         $service->status = 'pendiente';
         $service->save();
-        $serviceId = $service->id;
 
-        $activeDisability = Disability::where('service_id', $serviceId)
-            ->where('status', 'activo')
-            ->first();
+        return $service->id;
     }
+
     public function verificarPrestamosExpirados()
     {
-
         $prestamosExpirados = Service::where('date_ser', '<', Carbon::now()->subHours(1))
-            ->whereNull('return_date')
+            ->whereNull('return_ser')
             ->get();
 
-
         if ($prestamosExpirados->isNotEmpty()) {
-            return redirect()->route('home')->with('error', 'equipo exeigdsag');
+            return redirect()->route('home')->with('error', 'Hay préstamos expirados.');
         }
     }
 
