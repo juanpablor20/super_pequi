@@ -44,22 +44,28 @@
                                 @csrf
                                 <div class="mb-3">
                                     <label for="description" class="form-label">Descripción</label>
-                                    <textarea class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}" id="description" name="description" rows="3" placeholder="Description"></textarea>
+                                    <textarea class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}" id="description" name="description" rows="3" placeholder="Descripción">{{ old('description') }}</textarea>
                                     @if ($errors->has('description'))
                                         <div class="invalid-feedback">{{ $errors->first('description') }}</div>
                                     @endif
                                 </div>
                                 <div class="mb-3">
                                     <label for="numero_documento" class="form-label">Número de Documento:</label>
-                                    <input type="text" class="form-control" id="numero_documento" name="numero_documento" required>
+                                    <input type="text" class="form-control{{ $errors->has('numero_documento') ? ' is-invalid' : '' }}" id="numero_documento" name="numero_documento" value="{{ old('numero_documento') }}" required>
+                                    @if ($errors->has('numero_documento'))
+                                        <div class="invalid-feedback">{{ $errors->first('numero_documento') }}</div>
+                                    @endif
                                 </div>
                                 <div class="mb-3">
                                     <label for="numero_serie" class="form-label">Número de Serie:</label>
-                                    <input type="text" class="form-control" id="numero_serie" name="numero_serie" required>
+                                    <input type="text" class="form-control{{ $errors->has('numero_serie') ? ' is-invalid' : '' }}" id="numero_serie" name="numero_serie" value="{{ old('numero_serie') }}" required>
+                                    @if ($errors->has('numero_serie'))
+                                        <div class="invalid-feedback">{{ $errors->first('numero_serie') }}</div>
+                                    @endif
                                 </div>
                                 <div class="mb-3">
                                     <label for="end_date" class="form-label">Fecha de finalización</label>
-                                    <x-flat-picker name="end_date"></x-flat-picker>
+                                    <x-flat-picker name="end_date" value="{{ old('end_date') }}"></x-flat-picker>
                                 </div>
                                 <div class="text-end">
                                     <button type="submit" class="btn btn-primary">Enviar</button>

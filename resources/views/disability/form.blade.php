@@ -1,10 +1,9 @@
 <div class="form-group mb-3">
     <label class="form-label"> {{ Form::label('description') }}</label>
     <div>
-
         {{ Form::textArea('description', $disability->description, [
             'class' => 'form-control' . ($errors->has('description') ? ' is-invalid' : ''),
-            'placeholder' => 'Description',
+            'placeholder' => 'Description' 
         ]) }}
         {!! $errors->first('description', '<div class="invalid-feedback">:message</div>') !!}
         

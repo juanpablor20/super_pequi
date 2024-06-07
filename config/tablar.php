@@ -52,22 +52,11 @@ return [
         ],
     ],
 
-    /*
-     *
-     * Default path is 'resources/views/vendor/tablar' as null. Set your custom path here If you need.
-     */
+  
 
     'views_path' => null,
 
-    /*
-    |--------------------------------------------------------------------------
-    | Layout
-    |--------------------------------------------------------------------------
-    | Here we change the layout of your admin panel.
-    |
-    | For detailed instructions you can look at the layout section here:
-    |
-    */
+   
 
     'layout' => 'combo',
     //boxed, combo, condensed, fluid, fluid-vertical, horizontal, navbar-overlap, navbar-sticky, rtl, vertical, vertical-right, vertical-transparent
@@ -134,7 +123,7 @@ return [
             
         ],
         [
-            'text' => 'programas',
+            'text' => 'Programas',
             'icon' => 'ti ti-tournament',
             'url' => 'programs',
             'hasAnyRole' => ['cordinador'] 
@@ -152,7 +141,7 @@ return [
             
         ],
         [
-            'text' => 'reportes',
+            'text' => 'Reportes',
             'icon' => 'ti ti-message-report',
             'url' => 'disabilities',
             

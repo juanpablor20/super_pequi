@@ -46,7 +46,7 @@
                         </div>
                         <div class="card-body">
                             <div class="form-group">
-                        
+
                             </div>
                             <div class="form-group">
                                 <strong>Nombres:</strong>
@@ -85,23 +85,32 @@
                                 {{ $user->address->addres_add }}
                             </div>
 
-                           
+
                             <div class="form-group">
                                 <strong>estado:</strong>
                                 {{ $user->states }}
                             </div>
-                            <h2>Ficha</h2>
+                            <h2>Rol:</h2>
                             <ul>
-                                @foreach($user->Relacion as $relacion)
-                                    <li>
-                                       
-                                        @if($relacion->ficha)
-                                            {{ $relacion->ficha->index_card_id }}
-                                        @else
-                                            Sin ficha
-                                        @endif
-                                    </li>
-                                @endforeach
+                                @forelse ($roles as $role)
+                                    <li>{{ $role }}</li>
+                                    @if ($role == 'aprendices')
+                                        <h3>Fichas:</h3>
+                                        <ul>
+                                            @forelse ($user->indexCards as $indexCard)
+                                                <li>{{ $indexCard->number }}</li>
+                                            @empty
+                                                <li>No tiene fichas asignadas.</li>
+                                            @endforelse
+                                        </ul>
+                                    @endif
+                                @empty
+                                    <h1>Este usuario está sin rol</h1>
+                                @endforelse
+                            </ul>
+                            
+
+
                             </ul>
                         </div>
                         <div class="card-footer">
@@ -120,7 +129,7 @@
                                     @forelse ($prestamos as $prestamo)
                                         <tr>
                                             <td>{{ $prestamo->date_ser }}</td>
-                                            <td>{{ $prestamo->return_ser}}</td>
+                                            <td>{{ $prestamo->return_ser }}</td>
                                             <td>{{ $prestamo->equipment->type_equi }}</td>
                                             <td>{{ $prestamo->equipment->serie_equi }}</td>
                                             <td>{{ $prestamo->status }}</td>

@@ -10,7 +10,8 @@ class Equipment extends Model
     use HasFactory;
     static $rules = [
         'type_equi' => 'required',
-        'serie_equi' => 'required',
+        'characteristics' => 'required',
+        'serie_equi' => 'required|unique:equipment,serie_equi',
     ];
 
     protected $perPage = 20;

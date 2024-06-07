@@ -49,8 +49,9 @@ class Users extends Authenticatable
   {
     return $this->hasMany(Service::class, 'user_id');
   }
-  public function Relacion()
+  public function indexCards()
   {
-    return $this->hasMany(Relationship::class, 'index_card_id', 'user_rel_id', 'id');
+      return $this->belongsToMany(IndexCard::class, 'relationships', 'user_rel_id', 'index_card_id');
   }
+
 }

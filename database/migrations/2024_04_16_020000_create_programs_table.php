@@ -12,7 +12,7 @@ return new class extends Migration
         Schema::create('programs', function (Blueprint $table) {
             $table->id();
             $table->string('names_pro');
-            $table->string('code_pro')->unique();
+            $table->string('code_pro');
             $table->string('version');
             $table->enum('states', ['active', 'inactive'])->default('active');
             $table->timestamps();

@@ -9,7 +9,7 @@
     <!-- Page header -->
     <div class="page-header d-print-none">
 
-       
+
 
         @if (config('tablar', 'display_alert'))
             @include('tablar::common.alert')
@@ -20,49 +20,49 @@
                     <!-- Page pre-title -->
                     <div class="page-pretitle">
                         Panel Principal
-                       
+
                     </div>
                     <h2 class="page-title">
-                       
+
                         Pequi
                     </h2>
-                     
+
                     </h2>
                 </div>
                 @role('bibliotecario')
-                <!-- Page title actions -->
-                <div class="col-12 col-md-auto ms-auto d-print-none">
-                    <div class="btn-list">
-                        <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
-                            data-bs-target="#prestamo">
-                            <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <line x1="12" y1="5" x2="12" y2="19" />
-                                <line x1="5" y1="12" x2="19" y2="12" />
-                            </svg>
-                            Registrar Prestamo
-                        </a>
-                        <a href="#" class="btn btn-danger d-none d-sm-inline-block" data-bs-toggle="modal"
-                            data-bs-target="#devolucion">
-                            <!-- Icono "Menos" SVG -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <line x1="5" y1="12" x2="19" y2="12" />
-                            </svg>
-                            Registrar Devolucion
+                    <!-- Page title actions -->
+                    <div class="col-12 col-md-auto ms-auto d-print-none">
+                        <div class="btn-list">
+                            <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
+                                data-bs-target="#prestamo">
+                                <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <line x1="12" y1="5" x2="12" y2="19" />
+                                    <line x1="5" y1="12" x2="19" y2="12" />
+                                </svg>
+                                Registrar Prestamo
+                            </a>
+                            <a href="#" class="btn btn-danger d-none d-sm-inline-block" data-bs-toggle="modal"
+                                data-bs-target="#devolucion">
+                                <!-- Icono "Menos" SVG -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <line x1="5" y1="12" x2="19" y2="12" />
+                                </svg>
+                                Registrar Devolucion
 
-                        </a>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-    </div>
+        </div>
     @endrole
     <!-- Page body -->
     <div class="page-body">
@@ -72,10 +72,8 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Servicio</h3>
-                            <div id="loading-overlay">
-                                <div id="loading-message">Cargando...</div>
-                            </div>
-                            
+
+
                         </div>
                         <div class="card-body border-bottom py-3">
                             <div class="d-flex">
@@ -110,14 +108,14 @@
                                         {{-- @foreach ($user as $hola)
                                         {{ $hola->name }}
                                     @endforeach --}}
-                                      
+
                                         <th>Nombre</th>
                                         <th>Roll</th>
                                         <th>Tipo de Equipo</th>
                                         <th>Numero de Serie</th>
                                         <th>Lugar de Traslado</th>
                                         <th>Estado</th>
-                                       
+
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
@@ -147,7 +145,7 @@
                                             <td>{{ $service->equipment->type_equi }}</td>
                                             <td>{{ $service->equipment->serie_equi }}</td>
                                             <td>{{ $service->environment->names }}</td>
-                                           
+
                                             <td>
                                                 @if ($service->status == 'pendiente')
                                                     <span class="badge bg-warning text-dark me-1"></span> pendiente
@@ -182,5 +180,5 @@
         </div>
     </div>
 
- 
+
 @endsection

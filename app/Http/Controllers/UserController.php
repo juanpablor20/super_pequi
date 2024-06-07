@@ -33,7 +33,7 @@ class UserController extends Controller
 
     public function create()
     {
-        // $ficha = IndexCard::query()->pluck('number', 'id')->all();
+      
         $ficha = IndexCard::where('states', 'active')->get();
         $user = new Users();
         return view('user.create', compact('user', 'ficha'));
@@ -65,11 +65,12 @@ class UserController extends Controller
         $role = $request->input('role');
         if ($role == 'aprendices') {
 
+            // Validamos la solicitud
+           
+  
+
             $validacionFicha = $request->input('index_card_id'); // Corregí el nombre de la variable
 
-            if (!$validacionFicha) {
-                return redirect()->back()->with('error', 'No ha seleccionado la ficha.');
-            }
             $ficha = Relationship::create([
                 'index_card_id' => $request->input('index_card'),
                 'user_rel_id' => $user->id,
@@ -92,11 +93,13 @@ class UserController extends Controller
 
     public function show($id)
     {
-        $user = Users::with('contacts', 'Address', 'Relacion')->find($id);
+        $user = Users::with('contacts', 'Address', 'indexCards', 'roles')->find($id);
         $prestamos = Service::where('user_borrower_id', $user->id)->get();
+        $roles = $user->getRoleNames();
 
+       
         // Obtengo todos los préstamos asociados con el usuario
-        return view('user.show', compact('user', 'prestamos'));
+        return view('user.show', compact('user', 'prestamos', 'roles'));
     }
     public function edit($id)
     {

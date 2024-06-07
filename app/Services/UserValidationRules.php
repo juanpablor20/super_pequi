@@ -16,6 +16,7 @@ class UserValidationRules
             'email_con' => 'required|email',
             'telephone_con' => 'required|regex:/^\d{10}$/',
             'addres_add' => 'required',
+            
         ];
     }
 

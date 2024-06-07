@@ -1,15 +1,4 @@
 
-
-@if (config('tablar', 'display_alert'))
-    @include('tablar::common.alert')
-@endif
-<script>
- document.addEventListener('DOMContentLoaded', function () {
-    console.log('El código JavaScript se ha cargado correctamente.');
-
-    // Resto del código...
-}); 
-</script>
 <div class="btn-list flex-nowrap">
     <a href="{{ route('equipment.show', $item->id) }}" class="btn btn-primary"><i class="ti ti-eye-check"></i></a>
   @role('bibliotecario')

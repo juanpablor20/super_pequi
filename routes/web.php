@@ -33,7 +33,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('bibliotecarios/{id}/active', [BibliotecarioController::class, 'activate'])->name('bibliotecarios.activate')->middleware('can:index.bibliotecario');
     
 
-    // Route::resource('/perfil', PerfilController::class);
+    Route::resource('/perfil', PerfilController::class);
     Route::resource('/equipment', EquipmentController::class);
     Route::resource('/environments', EnvironmentController::class)->middleware('can:users');
     Route::resource('/indexcards', IndexCardController::class)->middleware('can:users');

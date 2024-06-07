@@ -33,7 +33,8 @@ class DisabilityController extends Controller
 
     public function store(Request $request)
     {
-        $currentDate = Carbon::now()->startOfDay();
+      dd( $currentDate = Carbon::now()->startOfDay());
+       
 
         if (Carbon::parse($request->input('end_date'))->startOfDay()->lessThan($currentDate)) {
             return redirect()->back()->with('error', 'La fecha de finalización debe ser posterior a la fecha actual');
@@ -79,12 +80,18 @@ class DisabilityController extends Controller
         $request->validate([
             'description' => 'required|string',
             'end_date' => 'nullable|date',
+            'service_id' => ''
         ]);
 
         $numero_serie = $request->input('numero_serie');
         $numero_documento = $request->input('numero_documento');
 
         $user = Users::where('number_identification', $numero_documento)->first();
+        $date = $request->input('end_date');
+        
+        if(!$user){
+            return redirect()->back()->with('error', 'El usuario no se encuentra sancionado');
+        }
         $userId = $user->id;
         $equipment = Equipment::where('serie_equi', $numero_serie)->first();
         $equipmentId = $equipment->id;
@@ -101,22 +108,17 @@ class DisabilityController extends Controller
                 'service_id' => $serviceId
             ]);
         } else {
-            return $services;
+           
             return redirect()->back()->with('error', 'Servicio no encontrado');
         }
 
-        // $disability = Disability::create([
-        //     'description' => $request->input('description'),
-        //     'end_date' => $request->input('end_date'),
-        //     'service_id' => $request->input('service_id'),
-        // ]);
 
         $this->checkAndFireEndDateEvent($disability);
 
         $disability->punishment_date = Carbon::now();
         $disability->save();
 
-        // event(new DisabilityReportCreated($service));
+         event(new DisabilityReportCreated($services));
 
         return redirect()->route('disabilities.index')->with('success', 'Reporte Creado con exito.');
     }

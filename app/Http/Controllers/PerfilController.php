@@ -24,38 +24,28 @@ class PerfilController extends Controller
 
     public function index()
 {
-    if (Auth::check()) {
-        // Si el usuario está autenticado, obtenemos su número de documento
-        $numeroDocumento = auth()->user()->users;
-        
-        // Buscamos al usuario en la tabla Users usando el número de documento
-        $user = Users::with('contacts', 'Address')->where('number_identification', $numeroDocumento)->first();
-        
-        return view('perfil.index', compact('user'));
-       
-    } else {
-        // Manejar el caso en que el usuario no esté autenticado
-        return "Error: El usuario no está autenticado";
-    }
+
+    $user = Auth::user();
+   
+    return view('profile.index', compact('user'));
 }
     public function edit($id)
     {
         $perfil = Users::find($id);
 
-        return view('perfil.edit', compact('perfil'));
+        return view('profile.edit', compact('perfil'));
     }
 
    
     public function update(Request $request, Users $perfil)
     {
         // Validación de datos
-        $request->validate(Users::$rules);
+       // $request->validate(Users::$rules);
     
         // Actualiza los datos del perfil
         $perfil->names = $request->names;
         $perfil->last_name = $request->last_name;
         $perfil->type_identification = $request->type_identification;
-        //$perfil->number_identification = $request->number_identification;
         $perfil->sex_user = $request->sex_user;
         $perfil->gender_sex = $request->gender_sex;
         $perfil->save();

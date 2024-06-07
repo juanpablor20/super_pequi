@@ -16,7 +16,7 @@ class DesactivarSancion
         $reporte = Disability::findOrFail($sancionId);
 
         // Desactivar el reporte (marcarlo como inactivo)
-        $reporte->activo =  'inactivo';
+        $reporte->status =  'inactivo';
         $reporte->save();
     }
 }
