@@ -3,7 +3,7 @@
     <div>
         {{ Form::text('type_equi', $equipment->type_equi, [
             'class' => 'form-control' . ($errors->has('type_equi') ? ' is-invalid' : ''),
-            'placeholder' => 'Ejemplo: portatil, audifonos, teclado',
+            'placeholder' => 'Ejemplo: portatil, audifonos, teclado', 'required'
         ]) }}
         {!! $errors->first('type_equi', '<div class="invalid-feedback">:message</div>') !!}
     </div>
@@ -14,7 +14,7 @@
     <div>
         {{ Form::text('characteristics', $equipment->characteristics, [
             'class' => 'form-control' . ($errors->has('characteristics') ? ' is-invalid' : ''),
-            'placeholder' => 'Ejemplo: lenovo gaming, audifonos inalambricos',
+            'placeholder' => 'Ejemplo: lenovo gaming, audifonos inalambricos', 'required'
         ]) }}
         {!! $errors->first('serie_equi', '<div class="invalid-feedback">:message</div>') !!}
        
@@ -25,7 +25,7 @@
     <div>
         {{ Form::text('serie_equi', $equipment->serie_equi, [
             'class' => 'form-control' . ($errors->has('serie_equi') ? ' is-invalid' : ''),
-            'placeholder' => 'Numero de serie',
+            'placeholder' => 'Numero de serie', 'required'
         ]) }}
         {!! $errors->first('serie_equi', '<div class="invalid-feedback">:message</div>') !!}
         

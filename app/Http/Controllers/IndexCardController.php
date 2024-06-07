@@ -68,7 +68,7 @@ class IndexCardController extends Controller
     public function update(Request $request, IndexCard $indexCard)
     {
         request()->validate(IndexCard::$rules);
-
+       
         $indexCard->update($request->all());
 
         return redirect()->route('indexcards.index')
@@ -76,11 +76,20 @@ class IndexCardController extends Controller
     }
 
     public function destroy($id)
-    {
+{
+    $indexCard = IndexCard::find($id);
 
-        $indexCard = IndexCard::find($id)->delete();
-        return $indexCard;
-        return redirect()->route('indexcards.index')
-            ->with('success', 'Ficha Inactivada Exitosamente');
+    if(!$indexCard)
+    {
+        return redirect()->back()->with('error', 'Ficha no encontrada');
     }
+    if ($indexCard) {
+        $indexCard->states = 'inactive';
+        $indexCard->save();
+    }
+
+    return redirect()->route('indexcards.index')
+        ->with('success', 'Ficha Inactivada Exitosamente');
+}
+
 }

@@ -53,6 +53,17 @@
                                   enctype="multipart/form-data">
                                 {{ method_field('PATCH') }}
                                 @csrf
+                                <div class="form-group mb-3">
+                                    <label class="form-label">Estado dela Ficha</label>
+                                    <div>
+                                        <select name="states" class="form-select">
+                                            <option value="active" {{ $indexCard->states == 'active' ? 'selected' : '' }}>Activar</option>
+                                            <option value="inactive" {{ $indexCard->states == 'active' ? 'selected' : '' }}>inactivar</option>
+                                                 
+                                        </select>
+                                        <!-- Agrega cualquier mensaje de error aquí si es necesario -->
+                                       </div>
+                                </div>
                                 @include('index-card.form')
                             </form>
                         </div>

@@ -12,7 +12,7 @@ class IndexCard extends Model
     ];
 
     protected $perPage = 20;
-    protected $fillable = ['number', 'program_id'];
+    protected $fillable = ['states', 'number', 'program_id'];
 
 
     public function programs()

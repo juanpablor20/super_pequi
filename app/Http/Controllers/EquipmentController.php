@@ -58,7 +58,7 @@ class EquipmentController extends Controller
 
     public function update(Request $request, Equipment $equipment)
     {
-        request()->validate(Equipment::$rules);
+        
         $equipment->update($request->all());
 
         return redirect()->route('equipment.index')
